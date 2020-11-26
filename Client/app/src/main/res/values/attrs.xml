@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ChatTextView">
+        <attr name="border_radius" format="float"/>
+        <attr name="is_left" format="boolean"/>
+        <attr name="mborder_color" format="color"/>
+
+        <attr name="mtextSize" format="dimension"/>
+        <attr name="mtext" format="string"/>
+        <attr name="mbackground_color" format="color"/>
+        <attr name="mtext_color" format="color"/>
+    </declare-styleable>
+</resources>

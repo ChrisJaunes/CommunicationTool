@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.chrisjaunes.communication.server.utils_db.DBHelperTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-11-26T09:05:20" hostname="DESKTOP-1QS4ACM" time="0.203">
+  <properties/>
+  <testcase name="getResToJsonArray" classname="com.chrisjaunes.communication.server.utils_db.DBHelperTest" time="0.203"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[11月 26, 2020 5:05:20 下午 com.chrisjaunes.communication.server.utils_db.DBHelper <clinit>
+信息: 驱动加载成功
+]]></system-err>
+</testsuite>

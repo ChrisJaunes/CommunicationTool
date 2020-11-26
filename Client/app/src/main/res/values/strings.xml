@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">CommunicateApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_regist">RegistActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_add_friend">AddFriendActivity</string>
+    <string name="title_activity_add_group">AddGroupActivity</string>
+    <string name="account_name">登录用户名</string>
+    <string name="account_password">登录密码</string>
+    <string name="account_login">登陆</string>
+    <string name="account_register">注册</string>
+    <string name="account_nickname">用户昵称</string>
+    <string name="account_avatar">请选择你的头像</string>
+    <string name="accout_textstyle_font_color">字体颜色</string>
+    <string name="account_textstyle_font_color">字体颜色</string>
+    <string name="account_textstyle_bubble_color">气泡颜色</string>
+    <string name="account_textstyle_border_color">边框颜色</string>
+</resources>

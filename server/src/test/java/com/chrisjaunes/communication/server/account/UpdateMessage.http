@@ -8,7 +8,7 @@ client.log(response.headers.valuesOf("Set-Cookie"));
 
 ###
 
-GET http://{{host}}/account/UpdateMessage
+GET http://{{host}}/account/updateMessage
 
 > {%
 client.test("Request executed successfully", function() {
@@ -18,7 +18,7 @@ client.test("Request executed successfully", function() {
 %}
 ###
 
-POST http://{{host}}/account/UpdateMessage
+POST http://{{host}}/account/updateMessage
 
 > {%
 
@@ -30,7 +30,7 @@ client.test("Request executed successfully", function() {
 
 ###
 
-POST http://{{host}}/account/UpdateMessage?nickname=hjj
+POST http://{{host}}/account/updateMessage?nickname=hjj
 
 > {%
 client.test("Request executed successfully", function() {
@@ -41,7 +41,7 @@ client.test("Request executed successfully", function() {
 
 ###
 
-POST http://{{host}}/account/UpdateMessage?avatar=wqyefkjjkhjasdjkghjkwhgiljeklfj
+POST http://{{host}}/account/updateMessage?avatar=wqyefkjjkhjasdjkghjkwhgiljeklfj
 
 > {%
 client.test("Request executed successfully", function() {
@@ -52,7 +52,7 @@ client.test("Request executed successfully", function() {
 
 ###
 
-POST http://{{host}}/account/UpdateMessage?text_style={color:"#FFFFFFFF"}
+POST http://{{host}}/account/updateMessage?text_style={color:"#FFFFFFFF"}
 
 > {%
 client.test("Request executed successfully", function() {

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_change_headphoto"
+        android:title="修改头像"/>
+    <item
+        android:id="@+id/nav_change_chat_text_style"
+        android:title="修改聊天气泡风格"/>
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="退出登录"/>
+
+</menu>

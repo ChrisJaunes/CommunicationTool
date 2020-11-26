@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/account_register"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="150sp"
+            android:text="@string/account_name"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/et_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="150sp"
+            android:text="@string/account_password"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="150sp"
+            android:text="@string/account_nickname"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:text="@string/account_avatar"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="@string/account_textstyle_font_color" />
+        <View
+            android:id="@+id/vi_font_color"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <Spinner
+            android:id="@+id/sp_font_color"
+            android:layout_gravity="right"
+            android:layout_marginStart="20dp"
+            android:gravity="right"
+            android:spinnerMode="dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="@string/account_textstyle_bubble_color" />
+        <View
+            android:id="@+id/vi_bubble_color"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <Spinner
+            android:id="@+id/sp_bubble_color"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="right"
+            android:spinnerMode="dialog"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="@string/account_textstyle_border_color"/>
+
+        <View
+            android:id="@+id/vi_border_color"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <Spinner
+            android:id="@+id/sp_border_color"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:spinnerMode="dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:text="点击注册"/>
+</LinearLayout>
