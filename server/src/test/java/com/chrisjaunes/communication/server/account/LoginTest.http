@@ -1,0 +1,57 @@
+﻿GET http://localhost:8080/communicationServer/
+
+> {%
+client.global.set("host", "localhost:8080/communicationServer/");
+ %}
+
+###
+
+GET http://{{host}}/account/login
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body === "[ERROR] 不应该使用GET访问", "Response Body is Error");
+});
+%}
+###
+
+POST http://{{host}}/account/login?account=123&password=123
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "login successful");
+});
+
+%}
+
+###
+
+POST http://{{host}}/account/login?account=accountnotexists&password=123234
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "account is not exist");
+});
+%}
+
+###
+
+POST http://{{host}}/account/login?account=123&password=123234
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received ");
+  client.assert(response.body.status === "password is not correct");
+});
+%}
+
+###
+
+

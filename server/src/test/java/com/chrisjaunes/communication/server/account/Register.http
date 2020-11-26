@@ -1,0 +1,52 @@
+﻿GET http://localhost:8080/communicationServer/
+
+> {%
+client.global.set("host", "localhost:8080/communicationServer/");
+ %}
+
+###
+
+GET http://{{host}}/account/register
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body === "[ERROR] 不应该使用GET访问", "Response Body is Error");
+});
+%}
+###
+
+POST http://{{host}}/account/register?account=222&password=222
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+});
+%}
+
+###
+
+POST http://{{host}}/account/register?account=222&password=222
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+});
+%}
+
+###
+
+POST http://{{host}}/account/register?account=333&password=333&nickname=123&text_style={color:"#ffffff"}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received ");
+});
+%}
+
+###
+
+
