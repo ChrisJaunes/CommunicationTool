@@ -22,53 +22,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chrisjaunes.communication.client.account.AccountViewModel;
+import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
+import com.chrisjaunes.communication.client.contacts.NowContactsFragment;
 import com.chrisjaunes.communication.client.utils.DialogHelper;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
-    public final static int MENU_AVATAR = 0;
-    public final static int MENU_UPDATE_TEXT_STYLE = 1;
-    public final static int MENU_LOGOUT = 2;
+    private final static int MENU_AVATAR = 0;
+    private final static int MENU_UPDATE_TEXT_STYLE = 1;
+    private final static int MENU_LOGOUT = 2;
     private final static int PHOTO_REQUEST_GALLERY = 1;
 
-    @SuppressLint("NonConstantResourceId")
-    Toolbar.OnMenuItemClickListener toolbarOnMenuItemClickListener = item -> {
-        switch (item.getItemId()){
-            case  R.id.action_add_friend:
-                Log.i("MainActivity", "add friend");
-                Toast.makeText(getApplicationContext(),"add",Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.action_create_group:
-                Toast.makeText(getApplicationContext(),"create",Toast.LENGTH_SHORT).show();
-                break;
-            default:break;
-        }
-        return true;
-    };
-
-    @SuppressLint("NonConstantResourceId")
-    RadioGroup.OnCheckedChangeListener radioGroupOnCheckedChangeListener = (group, checkedId) -> {
-        final TextView toolBarTitle = findViewById(R.id.toolbar_title);
-        switch (checkedId){
-            case R.id.rb_now_contacts:
-                //updateFragment(nowFriendsFragment);
-                toolBarTitle.setText("我的好友");
-                break;
-            case R.id.radio_button_newfriend:
-                //updateFragment(newFriendsFragment);
-                toolBarTitle.setText("好友请求");
-                break;
-            case R.id.radio_button_chatgroup:
-                //updateFragment(chatGroupFragment);
-                toolBarTitle.setText("群聊");
-                break;
-        }
-    };
-
     private AccountViewModel accountViewModel;
-
+    private ContactsViewModel contactsViewModel;
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -80,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("MainActivity", stringUniApiResult.status);
             Toast.makeText(MainActivity.this, stringUniApiResult.status, Toast.LENGTH_SHORT).show();
         });
+        contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
 
         final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         final androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -142,6 +111,41 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    @SuppressLint("NonConstantResourceId")
+    private final Toolbar.OnMenuItemClickListener toolbarOnMenuItemClickListener = item -> {
+        switch (item.getItemId()){
+            case  R.id.action_add_friend:
+                Log.i("MainActivity", "add friend");
+                Toast.makeText(getApplicationContext(),"add",Toast.LENGTH_SHORT).show();
+                break;
+            case  R.id.action_create_group:
+                Toast.makeText(getApplicationContext(),"create",Toast.LENGTH_SHORT).show();
+                break;
+            default:break;
+        }
+        return true;
+    };
+
+    private final NowContactsFragment nowContactsFragment = new NowContactsFragment();
+    @SuppressLint("NonConstantResourceId")
+    private final RadioGroup.OnCheckedChangeListener radioGroupOnCheckedChangeListener = (group, checkedId) -> {
+        final TextView toolBarTitle = findViewById(R.id.toolbar_title);
+        switch (checkedId){
+            case R.id.rb_now_contacts:
+                updateFragment(nowContactsFragment);
+                toolBarTitle.setText("我的好友");
+                break;
+            case R.id.radio_button_newfriend:
+                //updateFragment(newFriendsFragment);
+                toolBarTitle.setText("好友请求");
+                break;
+            case R.id.radio_button_chatgroup:
+                //updateFragment(chatGroupFragment);
+                toolBarTitle.setText("群聊");
+                break;
+        }
+    };
 
     private void updateFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();

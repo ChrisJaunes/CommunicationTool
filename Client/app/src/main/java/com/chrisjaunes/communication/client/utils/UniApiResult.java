@@ -3,7 +3,7 @@ package com.chrisjaunes.communication.client.utils;
 public class UniApiResult<T> {
     public String status;
     public T data;
-    UniApiResult(String status, T data) {
+    public UniApiResult(String status, T data) {
         this.status = status;
         this.data = data;
     }

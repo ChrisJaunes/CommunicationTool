@@ -17,11 +17,12 @@ public class BitmapHelper {
         Bitmap bitmap = null;
         try {
             byte[] bitmapArray;
-            bitmapArray = Base64.decode(string,Base64.DEFAULT);
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
             bitmap = BitmapFactory.decodeByteArray(bitmapArray,0,bitmapArray.length);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.d("BitmapHelper", "" + bitmap);
         return bitmap;
     }
 

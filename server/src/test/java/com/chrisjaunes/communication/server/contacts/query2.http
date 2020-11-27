@@ -6,7 +6,7 @@ client.log(response.headers.valuesOf("Set-Cookie"));
 //client.global.set("cookie", response.headers.valueOf("JSESSIONID"));
  %}
 ###
-POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+POST http://{{host}}/contacts/query?time=0000-00-00 00:00:00
 
 > {%
 
@@ -23,7 +23,7 @@ POST http://localhost:8080/communicationServer/account/login?account=222&passwor
 client.log(response.headers.valuesOf("Set-Cookie"));
  %}
 ###
-POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+POST http://{{host}}/contacts/query?time=0000-00-00 00:00:00
 
 > {%
 
@@ -40,7 +40,7 @@ POST http://localhost:8080/communicationServer/account/login?account=333&passwor
 client.log(response.headers.valuesOf("Set-Cookie"));
  %}
 ###
-POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+POST http://{{host}}/contacts/query?time=0000-00-00 00:00:00
 
 > {%
 
@@ -57,7 +57,7 @@ POST http://localhost:8080/communicationServer/account/login?account=444&passwor
 client.log(response.headers.valuesOf("Set-Cookie"));
  %}
 ###
-POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+POST http://{{host}}/contacts/query?time=0000-00-00 00:00:00
 
 > {%
 

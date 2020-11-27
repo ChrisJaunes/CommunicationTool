@@ -5,6 +5,8 @@ public class Config {
     static public final String URL_LOGIN = URL_BASE + "/account/login";
     static public final String URL_REGISTER = URL_BASE + "/account/register";
     static public final String URL_UPDATE_MESSAGE = URL_BASE + "/account/updateMessage";
+    static public final String URL_CONTACTS_QUERY = URL_BASE + "/contacts/query";
+
     static public final String ERROR_NET = "网络错误";
     static public final String ERROR_UNKNOW = "未知错误";
     static public final String ERROR_AVATAR_TOO_LAEGE = "头像太大";
@@ -12,6 +14,7 @@ public class Config {
 
 
     static final public String STR_STATUS = "status";
+    static final public String STR_STATUS_DATA = "data";
 
     static final public String STATUS_LOGIN_SUCCESSFUL = "login successful";
     static final public String STATUS_LOGIN_ACCOUNT_ERROR = "account is not exist";
@@ -27,5 +30,17 @@ public class Config {
     static final public String STR_NICKNAME = "nickname";
     static final public String STR_AVATAR = "avatar";
     static final public String STR_TEXT_STYLE = "text_style";
+    static final public String TABLE_CONTACTS = "contacts";
+    static final public String STR_ACCOUNT1 = "account1";
+    static final public String STR_ACCOUNT2 = "account2";
+    static final public String STR_TIME = "time";
+    static final public String STR_OPERATION = "operation";
+    static final public String CONTACTS_FRIENDS_AGREE = "agree";
+    static final public int CONTACTS_FRIENDS_AGREE_CODE = 1;
+    static final public String CONTACTS_FRIEND_REQUEST = "request";
+    static final public int CONTACTS_FRIENDS_REQUEST_CODE = 2;
+    static final public String CONTACTS_FRIENDS_REJECT = "reject";
+
+    static final public String BUNDLE_ACCOUNT = "";
 
 }

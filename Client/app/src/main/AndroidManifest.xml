@@ -14,15 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".account.RegisterActivity"/>
-        <activity android:name=".account.LoginActivity" >
+        <activity android:name=".talk.TalkActivity"></activity>
+        <activity android:name=".account.RegisterActivity" />
+        <activity android:name=".account.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

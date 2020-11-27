@@ -50,10 +50,12 @@ public class Query extends HttpServlet {
             resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
         }else {
             requestTime = TimeHelper.timeToStdTime(requestTime);
+            Log.info(requestTime);
             try {
-                String sqlQuery = String.format("select * from %s as `A`, %s as `C` where `A`.`%s` = `C`.`contacts`",
+                String sqlQuery = String.format("select %s, %s, %s, %s, %s from %s as `A`, %s as `C` where `A`.`%s` = `C`.`contacts`",
+                        Config.STR_ACCOUNT, Config.STR_NICKNAME, Config.STR_AVATAR, Config.STR_TEXT_STYLE, Config.STR_TIME,
                         Config.TABLE_ACCOUNT,
-                        String.format("(select if(`%s` = ?, `%s`, `%s`) as `contacts` from %s where %s >= ? and %s = ? and (%s = ? or %s = ?))",
+                        String.format("(select if(`%s` = ?, `%s`, `%s`) as `contacts`, `time` from %s where %s >= ? and %s = ? and (%s = ? or %s = ?))",
                                 Config.STR_ACCOUNT1, Config.STR_ACCOUNT2, Config.STR_ACCOUNT1,
                                 Config.TABLE_CONTACTS,
                                 Config.STR_TIME, Config.STR_OPERATION, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2),

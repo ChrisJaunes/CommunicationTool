@@ -8,6 +8,7 @@ public class TimeHelper {
     static public String timeToStdTime(String time) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            format.setLenient(false);
             java.util.Date date = format.parse(time);
             return new Timestamp(date.getTime()).toString();
         } catch (ParseException e2) {
