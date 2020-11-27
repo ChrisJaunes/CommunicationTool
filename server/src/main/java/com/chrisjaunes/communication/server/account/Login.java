@@ -70,6 +70,7 @@ public class Login extends HttpServlet {
 			} else {
 				resJson.put(Config.STR_STATUS, Config.STATUS_LOGIN_ACCOUNT_ERROR);
 			}
+			DBHelper.closeResource(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

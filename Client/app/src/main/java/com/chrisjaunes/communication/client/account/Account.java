@@ -2,6 +2,10 @@ package com.chrisjaunes.communication.client.account;
 
 import com.google.gson.Gson;
 
+/**
+ * @author ChrisJaunes
+ * 采用了建造者模式
+ */
 public class Account {
     public String account;
     public String nickname;

@@ -82,11 +82,12 @@ public class UpdateMessage extends HttpServlet {
 				} else{
 					resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_FAIL);
 				}
+				DBHelper.closeResource(result);
 			} catch (SQLException throwables) {
 				throwables.printStackTrace();
 			}
 		} else{
-			resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_FAIL);
+			resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
 		}
 		response.setContentType("application/json");
 		response.getWriter().append(resJson.toString()).flush();

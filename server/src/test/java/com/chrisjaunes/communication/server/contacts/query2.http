@@ -1,0 +1,70 @@
+﻿POST http://localhost:8080/communicationServer/account/login?account=111&password=111
+
+> {%
+client.global.set("host", "localhost:8080/communicationServer/");
+client.log(response.headers.valuesOf("Set-Cookie"));
+//client.global.set("cookie", response.headers.valueOf("JSESSIONID"));
+ %}
+###
+POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###
+POST http://localhost:8080/communicationServer/account/login?account=222&password=222
+
+> {%
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+###
+POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###
+POST http://localhost:8080/communicationServer/account/login?account=333&password=333
+
+> {%
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+###
+POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###
+POST http://localhost:8080/communicationServer/account/login?account=444&password=444
+
+> {%
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+###
+POST http://{{host}}/contacts/query?time=0000:00:00 00:00:00
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###

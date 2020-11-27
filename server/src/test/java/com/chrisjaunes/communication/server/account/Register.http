@@ -16,34 +16,37 @@ client.test("Request executed successfully", function() {
 %}
 ###
 
-POST http://{{host}}/account/register?account=222&password=222
+POST http://{{host}}/account/register?account=666&password=666
 
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "register successful");
 });
 %}
 
 ###
 
-POST http://{{host}}/account/register?account=222&password=222
+POST http://{{host}}/account/register?account=666&password=666
 
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "account is exist");
 });
 %}
 
 ###
 
-POST http://{{host}}/account/register?account=333&password=333&nickname=123&text_style={color:"#ffffff"}
+POST http://{{host}}/account/register?account=777&password=777&nickname=777&text_style={color:"#ffffff"}
 
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received ");
+  client.assert(response.body.status === "register successful");
 });
 %}
 

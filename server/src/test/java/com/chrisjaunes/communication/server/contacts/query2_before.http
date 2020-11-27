@@ -1,0 +1,99 @@
+﻿POST http://localhost:8080/communicationServer/account/login?account=111&password=111
+
+> {%
+client.global.set("host", "localhost:8080/communicationServer/");
+client.log(response.headers.valuesOf("Set-Cookie"));
+//client.global.set("cookie", response.headers.valueOf("JSESSIONID"));
+ %}
+
+###
+POST http://{{host}}/contacts/update?account2=222&time=2020:11:27&operation=request
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###
+POST http://{{host}}/contacts/update?account2=333&time=2020:11:27&operation=request
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###
+POST http://{{host}}/contacts/update?account2=444&time=2020:11:27&operation=request
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+
+###
+POST http://{{host}}/contacts/update?account2=555&time=2020:11:27&operation=request
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+
+###
+POST http://localhost:8080/communicationServer/account/login?account=222&password=222
+
+> {%
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+###
+POST http://{{host}}/contacts/update?account2=111&time=2020:11:27&operation=agree
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###
+POST http://localhost:8080/communicationServer/account/login?account=333&password=333
+
+> {%
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+###
+POST http://{{host}}/contacts/update?account2=111&time=2020:11:27&operation=agree
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###
+POST http://localhost:8080/communicationServer/account/login?account=444&password=444
+
+> {%
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+###
+POST http://{{host}}/contacts/update?account2=111&time=2020:11:27&operation=reject
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful");
+});
+%}
+###

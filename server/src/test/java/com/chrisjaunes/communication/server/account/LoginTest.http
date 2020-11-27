@@ -16,7 +16,7 @@ client.test("Request executed successfully", function() {
 %}
 ###
 
-POST http://{{host}}/account/login?account=123&password=123
+POST http://{{host}}/account/login?account=111&password=111
 
 > {%
 
@@ -42,7 +42,7 @@ client.test("Request executed successfully", function() {
 
 ###
 
-POST http://{{host}}/account/login?account=123&password=123234
+POST http://{{host}}/account/login?account=111&password=123234
 
 > {%
 client.test("Request executed successfully", function() {

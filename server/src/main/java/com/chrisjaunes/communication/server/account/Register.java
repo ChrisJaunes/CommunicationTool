@@ -73,6 +73,7 @@ public class Register extends HttpServlet {
 				DBHelper.executeOperate(sqlQuery, params);
 				resJson.put(Config.STR_STATUS, Config.STATUS_REGISTER_SUCCESSFUL);
 			}
+			DBHelper.closeResource(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

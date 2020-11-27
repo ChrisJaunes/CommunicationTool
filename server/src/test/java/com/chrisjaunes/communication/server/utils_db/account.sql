@@ -29,8 +29,10 @@ CREATE TABLE IF NOT EXISTS `test` (
 LOCK TABLES `test` WRITE;
 INSERT INTO `test` VALUES
 ('111','111'),
-('555','555'),
-('123','123');
+('222','222'),
+('333','333'),
+('444','444'),
+('555','555');
 UNLOCK TABLES;
 
 
@@ -46,6 +48,8 @@ CREATE TABLE `account` (
 LOCK TABLES `account` WRITE;
 INSERT INTO `account` VALUES
     ('111','111','111', NULL, NULL),
-    ('555','555','555', NULL, NULL),
-    ('123','123','123', NULL, NULL);
+    ('222','222','222', NULL, NULL),
+    ('333','333','333', NULL, NULL),
+    ('444','444','444', NULL, NULL),
+    ('555','555','555', NULL, NULL);
 UNLOCK TABLES;
