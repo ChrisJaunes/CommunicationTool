@@ -20,4 +20,5 @@
     <string name="account_textstyle_font_color">字体颜色</string>
     <string name="account_textstyle_bubble_color">气泡颜色</string>
     <string name="account_textstyle_border_color">边框颜色</string>
+    <string name="main_now_contacts">好友</string>
 </resources>

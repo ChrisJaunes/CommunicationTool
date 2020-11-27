@@ -14,14 +14,13 @@
 <!--        android:layout_gravity="center"-->
 <!--        android:src="@drawable/frimage"-->
 <!--        android:scaleType="centerCrop"/>-->
-    <com.example.communicateapp.MyView.CircleHeadPhotoView
+    <!--<com.example.communicateapp.MyView.CircleHeadPhotoView
         android:id="@+id/head_headphoto"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        />
-
+        />-->
 
     <TextView
         android:id="@+id/head_username"

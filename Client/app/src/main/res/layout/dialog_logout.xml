@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="320dp"
+    android:gravity="center_horizontal"
+    android:background="@mipmap/dialog_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="真的要退出登陆嘛"
+        android:textColor="#145784"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="15dp">
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@mipmap/yes_btn"/>
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@mipmap/no_btn"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+    
+
+
+</LinearLayout>

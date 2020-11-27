@@ -11,31 +11,21 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * @author ChirsJaunes
- * 单例设计模式
  */
 public class BitmapHelper {
-    private BitmapHelper() {}
-    private static BitmapHelper instance;
-    public static BitmapHelper getInstance() {
-        if( instance == null ) {
-            instance = new BitmapHelper();
-        }
-        return instance;
-    }
-    public Bitmap StringToBitmap(String string){
+    public static Bitmap StringToBitmap(String string){
         Bitmap bitmap = null;
         try {
             byte[] bitmapArray;
             bitmapArray = Base64.decode(string,Base64.DEFAULT);
             bitmap = BitmapFactory.decodeByteArray(bitmapArray,0,bitmapArray.length);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-//      return imageScale(bitmap,200,200);
         return bitmap;
     }
 
-    public String BitmapToString(Bitmap bitmap) {
+    public static String BitmapToString(Bitmap bitmap) {
         if (null == bitmap) return null;
         String string = null;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -51,7 +41,7 @@ public class BitmapHelper {
         return string;
     }
 
-    public Bitmap imageScale(Bitmap bitmap,int dst_w,int dst_h){
+    public static Bitmap imageScale(Bitmap bitmap,int dst_w,int dst_h){
         int src_w = bitmap.getWidth();
         int src_h = bitmap.getHeight();
         float scale_w = ( (float)dst_w ) / src_w;

@@ -5,4 +5,82 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#339FF4"
+            app:navigationIcon="@drawable/img_menu_white"
+            android:theme="@style/OverflowMenuStyle">
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#F7FAF9"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10" />
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb_now_contacts"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/main_now_contacts"
+                android:textColor="@drawable/color_selector_main_activity_rb"
+                android:button="@null"
+                android:drawableTop="@drawable/icon_selector_now_contacts"
+                android:textStyle="bold"/>
+            <RadioButton
+                android:id="@+id/radio_button_chatgroup"
+                android:gravity="center"
+                android:text="群聊"
+                android:textColor="@drawable/color_selector_main_activity_rb"
+                android:button="@null"
+                android:textStyle="bold"
+                android:drawableTop="@drawable/nowgroup_bg_selector"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"/>
+            <RadioButton
+                android:id="@+id/radio_button_newfriend"
+                android:text="新好友"
+                android:textStyle="bold"
+                android:button="@null"
+                android:gravity="center"
+                android:drawableTop="@drawable/newfriend_bg_selector"
+                android:textColor="@drawable/color_selector_main_activity_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_head"
+        app:menu="@menu/drawer_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

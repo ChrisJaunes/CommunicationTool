@@ -19,7 +19,7 @@
 <!--        <item name="colorAccent">@color/colorAccent</item>-->
     </style>
 
-    <style name="mydialog" parent="android:style/Theme.Dialog">
+    <style name="LogoutDialog" parent="android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
@@ -41,14 +41,11 @@
         <item name="android:textColor">#FFFFFF</item>
         <!-- 字体大小-->
         <item name="android:textSize">18sp</item>
-
         <!-- 用于替换菜单的三个小白点，换成自已的图片-->
         <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.Menu</item>
-
     </style>
     <style name="ActionButton.Overflow.Menu" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
         <item name="android:src">@drawable/img_add</item>
-
     </style>
 
 </resources>
