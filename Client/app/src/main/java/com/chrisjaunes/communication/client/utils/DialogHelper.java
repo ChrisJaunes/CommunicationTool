@@ -2,31 +2,14 @@ package com.chrisjaunes.communication.client.utils;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.account.Account;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.List;
+import com.chrisjaunes.communication.client.account.AccountInfo;
 
 /**
  * @author Chris
@@ -47,7 +30,7 @@ public class DialogHelper {
 
     public static class SelectTextStyleColorDialog extends Dialog {
         public interface UpdateListener {
-            void update(Account.AccountTextStyle textStyle);
+            void update(AccountInfo.AccountTextStyle textStyle);
         }
         public SelectTextStyleColorDialog(@NonNull Context context, UpdateListener listener) {
             super(context);
@@ -68,7 +51,7 @@ public class DialogHelper {
             sp_border_color.setOnItemSelectedListener(new ColorTrHelper.ColorSelectedListener(vi_border_color));
 
             findViewById(R.id.btn_confirm).setOnClickListener(v -> {
-                Account.AccountTextStyle textStyle = new Account.AccountTextStyle();
+                AccountInfo.AccountTextStyle textStyle = new AccountInfo.AccountTextStyle();
                 textStyle.font_color = ColorTrHelper.colorToString(((ColorDrawable) vi_font_color.getBackground()).getColor());
                 textStyle.bubble_color = ColorTrHelper.colorToString(((ColorDrawable) vi_bubble_color.getBackground()).getColor());
                 textStyle.border_color = ColorTrHelper.colorToString(((ColorDrawable) vi_border_color.getBackground()).getColor());

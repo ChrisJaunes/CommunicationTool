@@ -15,11 +15,9 @@ import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import java.util.List;
 
 public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.NowContactsViewHolder> {
-    public interface ItemOnClickListener {
-        void goToTalk(String account);
-    }
     List<Contacts> friendList;
     ItemOnClickListener itemOnClickListener;
+
     public NowContactsAdapter(List<Contacts> new_friendList, ItemOnClickListener itemOnClickListener) {
         this.friendList = new_friendList;
         this.itemOnClickListener = itemOnClickListener;
@@ -28,7 +26,7 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
     @NonNull
     @Override
     public NowContactsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contacts_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contacts,parent,false);
         return new NowContactsViewHolder(view);
     }
 
@@ -43,6 +41,14 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
     @Override
     public int getItemCount() { return friendList.size(); }
 
+    public void addFriendItem(int pos, Contacts friendShip){
+        friendList.add(pos, friendShip);
+        notifyItemChanged(pos);
+    }
+
+    public interface ItemOnClickListener {
+        void goToTalk(String account);
+    }
     public static class NowContactsViewHolder extends RecyclerView.ViewHolder{
         TextView nickName;
         ImageView avatar;
@@ -51,10 +57,5 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
             nickName = itemView.findViewById(R.id.friendUerName);
             avatar = itemView.findViewById(R.id.friend_image);
         }
-    }
-
-    public void addFriendItem(int pos, Contacts friendShip){
-        friendList.add(pos, friendShip);
-        notifyItemChanged(pos);
     }
 }

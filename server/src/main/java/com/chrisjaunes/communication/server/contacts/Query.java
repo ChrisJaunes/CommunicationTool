@@ -1,8 +1,8 @@
 package com.chrisjaunes.communication.server.contacts;
 
 import com.chrisjaunes.communication.server.Config;
-import com.chrisjaunes.communication.server.utils_db.DBHelper;
-import com.chrisjaunes.communication.server.utils_db.TimeHelper;
+import com.chrisjaunes.communication.server.utils.DBHelper;
+import com.chrisjaunes.communication.server.utils.TimeHelper;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -52,20 +52,19 @@ public class Query extends HttpServlet {
             requestTime = TimeHelper.timeToStdTime(requestTime);
             Log.info(requestTime);
             try {
-                String sqlQuery = String.format("select %s, %s, %s, %s, %s from %s as `A`, %s as `C` where `A`.`%s` = `C`.`contacts`",
-                        Config.STR_ACCOUNT, Config.STR_NICKNAME, Config.STR_AVATAR, Config.STR_TEXT_STYLE, Config.STR_TIME,
+                String sqlQuery = String.format("select %s, %s, %s, %s, %s, %s from %s as `A`, %s as `C` where `A`.`%s` = `C`.`contacts`",
+                        Config.STR_ACCOUNT, Config.STR_NICKNAME, Config.STR_AVATAR, Config.STR_TEXT_STYLE, Config.STR_TIME, Config.STR_OPERATION,
                         Config.TABLE_ACCOUNT,
-                        String.format("(select if(`%s` = ?, `%s`, `%s`) as `contacts`, `time` from %s where %s >= ? and %s = ? and (%s = ? or %s = ?))",
-                                Config.STR_ACCOUNT1, Config.STR_ACCOUNT2, Config.STR_ACCOUNT1,
+                        String.format("(select if(`%s` = ?, `%s`, `%s`) as `contacts`, %s, %s from %s where %s >= ? and (%s = ? or %s = ?))",
+                                Config.STR_ACCOUNT1, Config.STR_ACCOUNT2, Config.STR_ACCOUNT1, Config.STR_TIME, Config.STR_OPERATION,
                                 Config.TABLE_CONTACTS,
-                                Config.STR_TIME, Config.STR_OPERATION, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2),
+                                Config.STR_TIME, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2),
                         Config.STR_ACCOUNT
                 );
                 Log.info(sqlQuery);
                 List<Object> params = new ArrayList<>();
                 params.add(account);
                 params.add(requestTime);
-                params.add(Config.CONTACTS_FRIENDS_AGREE_CODE);
                 params.add(account);
                 params.add(account);
                 ResultSet result = DBHelper.executeQuery(sqlQuery, params);

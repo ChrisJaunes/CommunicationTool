@@ -2,10 +2,9 @@ package com.chrisjaunes.communication.client;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.room.Room;
 
-import com.chrisjaunes.communication.client.account.Account;
+import com.chrisjaunes.communication.client.account.AccountInfo;
 import com.chrisjaunes.communication.client.account.AccountManage;
 
 public class MyApplication extends Application {
@@ -18,8 +17,18 @@ public class MyApplication extends Application {
 
     }
 
-    public void setAccount(Account account) {
-        AccountManage.getInstance().setAccount(account);
+    public void setAccount(AccountInfo account) {
+        AccountManage.getInstance().setAccountInfo(account);
+    }
+
+    LocalDatabase localDatabase;
+    public LocalDatabase getLocalDataBase() {
+        if(null == localDatabase) {
+            localDatabase = Room.databaseBuilder(this, LocalDatabase.class,
+                    String.format("account_%s", AccountManage.getInstance().getAccount())
+            ).build();
+        }
+        return localDatabase;
     }
 }
 

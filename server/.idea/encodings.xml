@@ -8,11 +8,11 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/account/UpdateMessage.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/contacts/Query.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/contacts/Update.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/utils_db/DBHelper.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/utils_db/TimeHelper.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/utils_db/db_helper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/utils/DBHelper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/utils/TimeHelper.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/utils/db_helper.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/test/com/chrisjaunes/communication/server/account/LoginTest.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/test/java/com/chrisjaunes/communication/server/utils_db/DBHelperTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/test/java/com/chrisjaunes/communication/server/utils/DBHelperTest.java" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
