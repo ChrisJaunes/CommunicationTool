@@ -23,10 +23,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginViewModel extends ViewModel{
-    private final MutableLiveData<UniApiResult> result = new MutableLiveData<>();
-    public LiveData<UniApiResult> getResult() {
-        return result;
-    }
+    private final MutableLiveData<UniApiResult> uniApiResult = new MutableLiveData<>();
+    public LiveData<UniApiResult> getUniApiResult() { return uniApiResult; }
 
     public void login(final String account,final String password) {
         OkHttpClient client = OkHttpHelper.getClient();
@@ -44,7 +42,7 @@ public class LoginViewModel extends ViewModel{
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                result.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
+                uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
                 Log.e("Login", Config.ERROR_NET);
             }
 
@@ -52,14 +50,14 @@ public class LoginViewModel extends ViewModel{
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
+                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
                     Log.e("Login", Config.ERROR_UNKNOW + response.code());
                     return;
                 }
                 String jsonS = response.body().string();
                 Gson gson = new Gson();
-                UniApiResult<Account> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<Account>>() {}.getType());
-                result.postValue(res);
+                UniApiResult<AccountInfo> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<AccountInfo>>() {}.getType());
+                uniApiResult.postValue(res);
                 Log.v("Login", res.status);
                 Log.v("Login", "" + res.data);
             }

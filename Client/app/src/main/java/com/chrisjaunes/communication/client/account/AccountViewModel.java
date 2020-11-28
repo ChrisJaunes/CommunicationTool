@@ -10,7 +10,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import com.chrisjaunes.communication.client.utils.OkHttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
@@ -74,7 +73,7 @@ public class AccountViewModel extends ViewModel {
         });
     }
 
-    public void updateTextStyle(final Account.AccountTextStyle textStyle) {
+    public void updateTextStyle(final AccountInfo.AccountTextStyle textStyle) {
         OkHttpClient client = OkHttpHelper.getClient();
 
         RequestBody requestBody = new FormBody.Builder()

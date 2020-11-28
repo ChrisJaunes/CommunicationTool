@@ -1,7 +1,7 @@
 package com.chrisjaunes.communication.server.account;
 
 import com.chrisjaunes.communication.server.Config;
-import com.chrisjaunes.communication.server.utils_db.DBHelper;
+import com.chrisjaunes.communication.server.utils.DBHelper;
 import net.sf.json.JSONObject;
 
 import java.io.IOException;

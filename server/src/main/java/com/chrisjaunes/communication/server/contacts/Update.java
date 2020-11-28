@@ -1,8 +1,8 @@
 package com.chrisjaunes.communication.server.contacts;
 
 import com.chrisjaunes.communication.server.Config;
-import com.chrisjaunes.communication.server.utils_db.DBHelper;
-import com.chrisjaunes.communication.server.utils_db.TimeHelper;
+import com.chrisjaunes.communication.server.utils.DBHelper;
+import com.chrisjaunes.communication.server.utils.TimeHelper;
 import net.sf.json.JSONObject;
 
 import javax.servlet.annotation.WebServlet;

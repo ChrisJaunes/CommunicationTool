@@ -30,7 +30,7 @@ public class RegisterViewModel extends ViewModel {
         return result;
     }
 
-    public void register(final Account account, final String password) {
+    public void register(final AccountInfo account, final String password) {
         OkHttpClient client = OkHttpHelper.getClient();
 
         RequestBody requestBody = new FormBody.Builder()

@@ -43,4 +43,5 @@ public class Config {
 
     static final public String BUNDLE_ACCOUNT = "";
 
+    static final public String ACCOUNT_VISITORS = "visitors";
 }

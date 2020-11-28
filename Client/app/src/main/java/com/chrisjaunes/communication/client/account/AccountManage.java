@@ -4,8 +4,13 @@ import android.graphics.Bitmap;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.chrisjaunes.communication.client.Config;
+import com.chrisjaunes.communication.client.contacts.Contacts;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
+/**
+ * Account.account 不允许设置
+ */
 public class AccountManage {
     private static AccountManage instance;
     private AccountManage (){}
@@ -14,15 +19,16 @@ public class AccountManage {
         return instance;
     }
 
-    private Account account;
+    private AccountInfo accountInfo;
     private final MutableLiveData<Bitmap> avatarLiveData = new MutableLiveData<>();
-    public void setAccount(Account account) {
-        this.account = account;
-        avatarLiveData.postValue(BitmapHelper.StringToBitmap(account.avatar));
+    public void setAccountInfo(AccountInfo accountInfo) {
+        this.accountInfo = accountInfo;
+        avatarLiveData.postValue(BitmapHelper.StringToBitmap(accountInfo.avatar));
     }
-    public Account getAccount() {
-        return account;
+    public AccountInfo getAccountInfo() {
+        return accountInfo;
     }
+    public String getAccount() { return null == accountInfo.account ? Config.ACCOUNT_VISITORS : accountInfo.account;}
     public void setAvatar(final Bitmap avatar) {
         avatarLiveData.postValue(avatar);
     }

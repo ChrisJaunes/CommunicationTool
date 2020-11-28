@@ -21,14 +21,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         final LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        loginViewModel.getResult().observe(this, uniApiResult -> {
+        loginViewModel.getUniApiResult().observe(this, uniApiResult -> {
             Toast.makeText(LoginActivity.this, uniApiResult.status, Toast.LENGTH_SHORT).show();
             if(Config.STATUS_LOGIN_SUCCESSFUL.equals(uniApiResult.status)) {
-                if (BuildConfig.DEBUG && !(uniApiResult.data instanceof Account)) {
+                if (BuildConfig.DEBUG && !(uniApiResult.data instanceof AccountInfo)) {
                     throw new AssertionError("Assertion failed");
                 }
-                MyApplication.getInstance().setAccount((Account) uniApiResult.data);
+                MyApplication.getInstance().setAccount((AccountInfo) uniApiResult.data);
 
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -55,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        et_account.setText("111");
-        et_password.setText("111");
+        et_account.setText("222");
+        et_password.setText("222");
         btn_login.performClick();
     }
 

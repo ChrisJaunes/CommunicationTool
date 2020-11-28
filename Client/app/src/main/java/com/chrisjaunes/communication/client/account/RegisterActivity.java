@@ -1,18 +1,14 @@
 package com.chrisjaunes.communication.client.account;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +24,6 @@ import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import com.chrisjaunes.communication.client.utils.ColorTrHelper;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final int PHOTO_REQUEST_GALLERY = 1;
@@ -37,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         final RegisterViewModel registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         registerViewModel.getResult().observe(this, stringUniApiResult -> {
             Toast.makeText(getApplicationContext(),stringUniApiResult.status,Toast.LENGTH_SHORT).show();
@@ -73,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         final Button btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(view -> {
-            Account account = new Account.Builder()
+            AccountInfo account = new AccountInfo.Builder()
                     .addAccount(et_account.getText().toString())
                     .addNickname(et_nickname.getText().toString())
                     .addAvatar(BitmapHelper.BitmapToString(
