@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * @author ChirsJaunes
  */
-@WebServlet(name = "TestServlet", urlPatterns = "/TestServlet")
+@WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet","/"})
 public class TestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {

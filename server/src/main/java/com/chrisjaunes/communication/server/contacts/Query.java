@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 /**
  * @author ChrisJaunes
  */
-@WebServlet(name = "Query" , urlPatterns = {"/contacts/query"})
+@WebServlet(name = "ContactsQuery" , urlPatterns = {"/contacts/query"})
 public class Query extends HttpServlet {
     private static final Logger Log = Logger.getLogger("Contacts Query");
     /**
@@ -75,6 +75,7 @@ public class Query extends HttpServlet {
                 result.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                resJson.put(Config.STR_STATUS, Config.STATUS_DB_ILLEGAL_PARAMETER);
             }
         }
         Log.info(resJson.toString());

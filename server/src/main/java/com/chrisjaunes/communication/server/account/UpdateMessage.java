@@ -44,7 +44,9 @@ public class UpdateMessage extends HttpServlet {
 		Log.info(String.format("account : %s", account));
 
 		JSONObject resJson = new JSONObject();
-		if (null != account) {
+		if (null == account) {
+			resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
+		} else {
 			try {
 				String sqlQuery = String.format("select * from %s where account = ?", Config.TABLE_ACCOUNT);
 				List<Object> params = new ArrayList<>();
@@ -86,8 +88,6 @@ public class UpdateMessage extends HttpServlet {
 			} catch (SQLException throwables) {
 				throwables.printStackTrace();
 			}
-		} else{
-			resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
 		}
 		response.setContentType("application/json");
 		response.getWriter().append(resJson.toString()).flush();

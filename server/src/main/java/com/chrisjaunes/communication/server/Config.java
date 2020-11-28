@@ -40,4 +40,15 @@ public class Config {
     static final public String CONTACTS_FRIEND_REQUEST = "request";
     static final public int CONTACTS_FRIENDS_REQUEST_CODE = 2;
     static final public String CONTACTS_FRIENDS_REJECT = "reject";
+    static final public String TABLE_TALK_MESSAGES = "talk_messages";
+    static final public String STR_SEND_TIME = "send_time";
+    static final public String STR_CONTENT_TYPE = "content_type";
+    static final public int STR_CONTENT_TYPE_NULL = 0;
+    static final public int STR_CONTENT_TYPE_TEXT = 1;
+    static final public int STR_CONTENT_TYPE_JPEG = 2;
+    static final public int STR_CONTENT_TYPE_PNG  = 3;
+    static final public int STR_CONTENT_TYPE_GIF  = 4;
+    static final public int STR_CONTENT_TYPE_EMOJI= 5;
+    static final public String STR_CONTENT = "content";
+
 }

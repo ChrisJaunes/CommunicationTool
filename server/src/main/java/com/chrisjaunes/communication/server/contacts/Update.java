@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 /**
  * @author ChrisJaunes
  */
-@WebServlet(name = "Update" , urlPatterns = {"/contacts/update"})
+@WebServlet(name = "ContactsUpdate" , urlPatterns = {"/contacts/update"})
 public class Update extends HttpServlet {
     private static final Logger Log = Logger.getLogger("Contacts Update");
     /**
@@ -61,7 +62,7 @@ public class Update extends HttpServlet {
                     break;
                 }
                 case Config.CONTACTS_FRIENDS_AGREE: {
-                    // request ( A -> B), now account is B, account1 = A(account2) and account2 = B(account)
+                    // TODO request ( A -> B), now account is B, account1 = A(account2) and account2 = B(account)
                     sqlOpera = String.format("update %s set %s = ?, %s = ? where %s = ? and %s = ?",
                             Config.TABLE_CONTACTS,
                             Config.STR_TIME, Config.STR_OPERATION,
@@ -83,11 +84,17 @@ public class Update extends HttpServlet {
             if (null == sqlOpera) {
                 resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
             } else {
-                int count = DBHelper.executeOperate(sqlOpera, params);
-                if (count != 1) {
+                int count = -1;
+                try {
+                    count = DBHelper.executeOperate(sqlOpera, params);
+                    if (count == 1) {
+                        resJson.put(Config.STR_STATUS, Config.STATUS_SUCCESSFUL);
+                    } else{
+                        resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
+                    }
+                }catch (SQLException throwables) {
+                    throwables.printStackTrace();
                     resJson.put(Config.STR_STATUS, Config.STATUS_DB_ILLEGAL_PARAMETER);
-                } else {
-                    resJson.put(Config.STR_STATUS, Config.STATUS_SUCCESSFUL);
                 }
             }
         }
