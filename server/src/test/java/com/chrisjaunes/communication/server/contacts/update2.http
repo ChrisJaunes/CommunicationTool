@@ -13,7 +13,7 @@ POST http://{{host}}/contacts/update?account2=222&time=2020:11:27&operation=requ
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 ###
@@ -23,7 +23,7 @@ POST http://{{host}}/contacts/update?account2=333&time=2020:11:27&operation=requ
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 ###
@@ -51,7 +51,7 @@ POST http://{{host}}/contacts/update?account2=111&time=2020:11:27&operation=agre
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 ###
@@ -79,7 +79,7 @@ POST http://{{host}}/contacts/update?account2=111&time=2020:11:27&operation=reje
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 ###

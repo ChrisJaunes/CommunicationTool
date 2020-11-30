@@ -15,7 +15,7 @@ public interface ContactsDao {
     void InsertContacts(Contacts contacts);
 
     @Query("SELECT * FROM Contacts WHERE operation = " + Config.CONTACTS_FRIENDS_AGREE_CODE)
-    List<Contacts> queryNowContacts();
+    List<Contacts> queryNowContactsList();
 
     @Query("SELECT * FROM Contacts WHERE operation = " + Config.CONTACTS_FRIENDS_REQUEST_CODE)
     List<Contacts> queryNewContacts();

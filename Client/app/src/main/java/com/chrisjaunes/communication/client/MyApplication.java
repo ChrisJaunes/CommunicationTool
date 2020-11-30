@@ -26,7 +26,10 @@ public class MyApplication extends Application {
         if(null == localDatabase) {
             localDatabase = Room.databaseBuilder(this, LocalDatabase.class,
                     String.format("account_%s", AccountManage.getInstance().getAccount())
-            ).build();
+            )
+                    .addMigrations()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return localDatabase;
     }

@@ -41,34 +41,31 @@ public class Query extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
-		String account2 = request.getParameter(Config.STR_ACCOUNT2);
 		String requestTime = request.getParameter(Config.STR_TIME);
-		Log.info(String.format("account : %s, accout2 : %s, time : %s", account, account2, requestTime));
+		Log.info(String.format("account : %s, time : %s", account, requestTime));
 
 		JSONObject resJson = new JSONObject();
 		if (null == account) {
 			resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-		} else if (null == account2 || null == requestTime) {
+		} else if (null == requestTime) {
 			resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
-		}else {
+		} else {
 			requestTime = TimeHelper.timeToStdTime(requestTime);
 			Log.info(requestTime);
 			try {
-				String sqlQuery = String.format("select %s, %s, %s, %s, %s from %s where %s >= ? and ((%s = ? and %s = ?) or (%s = ? and %s = ?))",
+				String sqlQuery = String.format("select %s, %s, %s, %s, %s from %s where %s >= ? and (%s = ? or %s = ?) ",
 						Config.STR_ACCOUNT1, Config.STR_ACCOUNT2, Config.STR_SEND_TIME, Config.STR_CONTENT_TYPE,Config.STR_CONTENT,
 						Config.TABLE_TALK_MESSAGES,
-						Config.STR_SEND_TIME, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2);
+						Config.STR_SEND_TIME, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2);
 				Log.info(sqlQuery);
 				List<Object> params = new ArrayList<>();
 				params.add(requestTime);
 				params.add(account);
-				params.add(account2);
-				params.add(account2);
 				params.add(account);
 				ResultSet result = DBHelper.executeQuery(sqlQuery, params);
 				JSONArray jsonA = new JSONArray();
 				DBHelper.getResToJsonArray(result, jsonA);
-				resJson.put(Config.STR_STATUS, Config.STATUS_SUCCESSFUL);
+				resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_SUCCESSFUL);
 				resJson.put(Config.STR_STATUS_DATA, jsonA);
 				result.close();
 			} catch (SQLException e) {

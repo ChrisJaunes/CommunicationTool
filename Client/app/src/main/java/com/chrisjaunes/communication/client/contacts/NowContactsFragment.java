@@ -49,7 +49,7 @@ public class NowContactsFragment extends Fragment {
             Log.d("NowContacts", account);
             Intent intent = new Intent(getActivity(), TalkActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putString(Config.STR_ACCOUNT, account);
+            bundle.putString(TalkActivity.STR_CONTACTS_ACCOUNT, account);
             intent.putExtras(bundle);
             getActivity().startActivity(intent);
         });

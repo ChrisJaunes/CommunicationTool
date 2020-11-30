@@ -21,4 +21,6 @@
     <string name="account_textstyle_bubble_color">气泡颜色</string>
     <string name="account_textstyle_border_color">边框颜色</string>
     <string name="main_now_contacts">好友</string>
+    <string name="talk_send_message_hint">请输入你发送的信息</string>
+    <string name="btn_send">发送</string>
 </resources>

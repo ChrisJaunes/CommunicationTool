@@ -7,6 +7,9 @@ import android.graphics.Matrix;
 import android.util.Base64;
 import android.util.Log;
 
+import com.chrisjaunes.communication.client.MyApplication;
+import com.chrisjaunes.communication.client.R;
+
 import java.io.ByteArrayOutputStream;
 
 /**
@@ -23,6 +26,9 @@ public class BitmapHelper {
             e.printStackTrace();
         }
         Log.d("BitmapHelper", "" + bitmap);
+        if (null == bitmap) {
+            bitmap = BitmapFactory.decodeResource(MyApplication.getInstance().getResources(),R.drawable.avatar_default);
+        }
         return bitmap;
     }
 

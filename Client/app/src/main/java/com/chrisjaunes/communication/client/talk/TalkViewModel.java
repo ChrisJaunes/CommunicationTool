@@ -1,13 +1,20 @@
 package com.chrisjaunes.communication.client.talk;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.room.Room;
+import androidx.lifecycle.ViewModelProvider;
 
 
+import com.chrisjaunes.communication.client.Config;
+import com.chrisjaunes.communication.client.MyApplication;
+import com.chrisjaunes.communication.client.account.AccountManage;
 import com.chrisjaunes.communication.client.utils.OkHttpHelper;
+import com.chrisjaunes.communication.client.utils.TimeHelper;
+import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +22,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
@@ -26,98 +34,106 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class TalkViewModel extends ViewModel {
-//    private MutableLiveData<List<Messages> > LocalMessageSingal;
-//    private MutableLiveData<List<Messages> > ServeMessageSingal;
-//    private MutableLiveData<FriendShip> UpdateInfoSingal;
-//
-//    private String UserId;
-//    private String TalkUserId;
-//    private UserDatabase userDatabase;
-//    private UserDatabaseDAO userDatabaseDAO;
-//    private Context context;
-//
-//    public void setInfo( String userId,String talkUserId,Context context){
-//        this.UserId = userId;
-//        this.TalkUserId = talkUserId;
-//        this.context = context;
-//        if(userDatabase == null){
-//            userDatabase = Room.databaseBuilder(context,UserDatabase.class,"user_" + UserId).build();
-//            userDatabaseDAO = userDatabase.getDao();
-//        }
-//    }
-//
-//    public MutableLiveData<List<Messages>> getLocalMessageSingal(){
-//        if( LocalMessageSingal == null){
-//            LocalMessageSingal = new MutableLiveData<>();
-//        }
-//        return LocalMessageSingal;
-//    }
-//
-//    public MutableLiveData<List<Messages>> getServeMessageSingal(){
-//        if( ServeMessageSingal == null){
-//            ServeMessageSingal = new MutableLiveData<>();
-//        }
-//        return ServeMessageSingal;
-//    }
-//
-//    public MutableLiveData<FriendShip> getUpdateInfoSingal(){
-//        if(UpdateInfoSingal == null){
-//            UpdateInfoSingal = new MutableLiveData<>();
-//        }
-//        return UpdateInfoSingal;
-//    }
-//
-//    // 查询本地数据库信息
-//    public void queryLocalMessage(){
-//        new Thread(){
-//            @Override
-//            public void run(){
-//                List<Messages> messagesList = userDatabaseDAO.queryAllMessage(TalkUserId);
-//                LocalMessageSingal.postValue(messagesList);
-//            }
-//        }.start();
-//    }
-//
-//    // 查询服务器上的信息
-    public void queryServer(){
-//        String lastTime = getLastUpdateMessageTime();
-//        String url = MyApplication.getMyApplicationInstance().ip + "QueryMessages";
-        OkHttpClient client = OkHttpHelper.getClient();
-        RequestBody requestBody = new FormBody.Builder()
-                                        .add("user1",UserId).add("user2",TalkUserId)
-                                        .add("time",lastTime).build();
-        final Request request = new okhttp3.Request.Builder().post(requestBody).url(url).build();
+    final private MutableLiveData<UniApiResult<String>> uniApiResult = new MutableLiveData<>();
+    public LiveData<UniApiResult<String>> getUniApiResult() { return uniApiResult; }
+    private final MutableLiveData<List<TMessage>> TMessageList = new MutableLiveData<>();
+    public LiveData<List<TMessage>> getTMessageList() { return TMessageList; }
+
+    final private TMessageDao tMessageDao;
+    final private String contacts_account;
+    TalkViewModel(final String contacts_account) {
+        tMessageDao = MyApplication.getInstance().getLocalDataBase().getTalkMessageDao();
+        this.contacts_account = contacts_account;
+    }
+
+    public void queryLocalMessageList() {
+        new Thread(() -> TMessageList.postValue(tMessageDao.queryMessageAboutTalk(contacts_account))).start();
+    }
+    public void updateMessage(final int type, final String content) {
+        final String lastTime = TimeHelper.getNowTime();
+        final OkHttpClient client = OkHttpHelper.getClient();
+        final RequestBody requestBody = new FormBody.Builder()
+                .add(Config.STR_ACCOUNT2, contacts_account)
+                .add(Config.STR_SEND_TIME, lastTime)
+                .add(Config.STR_CONTENT_TYPE, String.valueOf(type))
+                .add(Config.STR_CONTENT, content)
+                .build();
+        final Request request = new okhttp3.Request.Builder()
+                .post(requestBody)
+                .url(Config.URL_TALK_UPDATE)
+                .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) { }
-
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
+                Log.e("Contacts", Config.ERROR_NET);
+            }
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if( response.isSuccessful()){
-                    String resStr = response.body().string();
-                    try {
-                        JSONObject jsonObject = new JSONObject(resStr);
-                        JSONArray jsonArray = (JSONArray) jsonObject.get("list");
-                        List<Messages> messageList = new ArrayList<>();
-                        for(int i = 0;i<jsonArray.length();++i){
-                            JSONObject json = (JSONObject) jsonArray.get(i);
-                            Messages messages = new Messages(json.getString("from_user") ,json.getString("to_user") ,
-                                                                json.getString("time") , json.getString("content"));
-                            // 服务器数据先存到list ， 然后livedata 返回回去给界面
-                            //检查是否存在本地，没有才保存到本地
-                            Messages testMess = null;
-                            testMess = userDatabaseDAO.searchMessage(messages.getFromUserId(),messages.getToUserId(),messages.getSendTime(),messages.getContent());
-                            if( testMess == null){
-                                userDatabaseDAO.InsertMessage(messages);
-                                // 如果本地不存在，说明recyclerview没有，这样才加到recyclerview里面去
-                                messageList.add(messages);
-                            }
-                        }
-                        ServeMessageSingal.postValue(messageList);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if( !response.isSuccessful() ) {
+                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, String.valueOf(response.code())));
+                    return;
+                }
+                try {
+                    String resJson = response.body().string();
+                    JSONObject jsonO = new JSONObject(resJson);
+                    uniApiResult.postValue(new UniApiResult<>(jsonO.getString(Config.STR_STATUS), ""));
+                    if (Config.STATUS_UPDATE_SUCCESSFUL.equals(jsonO.getString(Config.STR_STATUS))) {
+                        Log.d(">>>", "" + content);
+                        TMessage tMessage = new TMessage(AccountManage.getInstance().getAccount(),
+                                contacts_account, lastTime, type, content);
+                        tMessageDao.InsertMessage(tMessage);
+                        List<TMessage> newTMessages = new ArrayList<>();
+                        newTMessages.add(tMessage);
+                        TMessageList.postValue(newTMessages);
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    public void queryServer(){
+        //final String lastTime = TimeHelper.getNowTime();
+        final String lastTime = "0000-00-00 00:00:00";
+        final OkHttpClient client = OkHttpHelper.getClient();
+        final RequestBody requestBody = new FormBody.Builder()
+                .add(Config.STR_TIME, lastTime)
+                .build();
+        final Request request = new okhttp3.Request.Builder()
+                .post(requestBody)
+                .url(Config.URL_TALK_QUERY)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
+                Log.e("Contacts", Config.ERROR_NET);
+            }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if( !response.isSuccessful() ) {
+                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, String.valueOf(response.code())));
+                    return;
+                }
+                String resJson = response.body().string();
+                try {
+                    JSONObject jsonO = new JSONObject(resJson);
+                    uniApiResult.postValue(new UniApiResult<>(jsonO.getString(Config.STR_STATUS), ""));
+
+                    JSONArray jsonA = (JSONArray) jsonO.get(Config.STR_STATUS_DATA);
+                    List<TMessage> newTMessages = new ArrayList<>();
+                    for (int i = 0; i < jsonA.length(); ++i) {
+                        TMessage message = TMessage.jsonToTMessage((JSONObject) jsonA.get(i));
+                        if (!tMessageDao.isMessageExist(message.getAccount1(), message.getAccount2(),message.getSendTime())) {
+                            tMessageDao.InsertMessage(message);
+                            newTMessages.add(message);
+                        }
+                    }
+                    TMessageList.postValue(newTMessages);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, Arrays.toString(e.getStackTrace())));
                 }
             }
         });
@@ -159,27 +175,16 @@ public class TalkViewModel extends ViewModel {
 //        return lastTime;
 //    }
 //
-//    // 发送消息
-//    public void addNewMessage(final Messages messages){
-//        // 先加到服务器那边
-//        String url = MyApplication.getMyApplicationInstance().ip + "AddMessages";
-//        OkHttpClient client = new OkHttpClient();
-//        RequestBody requestBody = new FormBody.Builder().add("from_user",messages.getFromUserId())
-//                                        .add("to_user",messages.getToUserId()).add("time",messages.getSendTime())
-//                                        .add("content",messages.getContent()).build();
-//        Request request = new okhttp3.Request.Builder().post(requestBody).url(url).build();
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) { }
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException { }
-//        });
-//        // 再加到本地数据库
-//        new Thread(){
-//            @Override
-//            public void run(){
-//                userDatabaseDAO.InsertMessage(messages);
-//            }
-//        }.start();
-//    }
+    static class Factory implements ViewModelProvider.Factory {
+        final String contacts_account;
+
+        Factory(final String contacts_account) {
+            this.contacts_account = contacts_account;
+        }
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            return (T) new TalkViewModel(contacts_account);
+        }
+    }
 }

@@ -41,3 +41,36 @@ client.test("Request executed successfully", function() {
 %}
 
 ###
+POST http://{{host}}/talk/query?account2=account_no_exist&t1me=2020-11-27 00:00:00
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+    client.assert(response.body.status === "illegal parameter");
+});
+%}
+
+###
+POST http://{{host}}/talk/query?account2=222
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+    client.assert(response.body.status === "illegal parameter");
+});
+%}
+
+###
+POST http://{{host}}/talk/query?account2=222&t1me=2020-11-27 00:00:00
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+    client.assert(response.body.status === "illegal parameter");
+});
+%}
+
+###

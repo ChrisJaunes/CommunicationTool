@@ -6,21 +6,13 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-<!--    <ImageView-->
-<!--        android:layout_marginTop="100dp"-->
-<!--        android:id="@+id/head_headphoto"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="150dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:src="@drawable/frimage"-->
-<!--        android:scaleType="centerCrop"/>-->
-    <!--<com.example.communicateapp.MyView.CircleHeadPhotoView
-        android:id="@+id/head_headphoto"
+
+    <com.chrisjaunes.communication.client.myView.AvatarCircleView
+        android:id="@+id/iv_avatar"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        />-->
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:id="@+id/head_username"
@@ -30,5 +22,4 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:textColor="#000000"/>
-
 </LinearLayout>

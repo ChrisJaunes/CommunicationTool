@@ -73,7 +73,7 @@ public class AccountViewModel extends ViewModel {
         });
     }
 
-    public void updateTextStyle(final AccountInfo.AccountTextStyle textStyle) {
+    public void updateTextStyle(final ChatTextStyle textStyle) {
         OkHttpClient client = OkHttpHelper.getClient();
 
         RequestBody requestBody = new FormBody.Builder()

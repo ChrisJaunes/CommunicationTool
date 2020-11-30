@@ -8,6 +8,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.chrisjaunes.communication.client.Config;
+import com.chrisjaunes.communication.client.account.ChatTextStyle;
+import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;

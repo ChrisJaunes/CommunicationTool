@@ -2,8 +2,6 @@ package com.chrisjaunes.communication.client.account;
 
 import androidx.annotation.NonNull;
 
-import com.google.gson.Gson;
-
 /**
  * @author ChrisJaunes
  * 采用了建造者模式
@@ -12,7 +10,7 @@ public class AccountInfo {
     public String account;
     public String nickname;
     public String avatar;
-    public AccountTextStyle text_style;
+    public ChatTextStyle text_style;
 
     public static class Builder{
         private final AccountInfo account;
@@ -21,7 +19,7 @@ public class AccountInfo {
             account.account = "";
             account.nickname = "";
             account.avatar = "";
-            account.text_style = new AccountTextStyle();
+            account.text_style = new ChatTextStyle();
         }
         public Builder addAccount(String account) {
             this.account.account = account;
@@ -49,27 +47,6 @@ public class AccountInfo {
         }
         public AccountInfo build() {
             return account;
-        }
-    }
-
-    public static class AccountTextStyle{
-        public String font_color;
-        public String bubble_color;
-        public String border_color;
-
-        @NonNull
-        @Override
-        public String toString() {
-            return "AccountTextStyle{" +
-                    "font_color='" + font_color + '\'' +
-                    ", bubble_color='" + bubble_color + '\'' +
-                    ", border_color='" + border_color + '\'' +
-                    '}';
-        }
-
-        public String toJson() {
-            Gson gson = new Gson();
-            return gson.toJson(this);
         }
     }
 

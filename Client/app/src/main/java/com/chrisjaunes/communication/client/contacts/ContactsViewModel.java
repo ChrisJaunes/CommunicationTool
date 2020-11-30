@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModel;
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.utils.OkHttpHelper;
-import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import org.json.JSONArray;
@@ -45,7 +44,7 @@ public class ContactsViewModel extends ViewModel {
     }
 
     public void queryLocalNowContactsList() {
-        new Thread(() -> nowContactsListResult.postValue( contactsDao.queryNowContacts())).start();
+        new Thread(() -> nowContactsListResult.postValue( contactsDao.queryNowContactsList())).start();
     }
 
     public void queryServer() {
