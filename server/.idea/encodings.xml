@@ -8,6 +8,10 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/account/UpdateMessage.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/contacts/Query.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/contacts/Update.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/group/Add.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/group/AddMessage.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/group/Query.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/group/QueryMessage.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/talk/Query.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/talk/Query1.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/chrisjaunes/communication/server/talk/Update.java" charset="GBK" />

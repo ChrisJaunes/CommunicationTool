@@ -1,0 +1,30 @@
+﻿POST http://localhost:8080/communicationServer/account/login?account=111&password=111
+
+> {%
+client.global.set("host", "localhost:8080/communicationServer/group/add");
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+
+###
+POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "444"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "add successful");
+});
+%}
+###
+POST http://{{host}}?nickname=bbb&group_member_list=["222", "333"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "add successful");
+});
+%}
+###

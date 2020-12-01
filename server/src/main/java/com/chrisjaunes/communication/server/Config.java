@@ -12,7 +12,10 @@ public class Config {
     static final public String STATUS_LOGIN_PASSWORD_ERROR = "password is not correct";
     static final public String STATUS_REGISTER_SUCCESSFUL = "register successful";
     static final public String STATUS_REGISTER_ACCOUNT_EXIST = "account is exist";
+
+
     static final public String STATUS_UPDATE_SUCCESSFUL = "update successful";
+    static final public String STATUS_ADD_SUCCESSFUL = "add successful";
     static final public String STATUS_UPDATE_FAIL = "update failed";
     static final public String STATUS_ACCOUNT_NOT_LOGIN = "account not login";
     static final public String STATUS_ILLEGAL_PARAMETER = "illegal parameter";
@@ -50,5 +53,14 @@ public class Config {
     static final public int STR_CONTENT_TYPE_GIF  = 4;
     static final public int STR_CONTENT_TYPE_EMOJI= 5;
     static final public String STR_CONTENT = "content";
+
+    static final public String TABLE_GROUP = "group";
+    static final public String STR_GROUP = "group";
+    static final public String STR_GROUP_NAME= "nickname";
+    static final public String STR_GROUP_MEMBER_LIST = "group_member_list";
+    static final public String TABLE_GROUP_MEMBER = "group_member";
+    static final public String STR_GROUP_MEMBER_OPERATION = "";
+    static final public String TABLE_GROUP_MESSAGES = "group_messages";
+
 
 }

@@ -1,0 +1,154 @@
+﻿POST http://localhost:8080/communicationServer/account/login?account=111&password=111
+
+> {%
+client.global.set("host", "localhost:8080/communicationServer/group/add");
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+
+###
+GET http://{{host}}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body === "[ERROR] 不应该使用GET访问", "Response Body is Error");
+});
+%}
+
+###
+POST http://{{host}}?nickname=aaa
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "illegal parameter");
+});
+%}
+###
+POST http://{{host}}?group_member_list=aaa
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "illegal parameter");
+});
+%}
+###
+POST http://{{host}}?group_member_list=aaa
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "illegal parameter");
+});
+%}
+###
+POST http://{{host}}?nickname=aaa&group_member_list=aaa
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "illegal parameter");
+});
+%}
+###
+POST http://{{host}}?nickname=aaa&group_member_list={aaa}
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "illegal parameter");
+});
+%}
+###
+POST http://{{host}}?nickname=aaa&group_member_list=["aaa"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "db illegal parameter");
+});
+%}
+###
+
+POST http://{{host}}?nickname=aaa&group_member_list=["111"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "db illegal parameter");
+});
+%}
+###
+
+POST http://{{host}}?nickname=aaa&group_member_list=["222"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "add successful");
+});
+%}
+###
+
+POST http://{{host}}?nickname=aaa&group_member_list=["222", "333"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "add successful");
+});
+%}
+###
+
+POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "444"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "add successful");
+});
+%}
+###
+POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "111"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "db illegal parameter");
+});
+%}
+###
+POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "account_not_existes"]
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "db illegal parameter");
+});
+%}
+###

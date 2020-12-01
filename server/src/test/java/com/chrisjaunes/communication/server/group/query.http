@@ -1,0 +1,29 @@
+﻿POST http://localhost:8080/communicationServer/account/login?account=111&password=111
+
+> {%
+client.global.set("host", "localhost:8080/communicationServer/group/query");
+client.log(response.headers.valuesOf("Set-Cookie"));
+ %}
+
+###
+GET http://{{host}}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.body === "[ERROR] 不应该使用GET访问", "Response Body is Error");
+});
+%}
+
+###
+POST http://{{host}}?nickname=aaa
+
+> {%
+
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
+  client.assert(response.body.status === "successful\"");
+});
+%}
+###
