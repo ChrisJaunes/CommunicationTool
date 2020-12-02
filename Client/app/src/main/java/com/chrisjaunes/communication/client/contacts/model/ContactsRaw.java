@@ -1,4 +1,4 @@
-package com.chrisjaunes.communication.client.contacts;
+package com.chrisjaunes.communication.client.contacts.model;
 
 import android.util.Log;
 
@@ -8,8 +8,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.account.ChatTextStyle;
-import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,7 +15,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 @Entity
-public class Contacts {
+public class ContactsRaw {
     @NonNull
     @PrimaryKey
     private String account;
@@ -27,7 +25,7 @@ public class Contacts {
     private String time;
     private int operation = 0;
 
-    public Contacts() {
+    public ContactsRaw() {
         account = Config.ACCOUNT_VISITORS;
     }
 
@@ -61,19 +59,19 @@ public class Contacts {
 
     @NonNull
     @Ignore
-    public static Contacts jsonToContacts(@NonNull JSONObject jsonO) {
-        Contacts contacts = new Contacts();
+    public static ContactsRaw jsonToContacts(@NonNull JSONObject jsonO) {
+        ContactsRaw contactsRaw = new ContactsRaw();
         try {
-            if (jsonO.has(Config.STR_ACCOUNT))    contacts.account = jsonO.getString(Config.STR_ACCOUNT);
-            if (jsonO.has(Config.STR_NICKNAME))   contacts.nickname = jsonO.getString(Config.STR_NICKNAME);
-            if (jsonO.has(Config.STR_AVATAR))     contacts.avatar = jsonO.getString(Config.STR_AVATAR);
-            if (jsonO.has(Config.STR_TEXT_STYLE)) contacts.textStyle = jsonO.getString(Config.STR_TEXT_STYLE);
-            if (jsonO.has(Config.STR_TIME))       contacts.time = jsonO.getString(Config.STR_TIME);
-            if (jsonO.has(Config.STR_OPERATION))  contacts.operation = jsonO.getInt(Config.STR_OPERATION);
+            if (jsonO.has(Config.STR_ACCOUNT))    contactsRaw.account = jsonO.getString(Config.STR_ACCOUNT);
+            if (jsonO.has(Config.STR_NICKNAME))   contactsRaw.nickname = jsonO.getString(Config.STR_NICKNAME);
+            if (jsonO.has(Config.STR_AVATAR))     contactsRaw.avatar = jsonO.getString(Config.STR_AVATAR);
+            if (jsonO.has(Config.STR_TEXT_STYLE)) contactsRaw.textStyle = jsonO.getString(Config.STR_TEXT_STYLE);
+            if (jsonO.has(Config.STR_TIME))       contactsRaw.time = jsonO.getString(Config.STR_TIME);
+            if (jsonO.has(Config.STR_OPERATION))  contactsRaw.operation = jsonO.getInt(Config.STR_OPERATION);
         }catch (JSONException e) {
             Log.e("jsonToContacts", Arrays.toString(e.getStackTrace()));
             e.printStackTrace();
         }
-        return contacts;
+        return contactsRaw;
     }
 }

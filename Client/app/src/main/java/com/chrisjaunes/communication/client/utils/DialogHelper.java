@@ -9,7 +9,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.account.ChatTextStyle;
+import com.chrisjaunes.communication.client.account.model.ChatTextStyle;
 
 /**
  * @author Chris

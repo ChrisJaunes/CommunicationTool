@@ -4,7 +4,7 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.chrisjaunes.communication.client.account.AccountInfo;
+import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.account.AccountViewManage;
 
 public class MyApplication extends Application {
@@ -17,8 +17,8 @@ public class MyApplication extends Application {
 
     }
 
-    public void setAccount(AccountInfo account) {
-        AccountViewManage.getInstance().setAccountInfo(account);
+    public void setAccount(AccountRaw account) {
+        AccountViewManage.getInstance().setAccountRaw(account);
     }
 
     LocalDatabase localDatabase;

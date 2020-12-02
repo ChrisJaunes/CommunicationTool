@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
+import com.chrisjaunes.communication.client.contacts.model.ContactsDao;
+import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
@@ -34,8 +36,8 @@ public class ContactsViewModel extends ViewModel {
     final private MutableLiveData<UniApiResult<String>> uniApiResult = new MutableLiveData<>();
     public LiveData<UniApiResult<String>> getUniApiResult() { return uniApiResult; }
 
-    final private MutableLiveData<List<Contacts>> nowContactsListResult = new MutableLiveData<>();
-    public LiveData<List<Contacts>> getNowContactsListResult() { return nowContactsListResult; }
+    final private MutableLiveData<List<ContactsRaw>> nowContactsListResult = new MutableLiveData<>();
+    public LiveData<List<ContactsRaw>> getNowContactsListResult() { return nowContactsListResult; }
 
     ContactsDao contactsDao;
 
@@ -77,17 +79,17 @@ public class ContactsViewModel extends ViewModel {
                     uniApiResult.postValue(new UniApiResult<>(jsonO.getString(Config.STR_STATUS), ""));
 
                     JSONArray jsonA = (JSONArray) jsonO.get(Config.STR_STATUS_DATA);
-                    List<Contacts> nowContactsList = new ArrayList<>();
+                    List<ContactsRaw> nowContactsRawList = new ArrayList<>();
                     for (int i = 0; i < jsonA.length(); ++i) {
-                        Contacts contact = Contacts.jsonToContacts((JSONObject) jsonA.get(i));
+                        ContactsRaw contact = ContactsRaw.jsonToContacts((JSONObject) jsonA.get(i));
                         if (!contactsDao.isNowContactsExist(contact.getAccount())) {
                             contactsDao.InsertContacts(contact);
                             if (Config.CONTACTS_FRIENDS_AGREE_CODE == contact.getOperation()) {
-                                nowContactsList.add(contact);
+                                nowContactsRawList.add(contact);
                             }
                         }
                     }
-                    nowContactsListResult.postValue(nowContactsList);
+                    nowContactsListResult.postValue(nowContactsRawList);
                  } catch (JSONException e) {
                     e.printStackTrace();
                     uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, Arrays.toString(e.getStackTrace())));

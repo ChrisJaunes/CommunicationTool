@@ -14,7 +14,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.account.ChatTextStyle;
+import com.chrisjaunes.communication.client.account.model.ChatTextStyle;
 
 public class ChatTextView extends View {
     // textwidth

@@ -3,8 +3,8 @@ package com.chrisjaunes.communication.client;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import com.chrisjaunes.communication.client.contacts.Contacts;
-import com.chrisjaunes.communication.client.contacts.ContactsDao;
+import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
+import com.chrisjaunes.communication.client.contacts.model.ContactsDao;
 import com.chrisjaunes.communication.client.group.model.GMessage;
 import com.chrisjaunes.communication.client.group.model.GroupDao;
 import com.chrisjaunes.communication.client.talk.TMessageDao;
@@ -16,7 +16,7 @@ import com.chrisjaunes.communication.client.talk.TMessage;
  * version 2 : entities = {Contacts.class, TalkMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao}
  * version 3 : entities = {Contacts.class, TalkMessage.class, GMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao, GMessageDao}
  */
-@Database(entities = {Contacts.class, TMessage.class, GMessage.class},
+@Database(entities = {ContactsRaw.class, TMessage.class, GMessage.class},
         version = 3,
         exportSchema = false)
 public abstract  class LocalDatabase extends RoomDatabase{

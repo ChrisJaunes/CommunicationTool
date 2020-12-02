@@ -1,4 +1,4 @@
-package com.chrisjaunes.communication.client.account;
+package com.chrisjaunes.communication.client.account.model;
 
 import androidx.annotation.NonNull;
 

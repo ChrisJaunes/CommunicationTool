@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
+import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 import java.util.List;
 
 public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.NowContactsViewHolder> {
-    List<Contacts> friendList;
+    List<ContactsRaw> friendList;
     ItemOnClickListener itemOnClickListener;
 
-    public NowContactsAdapter(List<Contacts> new_friendList, ItemOnClickListener itemOnClickListener) {
+    public NowContactsAdapter(List<ContactsRaw> new_friendList, ItemOnClickListener itemOnClickListener) {
         this.friendList = new_friendList;
         this.itemOnClickListener = itemOnClickListener;
     }
@@ -32,16 +33,16 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
 
     @Override
     public void onBindViewHolder(final NowContactsViewHolder holder, int position) {
-        final Contacts contacts = friendList.get(position);
-        holder.nickName.setText(contacts.getNickname());
-        holder.avatar.setImageBitmap(BitmapHelper.StringToBitmap(contacts.getAvatar()));
-        holder.itemView.setOnClickListener(v -> itemOnClickListener.goToTalk(contacts.getAccount()));
+        final ContactsRaw contactsRaw = friendList.get(position);
+        holder.nickName.setText(contactsRaw.getNickname());
+        holder.avatar.setImageBitmap(BitmapHelper.StringToBitmap(contactsRaw.getAvatar()));
+        holder.itemView.setOnClickListener(v -> itemOnClickListener.goToTalk(contactsRaw.getAccount()));
     }
 
     @Override
     public int getItemCount() { return friendList.size(); }
 
-    public void addFriendItem(int pos, Contacts friendShip){
+    public void addFriendItem(int pos, ContactsRaw friendShip){
         friendList.add(pos, friendShip);
         notifyItemChanged(pos);
     }

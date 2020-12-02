@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
+import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 import com.google.gson.Gson;
@@ -30,7 +31,7 @@ public class RegisterViewModel extends ViewModel {
         return result;
     }
 
-    public void register(final AccountInfo account, final String password) {
+    public void register(final AccountRaw account, final String password) {
         OkHttpClient client = HttpHelper.getOkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()

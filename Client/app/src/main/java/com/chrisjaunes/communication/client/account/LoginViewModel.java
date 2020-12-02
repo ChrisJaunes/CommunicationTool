@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
+import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 import com.google.gson.Gson;
@@ -57,7 +58,7 @@ public class LoginViewModel extends ViewModel{
                 }
                 String jsonS = response.body().string();
                 Gson gson = new Gson();
-                UniApiResult<AccountInfo> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<AccountInfo>>() {}.getType());
+                UniApiResult<AccountRaw> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<AccountRaw>>() {}.getType());
                 uniApiResult.postValue(res);
                 Log.v("Login", res.status);
                 Log.v("Login", "" + res.data);

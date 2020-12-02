@@ -1,4 +1,4 @@
-package com.chrisjaunes.communication.client.account;
+package com.chrisjaunes.communication.client.account.model;
 
 import androidx.annotation.NonNull;
 
@@ -6,16 +6,16 @@ import androidx.annotation.NonNull;
  * @author ChrisJaunes
  * 采用了建造者模式
  */
-public class AccountInfo {
+public class AccountRaw {
     public String account;
     public String nickname;
     public String avatar;
     public ChatTextStyle text_style;
 
     public static class Builder{
-        private final AccountInfo account;
+        private final AccountRaw account;
         Builder() {
-            account = new AccountInfo();
+            account = new AccountRaw();
             account.account = "";
             account.nickname = "";
             account.avatar = "";
@@ -45,7 +45,7 @@ public class AccountInfo {
             account.text_style.border_color = color;
             return this;
         }
-        public AccountInfo build() {
+        public AccountRaw build() {
             return account;
         }
     }

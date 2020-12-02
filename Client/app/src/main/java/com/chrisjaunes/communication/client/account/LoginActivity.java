@@ -14,6 +14,7 @@ import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MainActivity;
 import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.R;
+import com.chrisjaunes.communication.client.account.model.AccountRaw;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,10 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getUniApiResult().observe(this, uniApiResult -> {
             Toast.makeText(LoginActivity.this, uniApiResult.status, Toast.LENGTH_SHORT).show();
             if(Config.STATUS_LOGIN_SUCCESSFUL.equals(uniApiResult.status)) {
-                if (BuildConfig.DEBUG && !(uniApiResult.data instanceof AccountInfo)) {
+                if (BuildConfig.DEBUG && !(uniApiResult.data instanceof AccountRaw)) {
                     throw new AssertionError("Assertion failed");
                 }
-                MyApplication.getInstance().setAccount((AccountInfo) uniApiResult.data);
+                MyApplication.getInstance().setAccount((AccountRaw) uniApiResult.data);
 
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

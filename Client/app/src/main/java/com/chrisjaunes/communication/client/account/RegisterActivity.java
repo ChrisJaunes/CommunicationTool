@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.R;
+import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import com.chrisjaunes.communication.client.utils.ColorTrHelper;
 
@@ -69,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         final Button btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(view -> {
-            AccountInfo account = new AccountInfo.Builder()
+            AccountRaw account = new AccountRaw.Builder()
                     .addAccount(et_account.getText().toString())
                     .addNickname(et_nickname.getText().toString())
                     .addAvatar(BitmapHelper.BitmapToString(

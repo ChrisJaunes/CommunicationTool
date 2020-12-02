@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.R;
+import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.talk.TalkActivity;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class NowContactsFragment extends Fragment {
             contactsViewModel.queryServer();
         });
         // TODO RecycleView控件，更新current Contacts列表，Adapter支持点击跳转
-        final List<Contacts> friendList = new ArrayList<>();
+        final List<ContactsRaw> friendList = new ArrayList<>();
         final RecyclerView contactsRecyclerView = view.findViewById(R.id.rv_friend);
         contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         final NowContactsAdapter contactsAdapter = new NowContactsAdapter(friendList, (account) -> {
@@ -65,8 +65,8 @@ public class NowContactsFragment extends Fragment {
         });
         contactsViewModel.getNowContactsListResult().observe(getActivity(), contactsList -> {
             Log.d("NowContacts", "contactsList" + contactsList + "size : " + contactsList.size());
-            for (Contacts contacts : contactsList) {
-                contactsAdapter.addFriendItem(friendList.size(), contacts);
+            for (ContactsRaw contactsRaw : contactsList) {
+                contactsAdapter.addFriendItem(friendList.size(), contactsRaw);
             }
         });
         // TODO 请求本地缓存数据库

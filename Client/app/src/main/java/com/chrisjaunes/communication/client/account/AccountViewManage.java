@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import androidx.lifecycle.MutableLiveData;
 
 import com.chrisjaunes.communication.client.Config;
+import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 /**
@@ -18,16 +19,16 @@ public class AccountViewManage {
         return instance;
     }
 
-    private AccountInfo accountInfo;
+    private AccountRaw accountRaw;
     private final MutableLiveData<Bitmap> avatarLiveData = new MutableLiveData<>();
-    public void setAccountInfo(AccountInfo accountInfo) {
-        this.accountInfo = accountInfo;
-        avatarLiveData.postValue(BitmapHelper.StringToBitmap(accountInfo.avatar));
+    public void setAccountRaw(AccountRaw accountRaw) {
+        this.accountRaw = accountRaw;
+        avatarLiveData.postValue(BitmapHelper.StringToBitmap(accountRaw.avatar));
     }
-    public AccountInfo getAccountInfo() {
-        return accountInfo;
+    public AccountRaw getAccountRaw() {
+        return accountRaw;
     }
-    public String getAccount() { return null == accountInfo.account ? Config.ACCOUNT_VISITORS : accountInfo.account;}
+    public String getAccount() { return null == accountRaw.account ? Config.ACCOUNT_VISITORS : accountRaw.account;}
     public void setAvatar(final Bitmap avatar) {
         avatarLiveData.postValue(avatar);
     }
