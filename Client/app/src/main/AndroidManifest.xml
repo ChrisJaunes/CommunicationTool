@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".talk.TalkActivity"></activity>
+        <activity android:name=".group.GMessageActivity"></activity>
         <activity android:name=".account.RegisterActivity" />
         <activity android:name=".account.LoginActivity">
             <intent-filter>

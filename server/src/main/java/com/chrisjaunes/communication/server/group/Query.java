@@ -55,8 +55,8 @@ public class Query extends HttpServlet {
             resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
         } else {
             try {
-                String sqlQuery = String.format("select `%s`, `%s` from (%s) as A left join `%s` on A.`group_id` = `%s`.`%s`",
-                        Config.STR_GROUP, Config.STR_GROUP_NAME,
+                String sqlQuery = String.format("select `%s`, `%s`, `%s` from (%s) as A left join `%s` on A.`group_id` = `%s`.`%s`",
+                        Config.STR_GROUP, Config.STR_GROUP_NAME,Config.STR_GROUP_AVATAR,
                         String.format("select `%s` as `group_id` from `%s` where `%s` = ?", Config.STR_GROUP, Config.TABLE_GROUP_MEMBER, Config.STR_ACCOUNT),
                         Config.TABLE_GROUP, Config.TABLE_GROUP, Config.STR_GROUP
                 );
@@ -66,7 +66,7 @@ public class Query extends HttpServlet {
                 ResultSet result = DBHelper.executeQuery(sqlQuery, params);
                 JSONArray jsonA = new JSONArray();
                 DBHelper.getResToJsonArray(result, jsonA);
-                resJson.put(Config.STR_STATUS, Config.STATUS_SUCCESSFUL);
+                resJson.put(Config.STR_STATUS, Config.STATUS_QUERY_GROUP_SUCCESSFUL);
                 resJson.put(Config.STR_STATUS_DATA, jsonA);
                 result.close();
             } catch (SQLException e) {

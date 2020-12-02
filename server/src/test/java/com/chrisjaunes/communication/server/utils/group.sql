@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS `group`;
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
     `group` int AUTO_INCREMENT,
-    `nickname` varchar(40) NOT NULL,
-    `avatar` longtext,
+    `group_name` varchar(40) NOT NULL,
+    `group_avatar` longtext,
     PRIMARY KEY (`group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

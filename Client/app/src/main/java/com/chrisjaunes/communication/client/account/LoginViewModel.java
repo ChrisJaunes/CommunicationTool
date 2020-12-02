@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.utils.OkHttpHelper;
+import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +27,7 @@ public class LoginViewModel extends ViewModel{
     public LiveData<UniApiResult> getUniApiResult() { return uniApiResult; }
 
     public void login(final String account,final String password) {
-        OkHttpClient client = OkHttpHelper.getClient();
+        OkHttpClient client = HttpHelper.getOkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_ACCOUNT,  account)
@@ -42,6 +42,7 @@ public class LoginViewModel extends ViewModel{
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
                 uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
                 Log.e("Login", Config.ERROR_NET);
             }

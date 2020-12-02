@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
-import com.chrisjaunes.communication.client.account.AccountManage;
-import com.chrisjaunes.communication.client.utils.OkHttpHelper;
+import com.chrisjaunes.communication.client.account.AccountViewManage;
+import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
@@ -51,7 +51,7 @@ public class TalkViewModel extends ViewModel {
     }
     public void updateMessage(final int type, final String content) {
         final String lastTime = TimeHelper.getNowTime();
-        final OkHttpClient client = OkHttpHelper.getClient();
+        final OkHttpClient client = HttpHelper.getOkHttpClient();
         final RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_ACCOUNT2, contacts_account)
                 .add(Config.STR_SEND_TIME, lastTime)
@@ -80,7 +80,7 @@ public class TalkViewModel extends ViewModel {
                     uniApiResult.postValue(new UniApiResult<>(jsonO.getString(Config.STR_STATUS), ""));
                     if (Config.STATUS_UPDATE_SUCCESSFUL.equals(jsonO.getString(Config.STR_STATUS))) {
                         Log.d(">>>", "" + content);
-                        TMessage tMessage = new TMessage(AccountManage.getInstance().getAccount(),
+                        TMessage tMessage = new TMessage(AccountViewManage.getInstance().getAccount(),
                                 contacts_account, lastTime, type, content);
                         tMessageDao.InsertMessage(tMessage);
                         List<TMessage> newTMessages = new ArrayList<>();
@@ -93,10 +93,10 @@ public class TalkViewModel extends ViewModel {
             }
         });
     }
-    public void queryServer(){
-        //final String lastTime = TimeHelper.getNowTime();
+    public void queryServer() {
+        //String lastTime = getLastUpdateMessageTime();
         final String lastTime = "0000-00-00 00:00:00";
-        final OkHttpClient client = OkHttpHelper.getClient();
+        final OkHttpClient client = HttpHelper.getOkHttpClient();
         final RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_TIME, lastTime)
                 .build();

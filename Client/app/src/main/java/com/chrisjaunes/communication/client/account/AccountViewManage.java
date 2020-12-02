@@ -5,17 +5,16 @@ import android.graphics.Bitmap;
 import androidx.lifecycle.MutableLiveData;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.contacts.Contacts;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 /**
  * Account.account 不允许设置
  */
-public class AccountManage {
-    private static AccountManage instance;
-    private AccountManage (){}
-    public static AccountManage getInstance() {
-        if (null == instance) instance = new AccountManage();
+public class AccountViewManage {
+    private static AccountViewManage instance;
+    private AccountViewManage(){}
+    public static AccountViewManage getInstance() {
+        if (null == instance) instance = new AccountViewManage();
         return instance;
     }
 
@@ -32,4 +31,6 @@ public class AccountManage {
     public void setAvatar(final Bitmap avatar) {
         avatarLiveData.postValue(avatar);
     }
+
+    public AccountView getAccountView() {return new AccountView();}
 }

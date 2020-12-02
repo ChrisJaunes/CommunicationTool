@@ -59,14 +59,15 @@ public class NowContactsFragment extends Fragment {
         contactsViewModel.getUniApiResult().observe(getActivity(), uniApiResult -> {
             Log.d("NowContacts", uniApiResult.status + uniApiResult.data);
             Toast.makeText(getActivity(), uniApiResult.status, Toast.LENGTH_SHORT).show();
+
+            swipeText.setVisibility(View.GONE);
+            swipeRefreshLayout.setRefreshing(false);
         });
         contactsViewModel.getNowContactsListResult().observe(getActivity(), contactsList -> {
             Log.d("NowContacts", "contactsList" + contactsList + "size : " + contactsList.size());
             for (Contacts contacts : contactsList) {
                 contactsAdapter.addFriendItem(friendList.size(), contacts);
             }
-            swipeText.setVisibility(View.GONE);
-            swipeRefreshLayout.setRefreshing(false);
         });
         // TODO 请求本地缓存数据库
         contactsViewModel.queryLocalNowContactsList();

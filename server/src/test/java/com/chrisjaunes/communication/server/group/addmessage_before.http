@@ -6,7 +6,7 @@ client.log(response.headers.valuesOf("Set-Cookie"));
  %}
 
 ###
-POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "444"]
+POST http://{{host}}?group_name=aaa&group_member_list=["222", "333", "444"]
 
 > {%
 
@@ -17,7 +17,7 @@ client.test("Request executed successfully", function() {
 });
 %}
 ###
-POST http://{{host}}?nickname=bbb&group_member_list=["222", "333"]
+POST http://{{host}}?group_name=bbb&group_member_list=["222", "333"]
 
 > {%
 

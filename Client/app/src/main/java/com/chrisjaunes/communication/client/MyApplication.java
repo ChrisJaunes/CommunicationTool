@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.room.Room;
 
 import com.chrisjaunes.communication.client.account.AccountInfo;
-import com.chrisjaunes.communication.client.account.AccountManage;
+import com.chrisjaunes.communication.client.account.AccountViewManage;
 
 public class MyApplication extends Application {
     private static MyApplication instance = null;
@@ -18,14 +18,14 @@ public class MyApplication extends Application {
     }
 
     public void setAccount(AccountInfo account) {
-        AccountManage.getInstance().setAccountInfo(account);
+        AccountViewManage.getInstance().setAccountInfo(account);
     }
 
     LocalDatabase localDatabase;
     public LocalDatabase getLocalDataBase() {
         if(null == localDatabase) {
             localDatabase = Room.databaseBuilder(this, LocalDatabase.class,
-                    String.format("account_%s", AccountManage.getInstance().getAccount())
+                    String.format("account_%s", AccountViewManage.getInstance().getAccount())
             )
                     .addMigrations()
                     .fallbackToDestructiveMigration()

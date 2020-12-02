@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
-import com.chrisjaunes.communication.client.utils.OkHttpHelper;
+import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import org.json.JSONArray;
@@ -51,7 +51,7 @@ public class ContactsViewModel extends ViewModel {
         //final String lastTime = TimeHelper.getNowTime();
         final String lastTime = "0000-00-00 00:00:00";
 
-        OkHttpClient client = OkHttpHelper.getClient();
+        OkHttpClient client = HttpHelper.getOkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_TIME, lastTime)
                 .build();

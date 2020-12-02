@@ -16,7 +16,7 @@ client.test("Request executed successfully", function() {
 %}
 
 ###
-POST http://{{host}}?nickname=aaa
+POST http://{{host}}?group_name=aaa
 
 > {%
 
@@ -49,7 +49,7 @@ client.test("Request executed successfully", function() {
 });
 %}
 ###
-POST http://{{host}}?nickname=aaa&group_member_list=aaa
+POST http://{{host}}?group_name=aaa&group_member_list=aaa
 
 > {%
 
@@ -60,7 +60,7 @@ client.test("Request executed successfully", function() {
 });
 %}
 ###
-POST http://{{host}}?nickname=aaa&group_member_list={aaa}
+POST http://{{host}}?group_name=aaa&group_member_list={aaa}
 
 > {%
 
@@ -71,7 +71,7 @@ client.test("Request executed successfully", function() {
 });
 %}
 ###
-POST http://{{host}}?nickname=aaa&group_member_list=["aaa"]
+POST http://{{host}}?group_name=aaa&group_member_list=["aaa"]
 
 > {%
 
@@ -83,7 +83,7 @@ client.test("Request executed successfully", function() {
 %}
 ###
 
-POST http://{{host}}?nickname=aaa&group_member_list=["111"]
+POST http://{{host}}?group_name=aaa&group_member_list=["111"]
 
 > {%
 
@@ -95,7 +95,7 @@ client.test("Request executed successfully", function() {
 %}
 ###
 
-POST http://{{host}}?nickname=aaa&group_member_list=["222"]
+POST http://{{host}}?group_name=aaa&group_member_list=["222"]
 
 > {%
 
@@ -107,7 +107,7 @@ client.test("Request executed successfully", function() {
 %}
 ###
 
-POST http://{{host}}?nickname=aaa&group_member_list=["222", "333"]
+POST http://{{host}}?group_name=aaa&group_member_list=["222", "333"]
 
 > {%
 
@@ -119,7 +119,7 @@ client.test("Request executed successfully", function() {
 %}
 ###
 
-POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "444"]
+POST http://{{host}}?group_name=aaa&group_member_list=["222", "333", "444"]
 
 > {%
 
@@ -130,7 +130,7 @@ client.test("Request executed successfully", function() {
 });
 %}
 ###
-POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "111"]
+POST http://{{host}}?group_name=aaa&group_member_list=["222", "333", "111"]
 
 > {%
 
@@ -141,7 +141,7 @@ client.test("Request executed successfully", function() {
 });
 %}
 ###
-POST http://{{host}}?nickname=aaa&group_member_list=["222", "333", "account_not_existes"]
+POST http://{{host}}?group_name=aaa&group_member_list=["222", "333", "account_not_existes"]
 
 > {%
 

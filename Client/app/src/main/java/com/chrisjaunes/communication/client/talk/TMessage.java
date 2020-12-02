@@ -7,8 +7,6 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.contacts.Contacts;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -23,7 +23,7 @@ POST http://{{host}}?nickname=aaa
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful\"");
+  client.assert(response.body.status === "query_group_successful");
 });
 %}
 ###

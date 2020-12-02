@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
-import com.chrisjaunes.communication.client.utils.OkHttpHelper;
+import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,7 +41,7 @@ public class AccountViewModel extends ViewModel {
             result.postValue(new UniApiResult.Fail(Config.ERROR_AVATAR_TOO_LAEGE, null));
             return;
         }
-        OkHttpClient client = OkHttpHelper.getClient();
+        OkHttpClient client = HttpHelper.getOkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_AVATAR, avatarString)
                 .build();
@@ -68,13 +68,13 @@ public class AccountViewModel extends ViewModel {
                 UniApiResult<String> res = new Gson().fromJson(jsonS, new TypeToken<UniApiResult<String>>() {}.getType());
                 Log.v("Login", res.status);
                 result.postValue(res);
-                if(Config.STATUS_UPDATE_SUCCESSFUL.equals(res.status)) AccountManage.getInstance().setAvatar(avatar);
+                if(Config.STATUS_UPDATE_SUCCESSFUL.equals(res.status)) AccountViewManage.getInstance().setAvatar(avatar);
             }
         });
     }
 
     public void updateTextStyle(final ChatTextStyle textStyle) {
-        OkHttpClient client = OkHttpHelper.getClient();
+        OkHttpClient client = HttpHelper.getOkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_TEXT_STYLE, textStyle.toJson())

@@ -95,7 +95,5 @@
                 android:layout_gravity="bottom"
                 android:layout_height="match_parent"/>
         </LinearLayout>
-
     </LinearLayout>
-
 </LinearLayout>

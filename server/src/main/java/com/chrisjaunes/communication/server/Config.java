@@ -56,11 +56,13 @@ public class Config {
 
     static final public String TABLE_GROUP = "group";
     static final public String STR_GROUP = "group";
-    static final public String STR_GROUP_NAME= "nickname";
+    static final public String STR_GROUP_NAME= "group_name";
+    static final public String STR_GROUP_AVATAR = "group_avatar";
     static final public String STR_GROUP_MEMBER_LIST = "group_member_list";
     static final public String TABLE_GROUP_MEMBER = "group_member";
     static final public String STR_GROUP_MEMBER_OPERATION = "";
     static final public String TABLE_GROUP_MESSAGES = "group_messages";
 
 
+    public static final String STATUS_QUERY_GROUP_SUCCESSFUL = "query_group_successful";
 }

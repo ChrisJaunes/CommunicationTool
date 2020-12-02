@@ -1,6 +1,10 @@
 package com.chrisjaunes.communication.client.talk;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,20 +24,24 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.contacts.ContactsView;
+import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TalkActivity extends AppCompatActivity {
     static final public String STR_CONTACTS_ACCOUNT = "contacts_account";
+    static final private int PHOTO_REQUEST_GALLERY = 1;
+    TalkViewModel talkViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_talk);
+        setContentView(R.layout.activity_talk_message);
         Bundle intentBundle = getIntent().getExtras();
         String contacts_account = intentBundle.getString(STR_CONTACTS_ACCOUNT);
         // DONE TalkViewModel : lifeOwner this
-        final TalkViewModel talkViewModel = new ViewModelProvider(this, new TalkViewModel.Factory(contacts_account)).get(TalkViewModel.class);
+        talkViewModel = new ViewModelProvider(this, new TalkViewModel.Factory(contacts_account)).get(TalkViewModel.class);
         // DONE toolbar : set toolbar(back、menu、title)
         final Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
@@ -50,18 +58,25 @@ public class TalkActivity extends AppCompatActivity {
         });
         // DONE RecycleView : init messageList、set recycleView recycleViewAdapter
         final List<TMessage> messageList = new ArrayList<>();
-        final RecyclerView rvTalkMessage = findViewById(R.id.rv_talk_message);
+        final RecyclerView rvTalkMessage = findViewById(R.id.rv_message);
         rvTalkMessage.setLayoutManager(new LinearLayoutManager(this));
         final TalkAdapter talkAdapter = new TalkAdapter(messageList);
         rvTalkMessage.setAdapter(talkAdapter);
         rvTalkMessage.setItemAnimator(new DefaultItemAnimator());
-        // DONE button : set click listener
-        final TextView tvSendMessage= findViewById(R.id.tv_send_message);
-        final Button btnSendMessage = findViewById(R.id.btn_send_message);
-        btnSendMessage.setOnClickListener(v -> {
-            tvSendMessage.setEnabled(false);
-            btnSendMessage.setEnabled(false);
-            talkViewModel.updateMessage(TMessageFactory.STR_CONTENT_TYPE_TEXT, tvSendMessage.getText().toString());
+        // DONE button : set click listener TODO
+        final TextView tvSendText= findViewById(R.id.tv_send_text);
+        final Button btnSendText = findViewById(R.id.btn_send_text);
+        btnSendText.setOnClickListener(v -> {
+            tvSendText.setEnabled(false);
+            btnSendText.setEnabled(false);
+            talkViewModel.updateMessage(TMessageFactory.STR_CONTENT_TYPE_TEXT, tvSendText.getText().toString());
+        });
+        final Button btnSendImg = findViewById(R.id.btn_send_img);
+        btnSendImg.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.setType("*/*");
+            intent.addCategory("android.intent.category.DEFAULT");
+            startActivityForResult(intent,PHOTO_REQUEST_GALLERY);
         });
         // DONE viewModel : set Observe and queryLocalDataBase scrollToEnd
         talkViewModel.getUniApiResult().observe(this, stringUniApiResult -> {
@@ -69,8 +84,8 @@ public class TalkActivity extends AppCompatActivity {
             Toast.makeText(TalkActivity.this, stringUniApiResult.status, Toast.LENGTH_SHORT).show();
             tvSwipeRefresh.setVisibility(View.GONE);
             layoutSwipeRefresh.setRefreshing(false);
-            tvSendMessage.setEnabled(true);
-            btnSendMessage.setEnabled(true);
+            tvSendText.setEnabled(true);
+            btnSendText.setEnabled(true);
         });
         talkViewModel.getTMessageList().observe(this, TMessageList -> {
             Log.d("Talk", "tMessageList : " + TMessageList + " size : " + TMessageList.size());
@@ -78,7 +93,7 @@ public class TalkActivity extends AppCompatActivity {
             if(messageList.size() != 0) {rvTalkMessage.scrollToPosition(messageList.size() - 1);}
         });
         talkViewModel.queryLocalMessageList();
-        // TODO getContactsViewLiveData
+        // DONE getContactsViewLiveData
         final MutableLiveData<ContactsView> contactsViewLiveData = new MutableLiveData<>();
         new Thread(()-> contactsViewLiveData.postValue(
                 new ContactsView(MyApplication.getInstance().getLocalDataBase().getContactsDao().queryContactsByAccountID(contacts_account))
@@ -89,6 +104,24 @@ public class TalkActivity extends AppCompatActivity {
             talkAdapter.contactsView = contactsView;
             talkAdapter.notifyDataSetChanged();
         });
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PHOTO_REQUEST_GALLERY) {
+            if (data == null) return;
+            try {
+                Uri uri = data.getData();
+                Bitmap avatar = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                if (null == avatar) {
+                    Log.d("Talk", " return chose bitmap is null");
+                    return;
+                }
+                talkViewModel.updateMessage(TMessageFactory.STR_CONTENT_TYPE_IMG, BitmapHelper.BitmapToString(avatar));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
     @SuppressLint("NonConstantResourceId")
     private final Toolbar.OnMenuItemClickListener toolbarOnMenuItemClickListener = item -> {

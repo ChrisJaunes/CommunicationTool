@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#339FF4"
-        app:navigationIcon="@drawable/img_menu_white"
+        app:navigationIcon="@drawable/img_back_white"
         android:theme="@style/OverflowMenuStyle">
         <TextView
             android:id="@+id/toolbar_title"
@@ -33,19 +33,18 @@
         android:layout_height="0dp"
         android:layout_weight="10">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_talk_message"
+            android:id="@+id/rv_message"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
         android:layout_gravity="bottom">
         <EditText
-            android:id="@+id/tv_send_message"
+            android:id="@+id/tv_send_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
@@ -54,10 +53,16 @@
             android:inputType="text"
             android:autofillHints="" />
         <Button
-            android:id="@+id/btn_send_message"
+            android:id="@+id/btn_send_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:text="@string/btn_send"/>
+        <Button
+            android:id="@+id/btn_send_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/btn_send_img"/>
     </LinearLayout>
 </LinearLayout>

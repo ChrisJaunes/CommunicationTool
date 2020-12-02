@@ -45,4 +45,6 @@ public class ChatTextStyle {
         }
         return chatTextStyle;
     }
+
+
 }

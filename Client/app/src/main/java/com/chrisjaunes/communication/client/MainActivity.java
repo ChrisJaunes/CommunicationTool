@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.chrisjaunes.communication.client.account.AccountViewModel;
 import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
 import com.chrisjaunes.communication.client.contacts.NowContactsFragment;
+import com.chrisjaunes.communication.client.group.GListFragment;
 import com.chrisjaunes.communication.client.utils.DialogHelper;
 import com.google.android.material.navigation.NavigationView;
 
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private final NowContactsFragment nowContactsFragment = new NowContactsFragment();
+    private final GListFragment gListFragment = new GListFragment();
     @SuppressLint("NonConstantResourceId")
     private final RadioGroup.OnCheckedChangeListener radioGroupOnCheckedChangeListener = (group, checkedId) -> {
         final TextView toolBarTitle = findViewById(R.id.toolbar_title);
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 toolBarTitle.setText("好友请求");
                 break;
             case R.id.radio_button_chatgroup:
-                //updateFragment(chatGroupFragment);
+                updateFragment(gListFragment);
                 toolBarTitle.setText("群聊");
                 break;
         }
