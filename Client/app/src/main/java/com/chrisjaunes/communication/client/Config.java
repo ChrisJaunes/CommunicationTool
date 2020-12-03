@@ -12,6 +12,7 @@ public class Config {
     static public final String URL_GROUP_MESSAGE_QUERY = URL_BASE + "talk/update";
     static public final String URL_GROUP_MESSAGE_ADD = URL_BASE + "talk/update";
 
+    static public final String STATUS_NET_ERROR = "网络错误";
     static public final String ERROR_NET = "网络错误";
     static public final String ERROR_UNKNOW = "未知错误";
     static public final String ERROR_AVATAR_TOO_LAEGE = "头像太大";
@@ -21,9 +22,6 @@ public class Config {
     static final public String STR_STATUS = "status";
     static final public String STR_STATUS_DATA = "data";
 
-    static final public String STATUS_LOGIN_SUCCESSFUL = "login successful";
-    static final public String STATUS_LOGIN_ACCOUNT_ERROR = "account is not exist";
-    static final public String STATUS_LOGIN_PASSWORD_ERROR = "password is not correct";
     static final public String STATUS_REGISTER_SUCCESSFUL = "register successful";
     static final public String STATUS_REGISTER_ACCOUNT_EXIST = "account is exist";
     static final public String STATUS_QUERY_SUCCESSFUL = "query successful";

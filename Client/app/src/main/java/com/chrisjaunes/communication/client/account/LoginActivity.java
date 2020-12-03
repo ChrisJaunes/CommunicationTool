@@ -1,10 +1,12 @@
 package com.chrisjaunes.communication.client.account;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +17,8 @@ import com.chrisjaunes.communication.client.MainActivity;
 import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
+import com.chrisjaunes.communication.client.utils.UniApiResult;
+
 /**
  * @author ChrisJaunes
  * @version 1
@@ -48,22 +52,23 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
         // DONE set Observe
-        loginViewModel.getUniApiResult().observe(this, uniApiResult -> {
-            Toast.makeText(LoginActivity.this, uniApiResult.status, Toast.LENGTH_SHORT).show();
-            btn_login.setEnabled(true);
-            if(Config.STATUS_LOGIN_SUCCESSFUL.equals(uniApiResult.status)) {
-                if (BuildConfig.DEBUG && !(uniApiResult.data instanceof AccountRaw)) {
-                    throw new AssertionError("Assertion failed");
-                }
-                MyApplication.getInstance().setAccount((AccountRaw) uniApiResult.data);
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+        loginViewModel.getUniApiResultLiveDate().observe(this, uniApiResult -> {
+            Toast.makeText(LoginActivity.this, uniApiResult.data, Toast.LENGTH_SHORT).show();
+            Log.i("Login", uniApiResult.status);
+            if(uniApiResult instanceof UniApiResult.Fail) {
+                Log.e("Login", ((UniApiResult.Fail) uniApiResult).error);
             }
+            btn_login.setEnabled(true);
+        });
+        loginViewModel.getAccountRawLiveData().observe(this, accountRaw -> {
+            MyApplication.getInstance().setAccount(accountRaw);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
         // DONE auto login
-        et_account.setText("222");
-        et_password.setText("222");
-        btn_login.performClick();
+        //et_account.setText("222");
+        //et_password.setText("222");
+        //btn_login.performClick();
     }
 }

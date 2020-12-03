@@ -1,7 +1,7 @@
 package com.chrisjaunes.communication.client.account;
 import android.annotation.SuppressLint;
-import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -24,8 +24,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginViewModel extends ViewModel{
-    private final MutableLiveData<UniApiResult> uniApiResult = new MutableLiveData<>();
-    public LiveData<UniApiResult> getUniApiResult() { return uniApiResult; }
+    static final public String STATUS_LOGIN_SUCCESSFUL = "login successful";
+    static final public String STATUS_LOGIN_ACCOUNT_ERROR = "account is not exist";
+    static final public String STATUS_LOGIN_PASSWORD_ERROR = "password is not correct";
+
+    private final MutableLiveData<UniApiResult<String>> uniApiResultLiveDate = new MutableLiveData<>();
+    public LiveData<UniApiResult<String>> getUniApiResultLiveDate() { return uniApiResultLiveDate; }
+    private final MutableLiveData<AccountRaw> accountRawLiveData = new MutableLiveData<>();
+    public LiveData<AccountRaw> getAccountRawLiveData() {return accountRawLiveData;}
 
     public void login(final String account,final String password) {
         OkHttpClient client = HttpHelper.getOkHttpClient();
@@ -42,26 +48,23 @@ public class LoginViewModel extends ViewModel{
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
-                Log.e("Login", Config.ERROR_NET);
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                uniApiResultLiveDate.postValue(new UniApiResult.Fail(Config.STATUS_NET_ERROR, Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
             }
-
             @SuppressLint("DefaultLocale")
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
-                    Log.e("Login", Config.ERROR_UNKNOW + response.code());
+                    uniApiResultLiveDate.postValue(new UniApiResult.Fail(Config.STATUS_NET_ERROR, Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
                     return;
                 }
                 String jsonS = response.body().string();
                 Gson gson = new Gson();
                 UniApiResult<AccountRaw> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<AccountRaw>>() {}.getType());
-                uniApiResult.postValue(res);
-                Log.v("Login", res.status);
-                Log.v("Login", "" + res.data);
+                uniApiResultLiveDate.postValue(new UniApiResult<>(res.status, res.status));
+                if (STATUS_LOGIN_SUCCESSFUL.equals(res.status)) {
+                    accountRawLiveData.postValue(res.data);
+                }
             }
         });
     }

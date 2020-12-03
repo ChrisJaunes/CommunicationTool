@@ -9,8 +9,13 @@ public class UniApiResult<T> {
     }
 
     public static class Fail extends UniApiResult<String> {
+        public String error;
         public Fail(String status, String data) {
             super(status, data);
+        }
+        public Fail(String status, String data, String error) {
+            super(status, data);
+            this.error = error;
         }
     }
 }
