@@ -2,6 +2,8 @@ package com.chrisjaunes.communication.client.account.model;
 
 import androidx.annotation.NonNull;
 
+import com.chrisjaunes.communication.client.myView.ChatTextStyle;
+
 /**
  * @author ChrisJaunes
  * 采用了建造者模式
@@ -14,7 +16,7 @@ public class AccountRaw {
 
     public static class Builder{
         private final AccountRaw account;
-        Builder() {
+        public Builder() {
             account = new AccountRaw();
             account.account = "";
             account.nickname = "";

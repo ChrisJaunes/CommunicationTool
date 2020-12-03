@@ -51,7 +51,7 @@ public class GMessageAdapter extends RecyclerView.Adapter<GMessageAdapter.ViewHo
             holder.right_avatar.setImageBitmap(contactsView.getAvatar());
             holder.right_nickname.setText(contactsView.getNickName());
             holder.right_content.setMyText(message.getContent());
-            holder.right_content.setMyColor(accountView.getChatTextStyle());
+            //holder.right_content.setMyColor(accountView.getChatTextStyleView());
         } else{
             holder.layout_left.setVisibility(View.VISIBLE);
             holder.layout_right.setVisibility(View.GONE);

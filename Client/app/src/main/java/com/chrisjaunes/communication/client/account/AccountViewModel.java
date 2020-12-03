@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.account.model.ChatTextStyle;
+import com.chrisjaunes.communication.client.myView.ChatTextStyle;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
@@ -69,7 +69,7 @@ public class AccountViewModel extends ViewModel {
                 UniApiResult<String> res = new Gson().fromJson(jsonS, new TypeToken<UniApiResult<String>>() {}.getType());
                 Log.v("Login", res.status);
                 result.postValue(res);
-                if(Config.STATUS_UPDATE_SUCCESSFUL.equals(res.status)) AccountViewManage.getInstance().setAvatar(avatar);
+                //if(Config.STATUS_UPDATE_SUCCESSFUL.equals(res.status)) AccountViewManage.getInstance().setAvatar(avatar);
             }
         });
     }

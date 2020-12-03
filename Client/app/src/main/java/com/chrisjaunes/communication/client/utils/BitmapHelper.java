@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
  * @author ChirsJaunes
  */
 public class BitmapHelper {
+    public static final Bitmap AVATAR_DEFAULT = BitmapFactory.decodeResource(MyApplication.getInstance().getResources(),R.drawable.avatar_default);
     public static Bitmap StringToBitmap(String string){
         Bitmap bitmap = null;
         try {
@@ -27,7 +28,7 @@ public class BitmapHelper {
         }
         Log.d("BitmapHelper", "" + bitmap);
         if (null == bitmap) {
-            bitmap = BitmapFactory.decodeResource(MyApplication.getInstance().getResources(),R.drawable.avatar_default);
+            bitmap = AVATAR_DEFAULT;
         }
         return bitmap;
     }

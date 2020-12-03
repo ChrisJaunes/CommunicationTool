@@ -15,9 +15,10 @@ import com.chrisjaunes.communication.client.talk.TMessage;
  * version 1 : entities = {Contacts.class} exportSchema = false, Dao = {ContactsDao}
  * version 2 : entities = {Contacts.class, TalkMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao}
  * version 3 : entities = {Contacts.class, TalkMessage.class, GMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao, GMessageDao}
+ * version 4 : entities = {Contacts.class, TalkMessage.class, GMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao, GMessageDao}
  */
 @Database(entities = {ContactsRaw.class, TMessage.class, GMessage.class},
-        version = 3,
+        version = 4,
         exportSchema = false)
 public abstract  class LocalDatabase extends RoomDatabase{
     public abstract ContactsDao getContactsDao();

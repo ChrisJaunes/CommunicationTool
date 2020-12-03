@@ -18,14 +18,14 @@ public class MyApplication extends Application {
     }
 
     public void setAccount(AccountRaw account) {
-        AccountViewManage.getInstance().setAccountRaw(account);
+        AccountViewManage.getInstance().setAccount(account);
     }
 
     LocalDatabase localDatabase;
     public LocalDatabase getLocalDataBase() {
         if(null == localDatabase) {
             localDatabase = Room.databaseBuilder(this, LocalDatabase.class,
-                    String.format("account_%s", AccountViewManage.getInstance().getAccount())
+                    String.format("account_%s", AccountViewManage.getInstance().getAccountView().getAccount())
             )
                     .addMigrations()
                     .fallbackToDestructiveMigration()

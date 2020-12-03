@@ -80,7 +80,7 @@ public class TalkViewModel extends ViewModel {
                     uniApiResult.postValue(new UniApiResult<>(jsonO.getString(Config.STR_STATUS), ""));
                     if (Config.STATUS_UPDATE_SUCCESSFUL.equals(jsonO.getString(Config.STR_STATUS))) {
                         Log.d(">>>", "" + content);
-                        TMessage tMessage = new TMessage(AccountViewManage.getInstance().getAccount(),
+                        TMessage tMessage = new TMessage(AccountViewManage.getInstance().getAccountView().getAccount(),
                                 contacts_account, lastTime, type, content);
                         tMessageDao.InsertMessage(tMessage);
                         List<TMessage> newTMessages = new ArrayList<>();

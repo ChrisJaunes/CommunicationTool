@@ -3,7 +3,7 @@ package com.chrisjaunes.communication.client.contacts;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.chrisjaunes.communication.client.account.model.ChatTextStyle;
+import com.chrisjaunes.communication.client.myView.ChatTextStyle;
 import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
