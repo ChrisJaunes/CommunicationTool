@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.account.AccountView;
-import com.chrisjaunes.communication.client.account.AccountViewManage;
+import com.chrisjaunes.communication.client.account.model.AccountView;
+import com.chrisjaunes.communication.client.account.model.AccountViewManage;
 import com.chrisjaunes.communication.client.contacts.ContactsView;
 import com.chrisjaunes.communication.client.contacts.ContactsViewManage;
 import com.chrisjaunes.communication.client.group.model.GMessage;

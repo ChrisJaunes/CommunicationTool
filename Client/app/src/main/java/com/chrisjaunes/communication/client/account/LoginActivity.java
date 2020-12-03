@@ -15,29 +15,20 @@ import com.chrisjaunes.communication.client.MainActivity;
 import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
-
+/**
+ * @author ChrisJaunes
+ * @version 1
+ * @status XXX
+ * 管理登录
+ */
 public class LoginActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        // DONE use LoginViewModel to manage login, set account if login successful
         final LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        loginViewModel.getUniApiResult().observe(this, uniApiResult -> {
-            Toast.makeText(LoginActivity.this, uniApiResult.status, Toast.LENGTH_SHORT).show();
-            if(Config.STATUS_LOGIN_SUCCESSFUL.equals(uniApiResult.status)) {
-                if (BuildConfig.DEBUG && !(uniApiResult.data instanceof AccountRaw)) {
-                    throw new AssertionError("Assertion failed");
-                }
-                MyApplication.getInstance().setAccount((AccountRaw) uniApiResult.data);
-
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
+        // DONE set view of R.layout.activity_login
         final EditText et_account = findViewById(R.id.et_account);
         final EditText et_password = findViewById(R.id.et_password);
         final Button btn_login = findViewById(R.id.btn_login);
@@ -47,21 +38,32 @@ public class LoginActivity extends AppCompatActivity {
             if (account.trim().isEmpty() || password.trim().isEmpty()) {
                 Toast.makeText(getApplicationContext(),"用户名或密码不能为空",Toast.LENGTH_SHORT).show();
             } else {
+                btn_login.setEnabled(false);
                 loginViewModel.login(account, password);
             }
         });
-
         final Button btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
             startActivity(intent);
         });
-
+        // DONE set Observe
+        loginViewModel.getUniApiResult().observe(this, uniApiResult -> {
+            Toast.makeText(LoginActivity.this, uniApiResult.status, Toast.LENGTH_SHORT).show();
+            btn_login.setEnabled(true);
+            if(Config.STATUS_LOGIN_SUCCESSFUL.equals(uniApiResult.status)) {
+                if (BuildConfig.DEBUG && !(uniApiResult.data instanceof AccountRaw)) {
+                    throw new AssertionError("Assertion failed");
+                }
+                MyApplication.getInstance().setAccount((AccountRaw) uniApiResult.data);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        // DONE auto login
         et_account.setText("222");
         et_password.setText("222");
         btn_login.performClick();
     }
-
-    @Override
-    public void onBackPressed() { }
 }

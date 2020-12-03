@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
-import com.chrisjaunes.communication.client.account.AccountViewManage;
+import com.chrisjaunes.communication.client.account.model.AccountViewManage;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;

@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.room.Room;
 
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
-import com.chrisjaunes.communication.client.account.AccountViewManage;
+import com.chrisjaunes.communication.client.account.model.AccountViewManage;
 
 public class MyApplication extends Application {
     private static MyApplication instance = null;

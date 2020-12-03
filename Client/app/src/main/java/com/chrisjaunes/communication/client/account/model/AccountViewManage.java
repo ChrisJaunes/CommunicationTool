@@ -1,6 +1,4 @@
-package com.chrisjaunes.communication.client.account;
-
-import com.chrisjaunes.communication.client.account.model.AccountRaw;
+package com.chrisjaunes.communication.client.account.model;
 
 /**
  * @author ChrisJaunes
