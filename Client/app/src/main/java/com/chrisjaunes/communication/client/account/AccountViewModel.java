@@ -38,10 +38,10 @@ public class AccountViewModel extends ViewModel {
         final String avatarString = BitmapHelper.BitmapToString(avatar);
         Log.i("UpdateMessage","bitmap len:" + avatarString.length());
         int needBytes = avatarString.length() * 2;
-        if ( needBytes > Config.LIMIT_AVATAR_LEN) {
-            result.postValue(new UniApiResult.Fail(Config.ERROR_AVATAR_TOO_LAEGE, null));
-            return;
-        }
+//        if ( needBytes > Config.LIMIT_AVATAR_LEN) {
+//            result.postValue(new UniApiResult.Fail(Config.ERROR_AVATAR_TOO_LARGE, null));
+//            return;
+//        }
         OkHttpClient client = HttpHelper.getOkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_AVATAR, avatarString)
@@ -61,8 +61,8 @@ public class AccountViewModel extends ViewModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
-                    Log.e("Login", Config.ERROR_UNKNOW + response.code());
+                    result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, String.format("错误返回代码 %d", response.code())));
+                    Log.e("Login", Config.ERROR_UNKNOWN + response.code());
                     return;
                 }
                 String jsonS = response.body().string();
@@ -97,8 +97,8 @@ public class AccountViewModel extends ViewModel {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
-                    Log.e("Login", Config.ERROR_UNKNOW + response.code());
+                    result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, String.format("错误返回代码 %d", response.code())));
+                    Log.e("Login", Config.ERROR_UNKNOWN + response.code());
                     return;
                 }
                 String jsonS = response.body().string();

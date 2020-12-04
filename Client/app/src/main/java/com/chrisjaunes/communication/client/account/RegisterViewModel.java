@@ -1,8 +1,8 @@
 package com.chrisjaunes.communication.client.account;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -24,7 +24,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
+/**
+ * view model about register
+ * status ： XXX
+ * @author ChrisJaunes
+ * @version 1.1
+ */
 public class RegisterViewModel extends ViewModel {
     private final MutableLiveData<UniApiResult<String>> result = new MutableLiveData<>();
     public LiveData<UniApiResult<String>> getResult() {
@@ -49,24 +54,21 @@ public class RegisterViewModel extends ViewModel {
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                result.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
-                Log.e("Login", Config.ERROR_NET);
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                result.postValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
             }
 
             @SuppressLint("DefaultLocale")
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
-                    Log.e("register", Config.ERROR_UNKNOW + response.code());
+                    result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, String.format("错误返回代码 %d", response.code())));
                     return;
                 }
                 String jsonS = response.body().string();
                 Gson gson = new Gson();
                 UniApiResult<String> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<String>>() {}.getType());
                 result.postValue(res);
-                Log.v("register", res.status);
             }
         });
     }

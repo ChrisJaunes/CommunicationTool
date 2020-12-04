@@ -42,7 +42,7 @@ public class GListFragment extends Fragment {
             Log.d("NowGroup", "" + group);
             Intent intent = new Intent(getActivity(), GMessageActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putInt(GroupConfig.STR_GROUP, group);
+            //bundle.putString(GroupConfig.STR_GROUP, group);
             intent.putExtras(bundle);
             getActivity().startActivity(intent);
         });

@@ -2,6 +2,7 @@ package com.chrisjaunes.communication.client.myView;
 
 import androidx.annotation.NonNull;
 
+import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -32,19 +33,49 @@ public class ChatTextStyle {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+
     public static ChatTextStyle valueOf(String json) {
         ChatTextStyle chatTextStyle = new ChatTextStyle();
         try {
-            if(null == json) json = "{}";
+            if (null == json) json = "{}";
             JSONObject jsonO = new JSONObject(json);
-            if(jsonO.has(STR_FONT_COLOR)) chatTextStyle.font_color = jsonO.getString(STR_FONT_COLOR);
-            if(jsonO.has(STR_BUBBLE_COLOR)) chatTextStyle.bubble_color = jsonO.getString(STR_BUBBLE_COLOR);
-            if(jsonO.has(STR_BORDER_COLOR)) chatTextStyle.border_color = jsonO.getString(STR_BORDER_COLOR);
-        }catch (JSONException e) {
+            if (jsonO.has(STR_FONT_COLOR))
+                chatTextStyle.font_color = jsonO.getString(STR_FONT_COLOR);
+            if (jsonO.has(STR_BUBBLE_COLOR))
+                chatTextStyle.bubble_color = jsonO.getString(STR_BUBBLE_COLOR);
+            if (jsonO.has(STR_BORDER_COLOR))
+                chatTextStyle.border_color = jsonO.getString(STR_BORDER_COLOR);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return chatTextStyle;
     }
 
+    public static class Builder {
+        ChatTextStyle chatTextStyle;
 
+        public Builder() {
+            chatTextStyle = new ChatTextStyle();
+        }
+
+        public Builder addChatFontColor(String color) {
+            chatTextStyle.font_color = color;
+            return this;
+        }
+
+        public Builder addChatBubbleColor(String color) {
+            chatTextStyle.bubble_color = color;
+            return this;
+        }
+
+        public Builder addChatBorderColor(String color) {
+            chatTextStyle.border_color = color;
+            return this;
+        }
+
+        ChatTextStyle build() {
+            return chatTextStyle;
+        }
+    }
 }
+

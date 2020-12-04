@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,7 +25,8 @@
             android:id="@+id/et_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:inputType="text"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,6 @@
             android:text="@string/account_password"
             android:textSize="20sp"
             android:layout_height="wrap_content"/>
-
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
@@ -78,87 +77,9 @@
             android:layout_height="match_parent"
             android:layout_weight="2"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="20sp"
-            android:text="@string/account_textstyle_font_color" />
-        <View
-            android:id="@+id/vi_font_color"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
-        <Spinner
-            android:id="@+id/sp_font_color"
-            android:layout_gravity="right"
-            android:layout_marginStart="20dp"
-            android:gravity="right"
-            android:spinnerMode="dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            tools:ignore="RtlHardcoded" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="20sp"
-            android:text="@string/account_textstyle_bubble_color" />
-        <View
-            android:id="@+id/vi_bubble_color"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
-        <Spinner
-            android:id="@+id/sp_bubble_color"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="right"
-            android:spinnerMode="dialog"
-            android:gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            tools:ignore="RtlHardcoded" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="20sp"
-            android:text="@string/account_textstyle_border_color"/>
-
-        <View
-            android:id="@+id/vi_border_color"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
-
-        <Spinner
-            android:id="@+id/sp_border_color"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:spinnerMode="dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            tools:ignore="RtlHardcoded" />
-    </LinearLayout>
+    <include
+        android:id="@+id/layout_select_chat_text_style"
+        layout="@layout/layout_select_chat_text_style" />
     <Button
         android:id="@+id/btn_register"
         android:layout_marginTop="20dp"

@@ -92,7 +92,7 @@ public class ContactsViewModel extends ViewModel {
                     nowContactsListResult.postValue(nowContactsRawList);
                  } catch (JSONException e) {
                     e.printStackTrace();
-                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOW, Arrays.toString(e.getStackTrace())));
+                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
                 }
             }
         });

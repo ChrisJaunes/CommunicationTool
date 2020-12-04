@@ -14,9 +14,8 @@ public class Config {
 
     static public final String STATUS_NET_ERROR = "网络错误";
     static public final String ERROR_NET = "网络错误";
-    static public final String ERROR_UNKNOW = "未知错误";
-    static public final String ERROR_AVATAR_TOO_LAEGE = "头像太大";
-    static public final long   LIMIT_AVATAR_LEN = 4294967295L;
+    static public final String ERROR_UNKNOWN = "未知错误";
+    static public final String ERROR_AVATAR_TOO_LARGE = "头像太大";
 
 
     static final public String STR_STATUS = "status";

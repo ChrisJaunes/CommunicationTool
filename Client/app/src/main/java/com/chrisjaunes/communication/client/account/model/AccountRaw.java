@@ -9,6 +9,7 @@ import com.chrisjaunes.communication.client.myView.ChatTextStyle;
  * 采用了建造者模式
  */
 public class AccountRaw {
+    static public final long  LIMIT_AVATAR_LEN = 4294967295L;
     public String account;
     public String nickname;
     public String avatar;
@@ -23,28 +24,20 @@ public class AccountRaw {
             account.avatar = "";
             account.text_style = new ChatTextStyle();
         }
-        public Builder addAccount(String account) {
+        public Builder setAccount(String account) {
             this.account.account = account;
             return this;
         }
-        public Builder addNickname(String nickname) {
+        public Builder setNickname(String nickname) {
             account.nickname = nickname;
             return this;
         }
-        public Builder addAvatar(String avatar) {
+        public Builder setAvatar(String avatar) {
             account.avatar = avatar;
             return this;
         }
-        public Builder addChatFontColor(String color) {
-            account.text_style.font_color = color;
-            return this;
-        }
-        public Builder addChatBubbleColor(String color) {
-            account.text_style.bubble_color = color;
-            return this;
-        }
-        public Builder addChatBorderColor(String color) {
-            account.text_style.border_color = color;
+        public Builder setChatTextStyle(ChatTextStyle textStyle) {
+            account.text_style = textStyle;
             return this;
         }
         public AccountRaw build() {

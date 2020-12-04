@@ -24,6 +24,8 @@ import net.sf.json.JSONObject;
 @WebServlet(name = "Login" , urlPatterns = {"/account/login"})
 public class Login extends HttpServlet {
 	private static final Logger Log = Logger.getLogger("Account Login");
+	public static final String STR_ACCOUNT = "account";
+	public static final String STR_PASSWORD = "password";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,8 +43,8 @@ public class Login extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String account = request.getParameter(Config.STR_ACCOUNT);
-		String password = request.getParameter(Config.STR_PASSWORD);
+		String account = request.getParameter(STR_ACCOUNT);
+		String password = request.getParameter(STR_PASSWORD);
 		assert null != account && null != password;
 		Log.info(String.format("account : %s, password %s", account, password));
 

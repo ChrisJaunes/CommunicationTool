@@ -22,8 +22,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-public class LoginViewModel extends ViewModel{
+/**
+ * view model about login, use live data to observe, use okhttp3
+ * status： XXX
+ * STR_PASSWORD and STR_PASSWORD must equal to server.account.login#STR_PASSWORD and server.account.login#STR_PASSWORD
+ * @author ChrisJaunes
+ * @version 1
+ */
+public class LoginViewModel extends ViewModel {
+    public static final String STR_ACCOUNT = "account";
+    public static final String STR_PASSWORD = "password";
     static final public String STATUS_LOGIN_SUCCESSFUL = "login successful";
     static final public String STATUS_LOGIN_ACCOUNT_ERROR = "account is not exist";
     static final public String STATUS_LOGIN_PASSWORD_ERROR = "password is not correct";
@@ -37,8 +45,8 @@ public class LoginViewModel extends ViewModel{
         OkHttpClient client = HttpHelper.getOkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
-                .add(Config.STR_ACCOUNT,  account)
-                .add(Config.STR_PASSWORD, password)
+                .add(STR_ACCOUNT,  account)
+                .add(STR_PASSWORD, password)
                 .build();
 
         Request request = new okhttp3.Request.Builder()
@@ -55,7 +63,7 @@ public class LoginViewModel extends ViewModel{
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    uniApiResultLiveDate.postValue(new UniApiResult.Fail(Config.STATUS_NET_ERROR, Config.ERROR_UNKNOW, String.format("错误返回代码 %d", response.code())));
+                    uniApiResultLiveDate.postValue(new UniApiResult.Fail(Config.STATUS_NET_ERROR, Config.ERROR_UNKNOWN, String.format("错误返回代码 %d", response.code())));
                     return;
                 }
                 String jsonS = response.body().string();
