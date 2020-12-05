@@ -28,6 +28,7 @@ public class ContactsView{
             chatTextStyleView = ChatTextStyleView.valueOf(contactsRaw.getTextStyle());
         }
     }
+    public ContactsRaw getContactsRaw() {return contactsRaw;}
 
     public String getAccount() {
         return contactsRaw.getAccount();

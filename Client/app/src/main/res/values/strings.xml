@@ -24,4 +24,7 @@
     <string name="talk_send_message_hint">请输入你发送的信息</string>
     <string name="btn_send">发送</string>
     <string name="btn_send_img">发送图片</string>
+    <string name="contacts_agree">同意</string>
+    <string name="contacts_reject">拒绝</string>
+    <string name="btn_new_contacts_list">新联系人</string>
 </resources>

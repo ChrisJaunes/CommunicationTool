@@ -21,7 +21,10 @@ import java.util.logging.Logger;
  */
 @WebServlet(name = "ContactsUpdate" , urlPatterns = {"/contacts/update"})
 public class Update extends HttpServlet {
-    private static final Logger Log = Logger.getLogger("Contacts Update");
+    static final Logger Log = Logger.getLogger("Contacts Update");
+
+
+
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -38,9 +41,9 @@ public class Update extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
-        String account2 = request.getParameter(Config.STR_ACCOUNT2);
-        String requestTime = request.getParameter(Config.STR_TIME);
-        String requestOperation = request.getParameter(Config.STR_OPERATION);
+        String account2 = request.getParameter(ContactsConfig.STR_CONTACTS_ACCOUNT);
+        String requestTime = request.getParameter(ContactsConfig.STR_TIME);
+        String requestOperation = request.getParameter(ContactsConfig.STR_OPERATION);
         Log.info(String.format("account : %s, account2 : %s, time : %s, operation : %s", account, account2, requestTime, requestOperation));
 
         JSONObject resJson = new JSONObject();
@@ -53,47 +56,49 @@ public class Update extends HttpServlet {
             String sqlOpera = null;
             List<Object> params = new ArrayList<>();
             switch (requestOperation) {
-                case Config.CONTACTS_FRIEND_REQUEST : {
-                    sqlOpera = String.format("insert into %s (%s, %s, %s, %s) value(?, ?, ?, ?)",
-                            Config.TABLE_CONTACTS, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2, Config.STR_TIME, Config.STR_OPERATION);
+                case ContactsConfig.CONTACTS_FRIEND_REQUEST : {
+                    sqlOpera = String.format("insert into `%s` (`%s`, `%s`, `%s`, `%s`) value(?, ?, ?, ?)",
+                            ContactsConfig.TABLE_CONTACTS, ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_ACCOUNT2, ContactsConfig.STR_TIME, ContactsConfig.STR_OPERATION);
                     params.add(account);params.add(account2);
                     params.add(requestTime);
-                    params.add(Config.CONTACTS_FRIENDS_REQUEST_CODE);
+                    params.add(ContactsConfig.CONTACTS_FRIENDS_REQUEST_CODE);
                     break;
                 }
-                case Config.CONTACTS_FRIENDS_AGREE: {
+                case ContactsConfig.CONTACTS_FRIENDS_AGREE: {
                     // TODO request ( A -> B), now account is B, account1 = A(account2) and account2 = B(account)
-                    sqlOpera = String.format("update %s set %s = ?, %s = ? where %s = ? and %s = ?",
-                            Config.TABLE_CONTACTS,
-                            Config.STR_TIME, Config.STR_OPERATION,
-                            Config.STR_ACCOUNT1, Config.STR_ACCOUNT2);
+                    sqlOpera = String.format("update `%s` set `%s` = ?, `%s` = ? where `%s` = ? and `%s` = ?",
+                            ContactsConfig.TABLE_CONTACTS,
+                            ContactsConfig.STR_TIME, ContactsConfig.STR_OPERATION,
+                            ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_ACCOUNT2);
                     params.add(requestTime);
-                    params.add(Config.CONTACTS_FRIENDS_AGREE_CODE);
+                    params.add(ContactsConfig.CONTACTS_FRIENDS_AGREE_CODE);
                     params.add(account2);params.add(account);
                     break;
                 }
-                case Config.CONTACTS_FRIENDS_REJECT: {
+                case ContactsConfig.CONTACTS_FRIENDS_REJECT: {
                     sqlOpera = String.format("delete from %s where (%s = ? and %s = ?) ",
-                            Config.TABLE_CONTACTS,
-                            Config.STR_ACCOUNT1, Config.STR_ACCOUNT2);
+                            ContactsConfig.TABLE_CONTACTS,
+                            ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_ACCOUNT2);
                     params.add(account2);params.add(account);
                     break;
                 }
                 default: break;
             }
+            Log.info("" + sqlOpera);
             if (null == sqlOpera) {
                 resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
             } else {
-                int count = -1;
+                int count;
                 try {
                     count = DBHelper.executeOperate(sqlOpera, params);
+                    Log.info("" + sqlOpera+"|"+count+"|"+ContactsConfig.CONTACTS_FRIENDS_AGREE_CODE);
                     if (count == 1) {
-                        resJson.put(Config.STR_STATUS, Config.STATUS_SUCCESSFUL);
+                        resJson.put(Config.STR_STATUS, ContactsConfig.STATUS_UPDATE_SUCCESSFUL);
                     } else{
                         resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
                     }
-                }catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                }catch (SQLException e) {
+                    e.printStackTrace();
                     resJson.put(Config.STR_STATUS, Config.STATUS_DB_ILLEGAL_PARAMETER);
                 }
             }

@@ -24,6 +24,8 @@ import java.util.logging.Logger;
 @WebServlet(name = "ContactsQuery" , urlPatterns = {"/contacts/query"})
 public class Query extends HttpServlet {
     private static final Logger Log = Logger.getLogger("Contacts Query");
+    static final public String STATUS_QUERY_SUCCESSFUL = "query successful";
+
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -40,7 +42,7 @@ public class Query extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
-        String requestTime = request.getParameter(Config.STR_TIME);
+        String requestTime = request.getParameter(ContactsConfig.STR_TIME);
         Log.info(String.format("account : %s, time : %s", account, requestTime));
 
         JSONObject resJson = new JSONObject();
@@ -52,13 +54,15 @@ public class Query extends HttpServlet {
             requestTime = TimeHelper.timeToStdTime(requestTime);
             Log.info(requestTime);
             try {
-                String sqlQuery = String.format("select %s, %s, %s, %s, %s, %s from %s as `A`, %s as `C` where `A`.`%s` = `C`.`contacts`",
+                String sqlQuery = String.format("select `%s`, `%s`, `%s`, `%s`, `%s`, `%s` from `%s` as `A`, %s as `C` where `A`.`%s` = `C`.`contacts`",
                         Config.STR_ACCOUNT, Config.STR_NICKNAME, Config.STR_AVATAR, Config.STR_TEXT_STYLE, Config.STR_TIME, Config.STR_OPERATION,
                         Config.TABLE_ACCOUNT,
-                        String.format("(select if(`%s` = ?, `%s`, `%s`) as `contacts`, %s, %s from %s where %s >= ? and (%s = ? or %s = ?))",
-                                Config.STR_ACCOUNT1, Config.STR_ACCOUNT2, Config.STR_ACCOUNT1, Config.STR_TIME, Config.STR_OPERATION,
-                                Config.TABLE_CONTACTS,
-                                Config.STR_TIME, Config.STR_ACCOUNT1, Config.STR_ACCOUNT2),
+                        String.format("(select if(`%s` = ?, `%s`, `%s`) as `contacts`, `%s`, `%s` from `%s` where `%s` >= ? and " +
+                                        "(`%s` = %s and (`%s` = ? or `%s` = ?)) or (`%s` = %s and `%s` = ?) )",
+                                ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_ACCOUNT2, ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_TIME, ContactsConfig.STR_OPERATION,
+                                ContactsConfig.TABLE_CONTACTS, ContactsConfig.STR_TIME,
+                                ContactsConfig.STR_OPERATION, ContactsConfig.CONTACTS_FRIENDS_AGREE_CODE, ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_ACCOUNT2,
+                                ContactsConfig.STR_OPERATION, ContactsConfig.CONTACTS_FRIENDS_REQUEST_CODE, ContactsConfig.STR_ACCOUNT2),
                         Config.STR_ACCOUNT
                 );
                 Log.info(sqlQuery);
@@ -67,10 +71,12 @@ public class Query extends HttpServlet {
                 params.add(requestTime);
                 params.add(account);
                 params.add(account);
+                params.add(account);
+                Log.info("" + params.size());
                 ResultSet result = DBHelper.executeQuery(sqlQuery, params);
                 JSONArray jsonA = new JSONArray();
                 DBHelper.getResToJsonArray(result, jsonA);
-                resJson.put(Config.STR_STATUS, Config.STATUS_SUCCESSFUL);
+                resJson.put(Config.STR_STATUS, STATUS_QUERY_SUCCESSFUL);
                 resJson.put(Config.STR_STATUS_DATA, jsonA);
                 result.close();
             } catch (SQLException e) {

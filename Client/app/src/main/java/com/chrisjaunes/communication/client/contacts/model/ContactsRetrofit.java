@@ -27,4 +27,11 @@ public interface ContactsRetrofit {
     @FormUrlEncoded
     @POST(ContactsConfig.URL_CONTACTS_QUERY)
     Call<ResponseBody> query(@Field(ContactsConfig.STR_TIME) String time);
+
+    @FormUrlEncoded
+    @POST(ContactsConfig.URL_CONTACTS_UPDATE)
+    Call<ResponseBody> update(@Field(ContactsConfig.STR_CONTACTS_ACCOUNT) String account,
+                              @Field(ContactsConfig.STR_TIME) String time,
+                              @Field(ContactsConfig.STR_OPERATION) String operation);
+
 }

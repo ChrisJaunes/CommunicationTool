@@ -25,13 +25,14 @@ import net.sf.json.JSONObject;
 @WebServlet(name = "Register" , urlPatterns = {"/account/register"})
 public class Register extends HttpServlet {
 	private static final Logger Log = Logger.getLogger("Account Register");
+	static final public String STATUS_REGISTER_ACCOUNT_EXIST = "account is exist";
+	static final public String STATUS_REGISTER_SUCCESSFUL = "register successful";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// TODO Auto-generated method stub
 		Log.log(Level.WARNING, String.format("发现通过GET访问z注册界面的人, 其IP为%s", request.getRemoteAddr()));
 		response.setContentType("text/html;charset=UTF-8;");
 		response.getWriter().append("[ERROR] 不应该使用GET访问");
@@ -57,7 +58,7 @@ public class Register extends HttpServlet {
 			params.add(account);
 			ResultSet result = DBHelper.executeQuery(sqlQuery, params);
 			if (result.next()) {
-				resJson.put(Config.STR_STATUS, Config.STATUS_REGISTER_ACCOUNT_EXIST);
+				resJson.put(Config.STR_STATUS, STATUS_REGISTER_ACCOUNT_EXIST);
 			} else {
 				sqlQuery = String.format("insert into %s (%s, %s, %s, %s, %s) values (?,?,?,?,?)",
 						Config.TABLE_ACCOUNT,
@@ -71,7 +72,7 @@ public class Register extends HttpServlet {
 				params.add(avatar);
 				params.add(textStyle);
 				DBHelper.executeOperate(sqlQuery, params);
-				resJson.put(Config.STR_STATUS, Config.STATUS_REGISTER_SUCCESSFUL);
+				resJson.put(Config.STR_STATUS, STATUS_REGISTER_SUCCESSFUL);
 			}
 			DBHelper.closeResource(result);
 		} catch (SQLException e) {

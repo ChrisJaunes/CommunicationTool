@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.chrisjaunes.communication.client.account.AccountViewModel;
 import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
+import com.chrisjaunes.communication.client.contacts.NewContactsFragment;
 import com.chrisjaunes.communication.client.contacts.NowContactsFragment;
 import com.chrisjaunes.communication.client.group.GListFragment;
 import com.chrisjaunes.communication.client.utils.DialogHelper;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         chatGroupRadioButton.setCompoundDrawables(drawables[0],drawables[1],drawables[2],drawables[3]);
 
         new Thread(contactsViewModel::queryLocalNowContactsList).start();
+        new Thread(contactsViewModel::queryLocalNowContactsList).start();
     }
 
     @Override
@@ -114,10 +116,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+    private final NowContactsFragment nowContactsFragment = new NowContactsFragment();
+    private final NewContactsFragment newContactsFragment = new NewContactsFragment();
     @SuppressLint("NonConstantResourceId")
     private final Toolbar.OnMenuItemClickListener toolbarOnMenuItemClickListener = item -> {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
+            case R.id.action_query_new_contacts_list:
+                updateFragment(newContactsFragment);
+                break;
             case  R.id.action_add_friend:
                 Log.i("MainActivity", "add friend");
                 Toast.makeText(getApplicationContext(),"add",Toast.LENGTH_SHORT).show();
@@ -130,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     };
 
-    private final NowContactsFragment nowContactsFragment = new NowContactsFragment();
     private final GListFragment gListFragment = new GListFragment();
     @SuppressLint("NonConstantResourceId")
     private final RadioGroup.OnCheckedChangeListener radioGroupOnCheckedChangeListener = (group, checkedId) -> {

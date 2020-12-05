@@ -26,6 +26,9 @@ public class Login extends HttpServlet {
 	private static final Logger Log = Logger.getLogger("Account Login");
 	public static final String STR_ACCOUNT = "account";
 	public static final String STR_PASSWORD = "password";
+	static final public String STATUS_LOGIN_SUCCESSFUL = "login successful";
+	static final public String STATUS_LOGIN_ACCOUNT_ERROR = "account is not exist";
+	static final public String STATUS_LOGIN_PASSWORD_ERROR = "password is not correct";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,7 +61,7 @@ public class Login extends HttpServlet {
 			if (result.next()) {
 				String correctPassword = result.getString(Config.STR_PASSWORD);
 				if( password.equals(correctPassword) ) {
-					resJson.put(Config.STR_STATUS, Config.STATUS_LOGIN_SUCCESSFUL);
+					resJson.put(Config.STR_STATUS, STATUS_LOGIN_SUCCESSFUL);
 					JSONObject jsonO = new JSONObject();
 					jsonO.put(Config.STR_ACCOUNT, result.getString(Config.STR_ACCOUNT));
 					jsonO.put(Config.STR_NICKNAME, result.getString(Config.STR_NICKNAME));
@@ -67,10 +70,10 @@ public class Login extends HttpServlet {
 					resJson.put(Config.STR_STATUS_DATA, jsonO);
 					request.getSession().setAttribute(Config.STR_ACCOUNT, result.getString(Config.STR_ACCOUNT));
 				} else {
-					resJson.put(Config.STR_STATUS, Config.STATUS_LOGIN_PASSWORD_ERROR);
+					resJson.put(Config.STR_STATUS, STATUS_LOGIN_PASSWORD_ERROR);
 				}
 			} else {
-				resJson.put(Config.STR_STATUS, Config.STATUS_LOGIN_ACCOUNT_ERROR);
+				resJson.put(Config.STR_STATUS, STATUS_LOGIN_ACCOUNT_ERROR);
 			}
 			DBHelper.closeResource(result);
 		} catch (SQLException e) {

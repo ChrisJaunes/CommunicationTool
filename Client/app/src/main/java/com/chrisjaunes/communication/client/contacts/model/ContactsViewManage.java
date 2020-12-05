@@ -33,4 +33,8 @@ public class ContactsViewManage {
         }).start();
         return ContactsView.CONTACTS_DEFAULT;
     }
+    public ContactsRaw getContactsRaw(String account) {
+        if(contactsViewHashMap.containsKey(account)) return contactsViewHashMap.get(account).getContactsRaw();
+        return contactsDao.queryContactsByAccountID(account);
+    }
 }

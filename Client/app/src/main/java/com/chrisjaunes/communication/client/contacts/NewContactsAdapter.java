@@ -3,6 +3,7 @@ package com.chrisjaunes.communication.client.contacts;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,18 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
+import com.chrisjaunes.communication.client.contacts.model.ContactsConfig;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
 import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.NowContactsViewHolder> {
-    private final List<String> contactsList;
-    private final ContactsViewManage contactsViewManage;
-    private final ItemOnClickListener itemOnClickListener;
+public class NewContactsAdapter extends RecyclerView.Adapter<NewContactsAdapter.NowContactsViewHolder> {
+    final List<String> contactsList;
+    final ContactsViewManage contactsViewManage;
+    final ItemOnClickListener itemOnClickListener;
 
-    public NowContactsAdapter(final ItemOnClickListener itemOnClickListener) {
+    public NewContactsAdapter(final ItemOnClickListener itemOnClickListener) {
         this.contactsList = new ArrayList<>();
         this.contactsViewManage = ContactsViewManage.getInstance();
         this.itemOnClickListener = itemOnClickListener;
@@ -39,7 +41,8 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
         final ContactsView contactsView = contactsViewManage.getContactsView(contactsList.get(position));
         holder.nickName.setText(contactsView.getNickName());
         holder.avatar.setImageBitmap(contactsView.getAvatarView());
-        holder.itemView.setOnClickListener(v -> itemOnClickListener.goToTalk(contactsView.getAccount()));
+        holder.agree.setOnClickListener(v -> itemOnClickListener.handleRequest(contactsView.getAccount(), ContactsConfig.CONTACTS_FRIENDS_AGREE));
+        holder.reject.setOnClickListener(v -> itemOnClickListener.handleRequest(contactsView.getAccount(), ContactsConfig.CONTACTS_FRIENDS_REJECT));
     }
 
     @Override
@@ -51,18 +54,22 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
         notifyDataSetChanged();
     }
 
-
     public interface ItemOnClickListener {
-        void goToTalk(String account);
+        void handleRequest(String account, String operation);
     }
-
     public static class NowContactsViewHolder extends RecyclerView.ViewHolder{
-        final TextView nickName;
-        final ImageView avatar;
+        TextView nickName;
+        ImageView avatar;
+        final Button agree;
+        final Button reject;
         public NowContactsViewHolder(@NonNull View itemView) {
             super(itemView);
             nickName = itemView.findViewById(R.id.tv_nickname);
             avatar = itemView.findViewById(R.id.iv_avatar);
+            agree = itemView.findViewById(R.id.btn_agree);
+            agree.setVisibility(View.VISIBLE);
+            reject = itemView.findViewById(R.id.btn_reject);
+            reject.setVisibility(View.VISIBLE);
         }
     }
 }

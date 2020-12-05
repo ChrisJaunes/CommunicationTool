@@ -13,6 +13,7 @@ import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.contacts.model.ContactsRetrofit;
 import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
+import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import org.json.JSONArray;
@@ -60,7 +61,7 @@ public class ContactsViewModel extends ViewModel {
     public void queryLocalNewContactsList() {
         newContactsListResult.postValue(updateContactsViewManage(contactsDao.queryNewContactsList()));
     }
-    public void updateLocalDataBase(final JSONArray contactsRawJsonList) throws JSONException {
+    private void updateLocalDataBase(final JSONArray contactsRawJsonList) throws JSONException {
         for (int i = 0; i < contactsRawJsonList.length(); ++i) {
             final ContactsRaw contactsRaw = ContactsRaw.jsonToContactsRaw((JSONObject) contactsRawJsonList.get(i));
             if (!contactsDao.isNowContactsExist(contactsRaw.getAccount())) {
@@ -92,6 +93,43 @@ public class ContactsViewModel extends ViewModel {
                             queryLocalNowContactsList();
                             queryLocalNewContactsList();
                         }
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                        uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
+                    }
+                }).start();
+            }
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, Arrays.toString(t.getStackTrace())));
+            }
+        });
+    }
+    public void handleRequestFriend(final String account, final String operation) {
+        final String time = TimeHelper.getNowTime();
+        final Retrofit retrofit = HttpHelper.getRetrofitBuilder().baseUrl(Config.URL_BASE).build();
+        final Call<ResponseBody> call = retrofit.create(ContactsRetrofit.class).update(account, time, operation);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, String.valueOf(response.code())));
+                    return;
+                }
+                new Thread(()-> {
+                    try {
+                        final JSONObject apiJson = new JSONObject(response.body().string());
+                        final String apiStatus = apiJson.getString(Config.STR_STATUS);
+                        uniApiResult.postValue(new UniApiResult<>(apiStatus, apiStatus));
+                        if (ContactsConfig.STATUS_UPDATE_SUCCESSFUL.equals(apiStatus)) {
+                            ContactsRaw contactsRaw = contactsViewManage.getContactsRaw(account);
+                            if (ContactsConfig.CONTACTS_FRIENDS_AGREE.equals(operation)) {
+                                contactsRaw.setOperation(ContactsConfig.CONTACTS_FRIENDS_AGREE_CODE);
+                            } else {
+                                contactsRaw.setOperation(ContactsConfig.CONTACTS_FRIENDS_NULL_CODE);
+                            }
+                        }
+                        queryLocalNewContactsList();
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                         uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
