@@ -1,8 +1,10 @@
 package com.chrisjaunes.communication.client.contacts;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,18 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
 import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
-import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.NowContactsViewHolder> {
-    final List<String> contactsList;
-    final ContactsViewManage contactsViewManage;
-    final ItemOnClickListener itemOnClickListener;
+    private final List<String> contactsList;
+    private final ContactsViewManage contactsViewManage;
+    private final ItemOnClickListener itemOnClickListener;
 
     public NowContactsAdapter(final ItemOnClickListener itemOnClickListener) {
         this.contactsList = new ArrayList<>();
@@ -47,23 +47,24 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
     @Override
     public int getItemCount() { return contactsList.size(); }
 
-    public void addContactsViewList(final List<String> contactsStringList) {
-        for (String contactsString : contactsStringList) {
-            contactsList.add(contactsList.size(), contactsString);
-            notifyItemChanged(contactsList.size());
-        }
+    public void setContactsStringList(final List<String> contactsStringList) {
+        contactsList.clear();
+        contactsList.addAll(contactsStringList);
+        notifyDataSetChanged();
     }
+
 
     public interface ItemOnClickListener {
         void goToTalk(String account);
     }
+
     public static class NowContactsViewHolder extends RecyclerView.ViewHolder{
-        TextView nickName;
-        ImageView avatar;
+        final TextView nickName;
+        final ImageView avatar;
         public NowContactsViewHolder(@NonNull View itemView) {
             super(itemView);
-            nickName = itemView.findViewById(R.id.friendUerName);
-            avatar = itemView.findViewById(R.id.friend_image);
+            nickName = itemView.findViewById(R.id.tv_nickname);
+            avatar = itemView.findViewById(R.id.iv_avatar);
         }
     }
 }

@@ -29,19 +29,19 @@ public class NowContactsFragment extends Fragment {
         // DONE ContactsViewModel 生命周期为 Activity
         final ContactsViewModel contactsViewModel = new ViewModelProvider(getActivity()).get(ContactsViewModel.class);
         // DONE 下拉刷新控件，用于下拉时请求服务器端
-        final TextView swipeText = view.findViewById(R.id.tv_swipe_refresh);
-        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.layout_swipe_refresh);
-        swipeRefreshLayout.setEnabled(true);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            swipeText.setText("正在刷新");
-            swipeText.setVisibility(View.VISIBLE);
+        final TextView tvSwipeRefresh = view.findViewById(R.id.tv_swipe_refresh);
+        final SwipeRefreshLayout layoutSwipeRefresh = view.findViewById(R.id.layout_swipe_refresh);
+        layoutSwipeRefresh.setEnabled(true);
+        layoutSwipeRefresh.setOnRefreshListener(() -> {
+            tvSwipeRefresh.setText("正在刷新");
+            tvSwipeRefresh.setVisibility(View.VISIBLE);
             contactsViewModel.queryServer();
         });
         // DONE RecycleView控件，更新current Contacts列表，Adapter支持点击跳转
         final RecyclerView rvContacts = view.findViewById(R.id.rv_contacts);
-        rvContacts.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
         final NowContactsAdapter contactsAdapter = new NowContactsAdapter((account) -> {
-            Log.d("NowContacts", account);
+            Log.d("NowContacts[interface]", account);
             Intent intent = new Intent(getActivity(), TalkActivity.class);
             intent.putExtra(TalkActivity.STR_CONTACTS_ACCOUNT, account);
             getActivity().startActivity(intent);
@@ -49,18 +49,18 @@ public class NowContactsFragment extends Fragment {
         rvContacts.setAdapter(contactsAdapter);
         rvContacts.setItemAnimator(new DefaultItemAnimator());
         // DONE contactsViewModel 监听远程服务端的返回结果 监听current contacts list 变化情况
-        contactsViewModel.getUniApiResult().observe(getActivity(), uniApiResult -> {
-            Log.d("NowContacts", uniApiResult.status + uniApiResult.data);
+        contactsViewModel.getUniApiResult().observe(getViewLifecycleOwner(), uniApiResult -> {
+            Log.d("NowContacts[uniApiResult]", uniApiResult.status + uniApiResult.data);
             Toast.makeText(getActivity(), uniApiResult.status, Toast.LENGTH_SHORT).show();
-            swipeText.setVisibility(View.GONE);
-            swipeRefreshLayout.setRefreshing(false);
+            tvSwipeRefresh.setVisibility(View.GONE);
+            layoutSwipeRefresh.setRefreshing(false);
         });
-        contactsViewModel.getNowContactsListResult().observe(getActivity(), stringContactsList -> {
-            Log.d("NowContacts", "contactsList" + stringContactsList + "size : " + stringContactsList.size());
-            contactsAdapter.addContactsViewList(stringContactsList);
+        contactsViewModel.getNowContactsListResult().observe(getViewLifecycleOwner(), stringContactsList -> {
+            Log.d("NowContacts[nowContactsListResult]", "contactsList" + stringContactsList + "size : " + stringContactsList.size());
+            contactsAdapter.setContactsStringList(stringContactsList);
         });
         // DONE 请求本地缓存数据库
-        contactsViewModel.queryLocalNowContactsList();
+        new Thread(contactsViewModel::queryLocalNowContactsList).start();
         return view;
     }
 }

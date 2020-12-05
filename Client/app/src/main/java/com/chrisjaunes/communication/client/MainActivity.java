@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.rb_now_contacts:
                 updateFragment(nowContactsFragment);
                 toolBarTitle.setText("我的好友");
+                //contactsViewModel.queryLocalNowContactsList();
                 break;
             case R.id.radio_button_newfriend:
                 //updateFragment(newFriendsFragment);
