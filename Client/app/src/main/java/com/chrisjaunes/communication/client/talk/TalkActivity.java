@@ -23,7 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.contacts.ContactsView;
+import com.chrisjaunes.communication.client.contacts.model.ContactsView;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 import java.io.FileNotFoundException;

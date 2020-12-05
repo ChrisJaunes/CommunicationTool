@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.contacts.ContactsView;
+import com.chrisjaunes.communication.client.contacts.model.ContactsView;
 import com.chrisjaunes.communication.client.myView.ChatTextView;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class TalkAdapter extends  RecyclerView.Adapter<TalkAdapter.ViewHolder>{
     ContactsView contactsView;
     TalkAdapter(final List<TMessage> messageList) {
         this.messageList = messageList;
-        contactsView = ContactsView.ContactsViewDefault();
+        contactsView = ContactsView.CONTACTS_DEFAULT;
     }
     @NonNull
     @Override
@@ -37,20 +37,20 @@ public class TalkAdapter extends  RecyclerView.Adapter<TalkAdapter.ViewHolder>{
         if (contactsView.getAccount().equals(message.getAccount1())) {
             holder.layout_left.setVisibility(View.VISIBLE);
             holder.layout_right.setVisibility(View.GONE);
-            holder.left_avatar.setImageBitmap(contactsView.getAvatar());
+            holder.left_avatar.setImageBitmap(contactsView.getAvatarView());
             holder.left_nickname.setText(contactsView.getNickName());
             holder.left_content.setMyText(message.getContent());
-            holder.left_content.setMyColor(contactsView.getChatTextStyle());
+            //holder.left_content.setMyColor(contactsView.getChatTextStyleView());
         } else {
             holder.layout_left.setVisibility(View.GONE);
             holder.layout_right.setVisibility(View.VISIBLE);
-            holder.right_avatar.setImageBitmap(contactsView.getAvatar());
+            holder.right_avatar.setImageBitmap(contactsView.getAvatarView());
             holder.right_nickname.setText(contactsView.getNickName());
             holder.right_content.setMyText(message.getContent());
-            holder.right_content.setMyColor(contactsView.getChatTextStyle());
+            //holder.right_content.setMyColor(contactsView.getChatTextStyleView());
         }
         Log.v("TalkAdapter", message.getAccount1() + message.getContent());
-        Log.v("TalkAdapter", "" + contactsView.getAvatar());
+        Log.v("TalkAdapter", "" + contactsView.getAvatarView());
     }
     public void addMessageList(@NonNull List<TMessage> newMessageList) {
         for (TMessage tMessage : newMessageList) {

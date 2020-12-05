@@ -15,5 +15,7 @@ public class ChatTextStyleView {
         viewData.bubble_color = Color.parseColor(rawData.bubble_color);
         return viewData;
     }
-
+    public static ChatTextStyleView valueOf(String json) {
+        return valueOf(ChatTextStyle.valueOf(json));
+    }
 }

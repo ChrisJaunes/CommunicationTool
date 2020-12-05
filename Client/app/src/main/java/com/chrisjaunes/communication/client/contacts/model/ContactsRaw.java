@@ -29,13 +29,12 @@ public class ContactsRaw {
         account = Config.ACCOUNT_VISITORS;
     }
 
-    public void setAccount(String account) {
+    public void setAccount(@NonNull String account) {
         this.account = account;
     }
 
-    public String getAccount() {
-        return account;
-    }
+    @NonNull
+    public String getAccount() { return account; }
 
     public void setNickname(String nickname) { this.nickname = nickname; }
 
@@ -59,7 +58,7 @@ public class ContactsRaw {
 
     @NonNull
     @Ignore
-    public static ContactsRaw jsonToContacts(@NonNull JSONObject jsonO) {
+    public static ContactsRaw jsonToContactsRaw(@NonNull JSONObject jsonO) {
         ContactsRaw contactsRaw = new ContactsRaw();
         try {
             if (jsonO.has(Config.STR_ACCOUNT))    contactsRaw.account = jsonO.getString(Config.STR_ACCOUNT);

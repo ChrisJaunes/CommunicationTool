@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountView;
 import com.chrisjaunes.communication.client.account.model.AccountViewManage;
-import com.chrisjaunes.communication.client.contacts.ContactsView;
-import com.chrisjaunes.communication.client.contacts.ContactsViewManage;
+import com.chrisjaunes.communication.client.contacts.model.ContactsView;
+import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 import com.chrisjaunes.communication.client.group.model.GMessage;
 import com.chrisjaunes.communication.client.myView.ChatTextView;
 
@@ -48,17 +48,17 @@ public class GMessageAdapter extends RecyclerView.Adapter<GMessageAdapter.ViewHo
         if (accountView.getAccount().equals(message.getAccount())) {
             holder.layout_left.setVisibility(View.GONE);
             holder.layout_right.setVisibility(View.VISIBLE);
-            holder.right_avatar.setImageBitmap(contactsView.getAvatar());
+            holder.right_avatar.setImageBitmap(contactsView.getAvatarView());
             holder.right_nickname.setText(contactsView.getNickName());
             holder.right_content.setMyText(message.getContent());
             //holder.right_content.setMyColor(accountView.getChatTextStyleView());
         } else{
             holder.layout_left.setVisibility(View.VISIBLE);
             holder.layout_right.setVisibility(View.GONE);
-            holder.left_avatar.setImageBitmap(contactsView.getAvatar());
+            holder.left_avatar.setImageBitmap(contactsView.getAvatarView());
             holder.left_nickname.setText(contactsView.getNickName());
             holder.left_content.setMyText(message.getContent());
-            holder.left_content.setMyColor(contactsView.getChatTextStyle());
+            //holder.left_content.setMyColor(contactsView.getChatTextStyleView());
         }
         Log.v("GroupAdapter", message.getAccount() + message.getContent());
     }

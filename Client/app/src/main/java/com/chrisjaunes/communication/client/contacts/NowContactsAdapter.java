@@ -11,16 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
+import com.chrisjaunes.communication.client.contacts.model.ContactsView;
+import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.NowContactsViewHolder> {
-    List<ContactsRaw> friendList;
-    ItemOnClickListener itemOnClickListener;
+    final List<String> contactsList;
+    final ContactsViewManage contactsViewManage;
+    final ItemOnClickListener itemOnClickListener;
 
-    public NowContactsAdapter(List<ContactsRaw> new_friendList, ItemOnClickListener itemOnClickListener) {
-        this.friendList = new_friendList;
+    public NowContactsAdapter(final ItemOnClickListener itemOnClickListener) {
+        this.contactsList = new ArrayList<>();
+        this.contactsViewManage = ContactsViewManage.getInstance();
         this.itemOnClickListener = itemOnClickListener;
     }
 
@@ -33,18 +38,20 @@ public class NowContactsAdapter extends RecyclerView.Adapter<NowContactsAdapter.
 
     @Override
     public void onBindViewHolder(final NowContactsViewHolder holder, int position) {
-        final ContactsRaw contactsRaw = friendList.get(position);
-        holder.nickName.setText(contactsRaw.getNickname());
-        holder.avatar.setImageBitmap(BitmapHelper.StringToBitmap(contactsRaw.getAvatar()));
-        holder.itemView.setOnClickListener(v -> itemOnClickListener.goToTalk(contactsRaw.getAccount()));
+        final ContactsView contactsView = contactsViewManage.getContactsView(contactsList.get(position));
+        holder.nickName.setText(contactsView.getNickName());
+        holder.avatar.setImageBitmap(contactsView.getAvatarView());
+        holder.itemView.setOnClickListener(v -> itemOnClickListener.goToTalk(contactsView.getAccount()));
     }
 
     @Override
-    public int getItemCount() { return friendList.size(); }
+    public int getItemCount() { return contactsList.size(); }
 
-    public void addFriendItem(int pos, ContactsRaw friendShip){
-        friendList.add(pos, friendShip);
-        notifyItemChanged(pos);
+    public void addContactsViewList(final List<String> contactsStringList) {
+        for (String contactsString : contactsStringList) {
+            contactsList.add(contactsList.size(), contactsString);
+            notifyItemChanged(contactsList.size());
+        }
     }
 
     public interface ItemOnClickListener {

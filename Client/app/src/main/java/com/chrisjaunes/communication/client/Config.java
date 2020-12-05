@@ -39,9 +39,7 @@ public class Config {
     static final public String STR_TIME = "time";
     static final public String STR_OPERATION = "operation";
     static final public String CONTACTS_FRIENDS_AGREE = "agree";
-    static final public int CONTACTS_FRIENDS_AGREE_CODE = 1;
     static final public String CONTACTS_FRIEND_REQUEST = "request";
-    static final public int CONTACTS_FRIENDS_REQUEST_CODE = 2;
     static final public String CONTACTS_FRIENDS_REJECT = "reject";
 
     static final public String BUNDLE_ACCOUNT = "";
