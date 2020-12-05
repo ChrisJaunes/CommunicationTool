@@ -55,37 +55,20 @@ public class ContactsViewModel extends ViewModel {
         return resList;
     }
     public void queryLocalNowContactsList() {
-        new Thread(() -> nowContactsListResult.postValue(updateContactsViewManage(contactsDao.queryNowContactsList()))).start();
+        nowContactsListResult.postValue(updateContactsViewManage(contactsDao.queryNowContactsList()));
     }
     public void queryLocalNewContactsList() {
-        new Thread(() -> newContactsListResult.postValue(updateContactsViewManage(contactsDao.queryNewContactsList()))).start();
+        newContactsListResult.postValue(updateContactsViewManage(contactsDao.queryNewContactsList()));
     }
-    public List<ContactsRaw> updateLocalDataBase(final JSONArray contactsRawJsonList) throws JSONException {
-        final List<ContactsRaw> contactsRawList = new ArrayList<>();
+    public void updateLocalDataBase(final JSONArray contactsRawJsonList) throws JSONException {
         for (int i = 0; i < contactsRawJsonList.length(); ++i) {
             final ContactsRaw contactsRaw = ContactsRaw.jsonToContactsRaw((JSONObject) contactsRawJsonList.get(i));
             if (!contactsDao.isNowContactsExist(contactsRaw.getAccount())) {
                 contactsDao.InsertContacts(contactsRaw);
-                contactsRawList.add(contactsRaw);
             } else {
                 contactsDao.UpdateContacts(contactsRaw);
             }
         }
-        return contactsRawList;
-    }
-    void updateContactsLiveData(final List<ContactsRaw> contactsRawList) {
-        final List<String> nowContactsStringList = new ArrayList<>();
-        final List<String> newContactsStringList = new ArrayList<>();
-        for (ContactsRaw contactsRaw : contactsRawList) {
-            if (ContactsConfig.CONTACTS_FRIENDS_AGREE_CODE == contactsRaw.getOperation()) {
-                nowContactsStringList.add(contactsRaw.getAccount());
-            }
-            if (ContactsConfig.CONTACTS_FRIENDS_REQUEST_CODE == contactsRaw.getOperation()) {
-                newContactsStringList.add(contactsRaw.getAccount());
-            }
-        }
-        nowContactsListResult.postValue(nowContactsStringList);
-        newContactsListResult.postValue(newContactsStringList);
     }
     public void queryServer() {
         //final String lastTime = TimeHelper.getLastTime();
@@ -96,7 +79,7 @@ public class ContactsViewModel extends ViewModel {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 if (!response.isSuccessful()) {
-                    uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, String.valueOf(response.code())));
+                    uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, String.valueOf(response.code())));
                     return;
                 }
                 new Thread(()-> {
@@ -105,8 +88,9 @@ public class ContactsViewModel extends ViewModel {
                         final String apiStatus = apiJson.getString(Config.STR_STATUS);
                         uniApiResult.postValue(new UniApiResult<>(apiStatus, apiStatus));
                         if (ContactsConfig.STATUS_QUERY_SUCCESSFUL.equals(apiStatus)) {
-                            List<ContactsRaw> contactsRawList = updateLocalDataBase((JSONArray) apiJson.get(Config.STR_STATUS_DATA));
-                            updateContactsLiveData(contactsRawList);
+                            updateLocalDataBase((JSONArray) apiJson.get(Config.STR_STATUS_DATA));
+                            queryLocalNowContactsList();
+                            queryLocalNewContactsList();
                         }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -116,7 +100,7 @@ public class ContactsViewModel extends ViewModel {
             }
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, Arrays.toString(t.getStackTrace())));
+                uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, Arrays.toString(t.getStackTrace())));
             }
         });
     }

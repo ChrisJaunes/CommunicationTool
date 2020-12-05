@@ -18,6 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.talk.TalkActivity;
+import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 /**
  * @author ChrisJaunes
@@ -48,19 +49,18 @@ public class NowContactsFragment extends Fragment {
         });
         rvContacts.setAdapter(contactsAdapter);
         rvContacts.setItemAnimator(new DefaultItemAnimator());
-        // DONE contactsViewModel 监听远程服务端的返回结果 监听current contacts list 变化情况
+        // DONE contactsViewModel 监听本地或远程服务端的返回结果 监听current contacts list 变化情况
         contactsViewModel.getUniApiResult().observe(getViewLifecycleOwner(), uniApiResult -> {
             Log.d("NowContacts[uniApiResult]", uniApiResult.status + uniApiResult.data);
-            Toast.makeText(getActivity(), uniApiResult.status, Toast.LENGTH_SHORT).show();
+            if(uniApiResult instanceof UniApiResult.Fail) Log.e("NowContacts[uniApiResult]", ((UniApiResult.Fail) uniApiResult).error);
+            Toast.makeText(getActivity(), uniApiResult.data, Toast.LENGTH_SHORT).show();
             tvSwipeRefresh.setVisibility(View.GONE);
             layoutSwipeRefresh.setRefreshing(false);
         });
         contactsViewModel.getNowContactsListResult().observe(getViewLifecycleOwner(), stringContactsList -> {
-            Log.d("NowContacts[nowContactsListResult]", "contactsList" + stringContactsList + "size : " + stringContactsList.size());
+            Log.d("NowContacts[nowContactsListResult]", "contactsList" + stringContactsList + " size : " + stringContactsList.size());
             contactsAdapter.setContactsStringList(stringContactsList);
         });
-        // DONE 请求本地缓存数据库
-        new Thread(contactsViewModel::queryLocalNowContactsList).start();
         return view;
     }
 }

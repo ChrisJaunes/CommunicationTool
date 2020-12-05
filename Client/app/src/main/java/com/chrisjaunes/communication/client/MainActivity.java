@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         drawables = chatGroupRadioButton.getCompoundDrawables();
         drawables[1].setBounds(0,0,100,100);
         chatGroupRadioButton.setCompoundDrawables(drawables[0],drawables[1],drawables[2],drawables[3]);
+
+        new Thread(contactsViewModel::queryLocalNowContactsList).start();
     }
 
     @Override
