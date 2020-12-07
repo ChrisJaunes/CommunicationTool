@@ -1,4 +1,4 @@
-﻿POST http://localhost:8080/communicationServer/account/login?account=123&password=123
+﻿POST http://localhost:8080/communicationServer/account/login?account=111&password=111
 
 > {%
 client.global.set("host", "localhost:8080/communicationServer/");

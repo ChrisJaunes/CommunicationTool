@@ -26,14 +26,6 @@ CREATE TABLE IF NOT EXISTS `test` (
     `test_id` int PRIMARY KEY,
     `test_content` varchar(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-LOCK TABLES `test` WRITE;
-INSERT INTO `test` VALUES
-('111','111'),
-('222','222'),
-('333','333'),
-('444','444'),
-('555','555');
-UNLOCK TABLES;
 
 
 DROP TABLE IF EXISTS `account`;
@@ -44,12 +36,3 @@ CREATE TABLE `account` (
   `avatar` longtext DEFAULT NULL,
   `text_style` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-LOCK TABLES `account` WRITE;
-INSERT INTO `account` VALUES
-    ('111','111','111', NULL, NULL),
-    ('222','222','222', NULL, NULL),
-    ('333','333','333', NULL, NULL),
-    ('444','444','444', NULL, NULL),
-    ('555','555','555', NULL, NULL);
-UNLOCK TABLES;

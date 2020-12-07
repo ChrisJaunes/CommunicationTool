@@ -4,24 +4,24 @@
   <OriginalElement />
   <nodes>
     <node x="0.0" y="0.0">com.chrisjaunes.communication.server.utils.DBHelper</node>
-    <node x="420.0" y="1112.0">com.chrisjaunes.communication.server.utils.TimeHelper</node>
-    <node x="0.0" y="965.0">com.chrisjaunes.communication.server.talk.Query1</node>
-    <node x="0.0" y="671.0">com.chrisjaunes.communication.server.group.AddMessage</node>
-    <node x="420.0" y="671.0">com.chrisjaunes.communication.server.group.Query</node>
+    <node x="420.0" y="1135.0">com.chrisjaunes.communication.server.utils.TimeHelper</node>
+    <node x="420.0" y="377.0">com.chrisjaunes.communication.server.talk.Query1</node>
+    <node x="0.0" y="547.0">com.chrisjaunes.communication.server.group.AddMessage</node>
+    <node x="420.0" y="547.0">com.chrisjaunes.communication.server.group.Query</node>
     <node x="412.0" y="0.0">com.chrisjaunes.communication.server.account.Login</node>
-    <node x="0.0" y="524.0">com.chrisjaunes.communication.server.contacts.Update</node>
+    <node x="0.0" y="694.0">com.chrisjaunes.communication.server.contacts.Update</node>
     <node x="832.0" y="0.0">com.chrisjaunes.communication.server.account.Register</node>
-    <node x="0.0" y="818.0">com.chrisjaunes.communication.server.group.QueryMessage</node>
-    <node x="420.0" y="965.0">com.chrisjaunes.communication.server.talk.Update</node>
-    <node x="420.0" y="818.0">com.chrisjaunes.communication.server.talk.Query</node>
-    <node x="420.0" y="377.0">com.chrisjaunes.communication.server.contacts.Query</node>
-    <node x="420.0" y="524.0">com.chrisjaunes.communication.server.group.Add</node>
-    <node x="0.0" y="377.0">com.chrisjaunes.communication.server.account.UpdateMessage</node>
-    <node x="0.0" y="1112.0">com.chrisjaunes.communication.server.TestServlet</node>
+    <node x="420.0" y="694.0">com.chrisjaunes.communication.server.group.QueryMessage</node>
+    <node x="0.0" y="377.0">com.chrisjaunes.communication.server.contacts.Query</node>
+    <node x="0.0" y="841.0">com.chrisjaunes.communication.server.talk.Query</node>
+    <node x="420.0" y="841.0">com.chrisjaunes.communication.server.talk.Update</node>
+    <node x="0.0" y="988.0">com.chrisjaunes.communication.server.group.Add</node>
+    <node x="420.0" y="988.0">com.chrisjaunes.communication.server.account.UpdateMessage</node>
+    <node x="0.0" y="1135.0">com.chrisjaunes.communication.server.TestServlet</node>
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="418.6666666666666" y="718.4444444444442" />
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="578.3571428571428" y="455.33333333333326" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>

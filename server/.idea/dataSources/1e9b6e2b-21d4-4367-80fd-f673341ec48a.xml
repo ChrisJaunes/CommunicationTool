@@ -1105,11 +1105,15 @@ account2</ColNames>
       <ColNames>account1</ColNames>
       <RefTableName>account</RefTableName>
       <RefColNames>account</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="337" parent="284" name="contacts_ibfk_2">
       <ColNames>account2</ColNames>
       <RefTableName>account</RefTableName>
       <RefColNames>account</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="338" parent="285" name="group">
       <Position>1</Position>
