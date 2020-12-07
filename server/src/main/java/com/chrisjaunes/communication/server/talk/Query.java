@@ -65,7 +65,7 @@ public class Query extends HttpServlet {
 				ResultSet result = DBHelper.executeQuery(sqlQuery, params);
 				JSONArray jsonA = new JSONArray();
 				DBHelper.getResToJsonArray(result, jsonA);
-				resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_SUCCESSFUL);
+				resJson.put(Config.STR_STATUS, Config.STATUS_SUCCESSFUL);
 				resJson.put(Config.STR_STATUS_DATA, jsonA);
 				result.close();
 			} catch (SQLException e) {

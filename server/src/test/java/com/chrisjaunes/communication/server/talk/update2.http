@@ -13,7 +13,6 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:00:00&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-    client.assert(response.body.status === "successful");
 });
 %}
 

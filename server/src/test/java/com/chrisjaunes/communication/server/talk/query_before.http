@@ -13,7 +13,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:00:00&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -24,7 +24,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:00:01&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -35,7 +35,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:03:00&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -46,7 +46,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:03:04&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -57,7 +57,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:03:05&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -68,7 +68,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 08:03:00&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -79,7 +79,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 08:00:00&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -99,7 +99,7 @@ POST http://{{host}}/talk/update?account2=111&send_time=2020-11-27 00:03:00&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -110,7 +110,7 @@ POST http://{{host}}/talk/update?account2=111&send_time=2020-11-27 00:03:02&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -121,7 +121,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:03:03&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
@@ -132,7 +132,7 @@ POST http://{{host}}/talk/update?account2=222&send_time=2020-11-27 00:03:04&cont
 client.test("Request executed successfully", function() {
   client.assert(response.status === 200, "Response status is not 200");
   client.assert(response.contentType.mimeType === "application/json", "Expected 'application/json' but received");
-  client.assert(response.body.status === "successful");
+  client.assert(response.body.status === "update successful");
 });
 %}
 
