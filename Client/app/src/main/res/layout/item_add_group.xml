@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/create_group_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    <ImageView
+        android:layout_gravity="left"
+        android:layout_marginStart="20dp"
+        android:id="@+id/create_group_person_image"
+        android:gravity="left"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        tools:ignore="RtlHardcoded" />
+    <TextView
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/create_group_person_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:ignore="RtlHardcoded" />
+</LinearLayout>

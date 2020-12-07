@@ -26,6 +26,7 @@ import com.chrisjaunes.communication.client.contacts.AddContactsFragment;
 import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
 import com.chrisjaunes.communication.client.contacts.NewContactsFragment;
 import com.chrisjaunes.communication.client.contacts.NowContactsFragment;
+import com.chrisjaunes.communication.client.group.GAddFragment;
 import com.chrisjaunes.communication.client.group.GListFragment;
 import com.chrisjaunes.communication.client.utils.DialogHelper;
 import com.google.android.material.navigation.NavigationView;
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     private final NowContactsFragment nowContactsFragment = new NowContactsFragment();
     private final NewContactsFragment newContactsFragment = new NewContactsFragment();
     private final AddContactsFragment addContactsFragment = new AddContactsFragment();
+    private final GAddFragment gAddFragment = new GAddFragment();
     @SuppressLint("NonConstantResourceId")
     private final Toolbar.OnMenuItemClickListener toolbarOnMenuItemClickListener = item -> {
         switch (item.getItemId()) {
@@ -130,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 updateFragment(addContactsFragment);
                 break;
             case  R.id.action_create_group:
-                Toast.makeText(getApplicationContext(),"create",Toast.LENGTH_SHORT).show();
+                updateFragment(gAddFragment);
                 break;
             default:break;
         }
