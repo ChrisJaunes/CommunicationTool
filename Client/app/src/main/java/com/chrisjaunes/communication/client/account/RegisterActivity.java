@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
         // DONE view model
         registerViewModel.getResult().observe(this, stringUniApiResult -> {
-            Toast.makeText(getApplicationContext(),stringUniApiResult.data,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"" + stringUniApiResult.data,Toast.LENGTH_SHORT).show();
             if (stringUniApiResult instanceof UniApiResult.Fail) {
                 Log.e("register", ((UniApiResult.Fail) stringUniApiResult).error);
             }

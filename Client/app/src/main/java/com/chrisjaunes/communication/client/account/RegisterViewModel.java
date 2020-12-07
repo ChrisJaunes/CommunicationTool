@@ -65,10 +65,11 @@ public class RegisterViewModel extends ViewModel {
                     result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, String.format("错误返回代码 %d", response.code())));
                     return;
                 }
+                assert response.body() != null;
                 String jsonS = response.body().string();
                 Gson gson = new Gson();
                 UniApiResult<String> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<String>>() {}.getType());
-                result.postValue(res);
+                result.postValue(new UniApiResult<>(res.status, res.status));
             }
         });
     }
