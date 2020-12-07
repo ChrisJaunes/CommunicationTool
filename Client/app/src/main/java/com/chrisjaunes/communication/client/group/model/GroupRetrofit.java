@@ -13,12 +13,16 @@ import retrofit2.http.POST;
 
 public interface GroupRetrofit {
     @FormUrlEncoded
-    @POST("QueryGroupMessages")
-    Flowable<UniApiResult<List<GMessage>>> queryMessage(@Field("groupId") String groupId, @Field("time") String time);
+    @POST(GroupConfig.URL_GROUP_QUERY_MESSAGE)
+    Flowable<UniApiResult<List<GMessage>>> queryMessage(@Field(GroupConfig.STR_GROUP) String groupId,
+                                                        @Field(GroupConfig.STR_TIME) String time);
 
     @FormUrlEncoded
-    @POST("AddGroupMessage")
-    Flowable<UniApiResult<String>> addMessage(@Field("groupId") String groupId, @Field("time") String time, @Field("1") int type, @Field("content") String content);
+    @POST(GroupConfig.URL_GROUP_ADD_MESSAGE)
+    Flowable<UniApiResult<String>> addMessage(@Field(GroupConfig.STR_GROUP) String groupId,
+                                              @Field(GroupConfig.STR_SEND_TIME) String time,
+                                              @Field(GroupConfig.STR_CONTENT_TYPE) int type,
+                                              @Field(GroupConfig.STR_CONTENT) String content);
 
     @POST(GroupConfig.URL_GROUP_QUERY)
     Flowable<UniApiResult<List<GInfo>>> query();

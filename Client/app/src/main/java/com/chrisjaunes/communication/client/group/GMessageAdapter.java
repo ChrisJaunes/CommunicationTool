@@ -63,6 +63,7 @@ public class GMessageAdapter extends RecyclerView.Adapter<GMessageAdapter.ViewHo
         Log.v("GroupAdapter", message.getAccount() + message.getContent());
     }
     public void addMessageList(@NonNull List<GMessage> newMessageList) {
+        messageList.clear();
         for (GMessage gMessage : newMessageList) {
             messageList.add(messageList.size(), gMessage);
             notifyItemChanged(messageList.size());

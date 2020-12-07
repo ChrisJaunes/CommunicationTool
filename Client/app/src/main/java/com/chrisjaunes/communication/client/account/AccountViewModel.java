@@ -52,14 +52,14 @@ public class AccountViewModel extends ViewModel {
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 result.postValue(new UniApiResult.Fail(Config.ERROR_NET, Arrays.toString(e.getStackTrace())));
                 Log.e("Login", Config.ERROR_NET);
             }
 
             @SuppressLint("DefaultLocale")
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (!response.isSuccessful()) {
                     result.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, String.format("错误返回代码 %d", response.code())));
                     Log.e("Login", Config.ERROR_UNKNOWN + response.code());
@@ -109,8 +109,5 @@ public class AccountViewModel extends ViewModel {
                 Log.v("Login", res.status);
             }
         });
-    }
-    public void logout() {
-
     }
 }

@@ -1,5 +1,7 @@
 package com.chrisjaunes.communication.client.group;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
+import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.group.model.GMessage;
 import com.chrisjaunes.communication.client.group.model.GroupDao;
 import com.chrisjaunes.communication.client.group.model.GroupRetrofit;
@@ -15,6 +18,8 @@ import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -51,9 +56,16 @@ public class GMessageViewModel extends ViewModel {
         this.group_id = group_id;
         this.compositeDisposable = new CompositeDisposable();
     }
+    private void updateGMessageViewManage(List<GMessage> gMessageList) {
+        for(GMessage message : gMessageList) {
+            Log.d(">>>", message.toString());
+            gMessageDao.InsertMessage(message);
+        }
+    }
     public void queryLocalMessageList() {
         new Thread(() -> GMessageList.postValue(gMessageDao.queryMessageAboutGroup(group_id))).start();
     }
+    // TODO
     public void queryServerMessageList() {
         String requestTime = "1970-1-1 00:00:00";
         if (compositeDisposable != null && ! compositeDisposable.isDisposed()) {
@@ -68,23 +80,24 @@ public class GMessageViewModel extends ViewModel {
                     .subscribeWith(new ResourceSubscriber<UniApiResult<List<GMessage>>>() {
                         @Override
                         public void onNext(UniApiResult<List<GMessage>> listUniApiResult) {
-                            //uniApiResult.postValue(new listUniApiResult.status);
+                            uniApiResult.postValue(new UniApiResult<>(listUniApiResult.status, listUniApiResult.status));
+                            new Thread(() -> {
+                                updateGMessageViewManage(listUniApiResult.data);
+                                queryLocalMessageList();
+                            }).start();
                         }
-
                         @Override
                         public void onError(Throwable t) {
-
+                            t.printStackTrace();
+                            uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, Arrays.toString(t.getStackTrace())));
                         }
-
                         @Override
-                        public void onComplete() {
-
-                        }
+                        public void onComplete() { }
                     })
             );
         }
     }
-    // 发送消息
+    // TODO 发送消息
     public void addMessage(final int content_type, final String content) {
         String sendTime = TimeHelper.getNowTime();
         if (compositeDisposable != null && ! compositeDisposable.isDisposed()) {
@@ -100,12 +113,12 @@ public class GMessageViewModel extends ViewModel {
                     .subscribeWith(new ResourceSubscriber<UniApiResult<String>>() {
                         @Override
                         public void onNext(UniApiResult<String> stringUniApiResult) {
-                            uniApiResult.postValue(stringUniApiResult);
+                            uniApiResult.postValue(new UniApiResult<>(stringUniApiResult.status, stringUniApiResult.status));
+                            queryServerMessageList();
                         }
                         @Override
                         public void onError(Throwable t) {
-                            t.printStackTrace();
-                            uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, ""));
+                            uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, Arrays.toString(t.getStackTrace())));
                         }
                         @Override
                         public void onComplete() { }
@@ -116,8 +129,8 @@ public class GMessageViewModel extends ViewModel {
     @SuppressWarnings("unchecked")
     static class Factory implements ViewModelProvider.Factory{
         String group_id;
-        Factory(String group_id) {
-            this.group_id = group_id;
+        Factory(int group_id) {
+            this.group_id = String.valueOf(group_id);
         }
         @NonNull
         @Override

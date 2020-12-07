@@ -38,11 +38,12 @@ public class GListFragment extends Fragment {
         // DONE RecycleView控件，更新current Contacts列表，Adapter支持点击跳转
         final RecyclerView rvGroup = view.findViewById(R.id.rv_group);
         rvGroup.setLayoutManager(new LinearLayoutManager(getActivity()));
-        final GListAdapter gListAdapter = new GListAdapter((group) -> {
+        final GListAdapter gListAdapter = new GListAdapter((group,groupName) -> {
             Log.d("NowGroup", "" + group);
             Intent intent = new Intent(getActivity(), GMessageActivity.class);
             Bundle bundle = new Bundle();
-            //bundle.putString(GroupConfig.STR_GROUP, group);
+            bundle.putInt(GroupConfig.STR_GROUP, group);
+            bundle.putString(GroupConfig.STR_GROUP_NAME, groupName);
             intent.putExtras(bundle);
             getActivity().startActivity(intent);
         });

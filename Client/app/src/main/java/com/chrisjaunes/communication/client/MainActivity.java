@@ -1,13 +1,5 @@
 package com.chrisjaunes.communication.client;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,18 +8,31 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.chrisjaunes.communication.client.account.AccountViewModel;
+import com.chrisjaunes.communication.client.account.LoginActivity;
+import com.chrisjaunes.communication.client.account.model.AccountViewManage;
 import com.chrisjaunes.communication.client.contacts.AddContactsFragment;
 import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
 import com.chrisjaunes.communication.client.contacts.NewContactsFragment;
 import com.chrisjaunes.communication.client.contacts.NowContactsFragment;
 import com.chrisjaunes.communication.client.group.GAddFragment;
 import com.chrisjaunes.communication.client.group.GListFragment;
+import com.chrisjaunes.communication.client.group.GListViewModel;
 import com.chrisjaunes.communication.client.utils.DialogHelper;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private final static int PHOTO_REQUEST_GALLERY = 1;
 
     private AccountViewModel accountViewModel;
-    private ContactsViewModel contactsViewModel;
+
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -52,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i("MainActivity", stringUniApiResult.status);
             Toast.makeText(MainActivity.this, stringUniApiResult.status, Toast.LENGTH_SHORT).show();
         });
-        contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        final ContactsViewModel contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        final GListViewModel gListViewModel = new ViewModelProvider(this).get(GListViewModel.class);
 
         final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         final androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -73,9 +79,18 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
         navigationView.getMenu().getItem(MENU_LOGOUT).setOnMenuItemClickListener(item -> {
-            new DialogHelper.logoutDialog(MainActivity.this, R.style.LogoutDialog, accountViewModel::logout).show();
+            new DialogHelper.logoutDialog(MainActivity.this, R.style.LogoutDialog, () -> {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }).show();
             return true;
         });
+        View navigationHeadView = navigationView.getHeaderView(0);
+        ImageView iv_avatar = navigationHeadView.findViewById(R.id.iv_avatar);
+        iv_avatar.setImageBitmap(AccountViewManage.getInstance().getAccountView().getAvatarView());
+        TextView tv_nickname = navigationHeadView.findViewById(R.id.tv_nickname);
+        tv_nickname.setText(AccountViewManage.getInstance().getAccountView().getNickName());
 
         final RadioGroup radioGroup = findViewById(R.id.radio_group);
         radioGroup.setOnCheckedChangeListener(radioGroupOnCheckedChangeListener);
@@ -97,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
         chatGroupRadioButton.setCompoundDrawables(drawables[0],drawables[1],drawables[2],drawables[3]);
 
         new Thread(contactsViewModel::queryLocalNowContactsList).start();
-        new Thread(contactsViewModel::queryLocalNowContactsList).start();
+        new Thread(contactsViewModel::queryLocalNewContactsList).start();
+        new Thread(contactsViewModel::queryLocalNewContactsList).start();
+        new Thread(gListViewModel::queryServer).start();
     }
 
     @Override

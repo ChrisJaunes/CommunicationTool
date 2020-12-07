@@ -22,8 +22,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.group.model.GMessage;
 import com.chrisjaunes.communication.client.group.model.GroupConfig;
+import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import java.io.FileNotFoundException;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,12 +37,15 @@ public class GMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_message);
         Bundle intentBundle = getIntent().getExtras();
-        String group = intentBundle.getString(GroupConfig.STR_GROUP);
+        int group = intentBundle.getInt(GroupConfig.STR_GROUP);
+        String groupName = intentBundle.getString(GroupConfig.STR_GROUP_NAME);
         // DONE TalkViewModel : lifeOwner this
         groupViewModel = new ViewModelProvider(this, new GMessageViewModel.Factory(group)).get(GMessageViewModel.class);
         // TODO toolbar : set toolbar(back、menu、title)
         final Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
+        final TextView toolBarTitle = findViewById(R.id.toolbar_title);
+        toolBarTitle.setText(groupName);
 //        toolbar.inflateMenu(R.menu.group_message);
 //        toolbar.setOnMenuItemClickListener(toolbarOnMenuItemClickListener);
         // DONE SwipeRefreshLayout : queryServer when swipe refresh
@@ -77,7 +82,9 @@ public class GMessageActivity extends AppCompatActivity {
         // DONE viewModel : set Observe and queryLocalDataBase scrollToEnd
         groupViewModel.getUniApiResult().observe(this, stringUniApiResult -> {
             Log.v("Group", stringUniApiResult.status + stringUniApiResult.data);
-            Toast.makeText(GMessageActivity.this, stringUniApiResult.status, Toast.LENGTH_SHORT).show();
+            Toast.makeText(GMessageActivity.this, stringUniApiResult.data, Toast.LENGTH_SHORT).show();
+            if (stringUniApiResult instanceof UniApiResult.Fail)
+                Log.e("Group[uniApiResult]", ((UniApiResult.Fail) stringUniApiResult).error);
             tvSwipeRefresh.setVisibility(View.GONE);
             layoutSwipeRefresh.setRefreshing(false);
             tvSendText.setEnabled(true);
@@ -102,7 +109,7 @@ public class GMessageActivity extends AppCompatActivity {
                     Log.d("Talk", " return chose bitmap is null");
                     return;
                 }
-                //groupViewModel.addMessage(GroupViewModel.STR_CONTENT_TYPE_IMG, BitmapHelper.BitmapToString(avatar));
+//                groupViewModel.addMessage(GroupViewModel.STR_CONTENT_TYPE_IMG, BitmapHelper.BitmapToString(avatar));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

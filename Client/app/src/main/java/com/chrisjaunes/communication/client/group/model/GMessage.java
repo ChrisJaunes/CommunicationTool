@@ -8,6 +8,7 @@ import androidx.room.Ignore;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.group.GMessageViewModel;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +21,9 @@ public class GMessage {
     @NonNull
     private String account;
     @NonNull
+    @SerializedName("send_time")
     private String sendTime;
+    @SerializedName("content_type")
     private int contentType;
     private String content;
 

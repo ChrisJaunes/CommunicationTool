@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"/>
             <RadioButton
                 android:id="@+id/radio_button_newfriend"
-                android:text="新好友"
+                android:text="机器人"
                 android:textStyle="bold"
                 android:button="@null"
                 android:gravity="center"

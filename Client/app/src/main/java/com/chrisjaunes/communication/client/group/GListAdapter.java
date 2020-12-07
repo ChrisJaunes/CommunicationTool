@@ -37,7 +37,7 @@ public class GListAdapter extends RecyclerView.Adapter<GListAdapter.ViewHolder> 
         final GInfoView gInfoView = gInfoViewList.get(position);
         holder.nickName.setText(gInfoView.getGroupName());
         holder.avatar.setImageBitmap(gInfoView.getAvatar());
-        holder.itemView.setOnClickListener(v -> itemOnClickListener.goToGroup(gInfoView.getGroup()));
+        holder.itemView.setOnClickListener(v -> itemOnClickListener.goToGroup(gInfoView.getGroup(), gInfoView.getGroupName()));
     }
 
     @Override
@@ -55,6 +55,7 @@ public class GListAdapter extends RecyclerView.Adapter<GListAdapter.ViewHolder> 
     }
 
     public void addGInfoList(final List<GInfo> gInfoList) {
+        gInfoViewList.clear();
         for(GInfo g : gInfoList) {
             gInfoViewList.add(new GInfoView(g));
             notifyItemChanged(gInfoViewList.size());
@@ -62,6 +63,6 @@ public class GListAdapter extends RecyclerView.Adapter<GListAdapter.ViewHolder> 
     }
 
     public interface ItemOnClickListener {
-        void goToGroup(int group);
+        void goToGroup(int group, String group_name);
     }
 }
