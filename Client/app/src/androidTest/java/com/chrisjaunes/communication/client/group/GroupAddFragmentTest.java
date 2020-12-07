@@ -30,10 +30,6 @@ public class GroupAddFragmentTest {
         Thread.sleep(100);
         onView(withId(R.id.radio_button_chatgroup)).perform(click());
         onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
-        Thread.sleep(100);
-        onView(withId(R.id.rv_contacts)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-        Thread.sleep(100);
-        onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
         Thread.sleep(1000);
     }
     @Test
@@ -45,10 +41,6 @@ public class GroupAddFragmentTest {
         Thread.sleep(100);
         onView(withId(R.id.radio_button_chatgroup)).perform(click());
         onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
-        Thread.sleep(100);
-        onView(withId(R.id.rv_contacts)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
-        Thread.sleep(100);
-        onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
         Thread.sleep(1000);
     }
     @Test
@@ -58,6 +50,8 @@ public class GroupAddFragmentTest {
         onView(withId(R.id.et_password)).perform(typeText("444"));
         onView(withId(R.id.btn_login)).perform(click());
         Thread.sleep(100);
+        onView(withId(R.id.rb_now_contacts)).perform(click());
+        onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
         openContextualActionModeOverflowMenu();
         Thread.sleep(100);
         onData(allOf(is(instanceOf(androidx.appcompat.view.menu.MenuItemImpl.class)))).atPosition(2).perform(click());
@@ -76,10 +70,6 @@ public class GroupAddFragmentTest {
         Thread.sleep(100);
         onView(withId(R.id.radio_button_chatgroup)).perform(click());
         onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
-        Thread.sleep(100);
-        onView(withId(R.id.rv_contacts)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
-        Thread.sleep(100);
-        onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
         Thread.sleep(1000);
     }
     @Test
@@ -90,10 +80,6 @@ public class GroupAddFragmentTest {
         onView(withId(R.id.btn_login)).perform(click());
         Thread.sleep(100);
         onView(withId(R.id.radio_button_chatgroup)).perform(click());
-        onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
-        Thread.sleep(100);
-        onView(withId(R.id.rv_contacts)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
-        Thread.sleep(100);
         onView(withId(R.id.layout_swipe_refresh)).perform(swipeDown());
         Thread.sleep(1000);
     }
