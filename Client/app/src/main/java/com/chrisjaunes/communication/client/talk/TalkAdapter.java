@@ -12,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
+import com.chrisjaunes.communication.client.account.model.AccountView;
+import com.chrisjaunes.communication.client.account.model.AccountViewManage;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
+import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 import com.chrisjaunes.communication.client.myView.ChatTextView;
 
 import java.util.List;
@@ -20,8 +23,10 @@ import java.util.List;
 public class TalkAdapter extends  RecyclerView.Adapter<TalkAdapter.ViewHolder>{
     final private List<TMessage> messageList;
     ContactsView contactsView;
+    final AccountView accountView;
     TalkAdapter(final List<TMessage> messageList) {
         this.messageList = messageList;
+        accountView = AccountViewManage.getInstance().getAccountView();
         contactsView = ContactsView.CONTACTS_DEFAULT;
     }
     @NonNull
@@ -34,20 +39,20 @@ public class TalkAdapter extends  RecyclerView.Adapter<TalkAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TMessage message = messageList.get(position);
         holder.time.setText(message.getSendTime());
-        if (contactsView.getAccount().equals(message.getAccount1())) {
+        if (accountView.getAccount().equals(message.getAccount1())) {
+            holder.layout_left.setVisibility(View.GONE);
+            holder.layout_right.setVisibility(View.VISIBLE);
+            holder.right_avatar.setImageBitmap(accountView.getAvatarView());
+            holder.right_nickname.setText(accountView.getNickName());
+            holder.right_content.setMyText(message.getContent());
+            holder.right_content.setMyColor(accountView.getChatTextStyleView());
+        } else {
             holder.layout_left.setVisibility(View.VISIBLE);
             holder.layout_right.setVisibility(View.GONE);
             holder.left_avatar.setImageBitmap(contactsView.getAvatarView());
             holder.left_nickname.setText(contactsView.getNickName());
             holder.left_content.setMyText(message.getContent());
-            //holder.left_content.setMyColor(contactsView.getChatTextStyleView());
-        } else {
-            holder.layout_left.setVisibility(View.GONE);
-            holder.layout_right.setVisibility(View.VISIBLE);
-            holder.right_avatar.setImageBitmap(contactsView.getAvatarView());
-            holder.right_nickname.setText(contactsView.getNickName());
-            holder.right_content.setMyText(message.getContent());
-            //holder.right_content.setMyColor(contactsView.getChatTextStyleView());
+            holder.left_content.setMyColor(contactsView.getChatTextStyleView());
         }
         Log.v("TalkAdapter", message.getAccount1() + message.getContent());
         Log.v("TalkAdapter", "" + contactsView.getAvatarView());

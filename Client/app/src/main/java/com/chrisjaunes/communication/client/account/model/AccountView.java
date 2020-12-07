@@ -39,6 +39,9 @@ public class AccountView {
     public String getNickName() {
         return accountRaw.nickname;
     }
+    public void setAvatarView(final Bitmap bitmap) {
+        this.avatarView = bitmap;
+    }
     public Bitmap getAvatarView() {
         return avatarView;
     }

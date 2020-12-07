@@ -236,4 +236,12 @@ public class ChatTextView extends View {
         Log.d("TalkAdapterX", "" + this.text_color);
         invalidate();
     }
+    // 更改颜色
+    public void setMyColor(ChatTextStyleView chatTextStyleView){
+        this.text_color = chatTextStyleView.text_color;
+        this.border_color = chatTextStyleView.border_color;
+        this.bubble_color =  chatTextStyleView.bubble_color;
+        invalidate();
+    }
+
 }
