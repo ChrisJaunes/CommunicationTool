@@ -45,7 +45,7 @@ public class NewContactsFragment extends Fragment {
         // DONE RecycleView控件，更新current Contacts列表，Adapter支持点击跳转
         final RecyclerView rvContacts = view.findViewById(R.id.rv_contacts);
         rvContacts.setLayoutManager(new LinearLayoutManager(getActivity()));
-        final NewContactsAdapter contactsAdapter = new NewContactsAdapter(contactsViewModel::handleRequestFriend);
+        final NewContactsAdapter contactsAdapter = new NewContactsAdapter(contactsViewModel::handleRequestContacts);
         rvContacts.setAdapter(contactsAdapter);
         rvContacts.setItemAnimator(new DefaultItemAnimator());
         // DONE contactsViewModel 监听远程服务端的返回结果 监听current contacts list 变化情况

@@ -23,8 +23,6 @@ import java.util.logging.Logger;
 public class Update extends HttpServlet {
     static final Logger Log = Logger.getLogger("Contacts Update");
 
-
-
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -37,30 +35,38 @@ public class Update extends HttpServlet {
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     * account2 : request account about this account
+     * requestTime : time when request send
+     * such as : login_account:111; ?account2=222&time=2020:11:27&operation=request
+     * @return : Config.STATUS_ACCOUNT_NOT_LOGIN
+     *           Config.STATUS_DB_ILLEGAL_PARAMETER
+     *           Config.STATUS_SUCCESSFUL
+     * @unit_test : test -> group
+     * @status : XXX
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
         String account2 = request.getParameter(ContactsConfig.STR_CONTACTS_ACCOUNT);
-        String requestTime = request.getParameter(ContactsConfig.STR_TIME);
-        String requestOperation = request.getParameter(ContactsConfig.STR_OPERATION);
-        Log.info(String.format("account : %s, account2 : %s, time : %s, operation : %s", account, account2, requestTime, requestOperation));
+        String sendTime = request.getParameter(ContactsConfig.STR_TIME);
+        String sendOperation = request.getParameter(ContactsConfig.STR_OPERATION);
+        Log.info(String.format("account : %s, account2 : %s, time : %s, operation : %s", account, account2, sendTime, sendOperation));
 
         JSONObject resJson = new JSONObject();
         if (null == account) {
             resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-        } else if (null == account2 || null == requestTime || null == requestOperation) {
+        } else if (null == account2 || null == sendTime || null == sendOperation) {
             resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
         } else {
-            requestTime = TimeHelper.timeToStdTime(requestTime);
+            sendTime = TimeHelper.timeToStdTime(sendTime);
             String sqlOpera = null;
             List<Object> params = new ArrayList<>();
-            switch (requestOperation) {
+            switch (sendOperation) {
                 case ContactsConfig.CONTACTS_FRIEND_REQUEST : {
                     sqlOpera = String.format("insert into `%s` (`%s`, `%s`, `%s`, `%s`) value(?, ?, ?, ?)",
                             ContactsConfig.TABLE_CONTACTS, ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_ACCOUNT2, ContactsConfig.STR_TIME, ContactsConfig.STR_OPERATION);
                     params.add(account);params.add(account2);
-                    params.add(requestTime);
+                    params.add(sendTime);
                     params.add(ContactsConfig.CONTACTS_FRIENDS_REQUEST_CODE);
                     break;
                 }
@@ -70,7 +76,7 @@ public class Update extends HttpServlet {
                             ContactsConfig.TABLE_CONTACTS,
                             ContactsConfig.STR_TIME, ContactsConfig.STR_OPERATION,
                             ContactsConfig.STR_ACCOUNT1, ContactsConfig.STR_ACCOUNT2);
-                    params.add(requestTime);
+                    params.add(sendTime);
                     params.add(ContactsConfig.CONTACTS_FRIENDS_AGREE_CODE);
                     params.add(account2);params.add(account);
                     break;

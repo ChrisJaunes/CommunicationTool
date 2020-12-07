@@ -2,10 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_query_new_contacts_list"
-        android:title="添加好友"
+        android:title="新的联系人"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_add_friend"
+        android:id="@+id/action_add_contacts"
         android:title="添加好友"
         app:showAsAction="never" />
     <item

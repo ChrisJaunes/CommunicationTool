@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chrisjaunes.communication.client.account.AccountViewModel;
+import com.chrisjaunes.communication.client.contacts.AddContactsFragment;
 import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
 import com.chrisjaunes.communication.client.contacts.NewContactsFragment;
 import com.chrisjaunes.communication.client.contacts.NowContactsFragment;
@@ -118,15 +119,15 @@ public class MainActivity extends AppCompatActivity {
     }
     private final NowContactsFragment nowContactsFragment = new NowContactsFragment();
     private final NewContactsFragment newContactsFragment = new NewContactsFragment();
+    private final AddContactsFragment addContactsFragment = new AddContactsFragment();
     @SuppressLint("NonConstantResourceId")
     private final Toolbar.OnMenuItemClickListener toolbarOnMenuItemClickListener = item -> {
         switch (item.getItemId()) {
             case R.id.action_query_new_contacts_list:
                 updateFragment(newContactsFragment);
                 break;
-            case  R.id.action_add_friend:
-                Log.i("MainActivity", "add friend");
-                Toast.makeText(getApplicationContext(),"add",Toast.LENGTH_SHORT).show();
+            case  R.id.action_add_contacts:
+                updateFragment(addContactsFragment);
                 break;
             case  R.id.action_create_group:
                 Toast.makeText(getApplicationContext(),"create",Toast.LENGTH_SHORT).show();
@@ -144,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.rb_now_contacts:
                 updateFragment(nowContactsFragment);
                 toolBarTitle.setText("我的好友");
-                //contactsViewModel.queryLocalNowContactsList();
                 break;
             case R.id.radio_button_newfriend:
                 //updateFragment(newFriendsFragment);

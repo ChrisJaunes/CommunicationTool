@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,7 +109,7 @@ public class ContactsViewModel extends ViewModel {
             }
         });
     }
-    public void handleRequestFriend(final String account, final String operation) {
+    public void handleRequestContacts(final String account, final String operation) {
         final String time = TimeHelper.getNowTime();
         final Retrofit retrofit = HttpHelper.getRetrofitBuilder().baseUrl(Config.URL_BASE).build();
         final Call<ResponseBody> call = retrofit.create(ContactsRetrofit.class).update(account, time, operation);
@@ -118,6 +122,7 @@ public class ContactsViewModel extends ViewModel {
                 }
                 new Thread(()-> {
                     try {
+                        assert response.body() != null;
                         final JSONObject apiJson = new JSONObject(response.body().string());
                         final String apiStatus = apiJson.getString(Config.STR_STATUS);
                         uniApiResult.postValue(new UniApiResult<>(apiStatus, apiStatus));
@@ -130,6 +135,45 @@ public class ContactsViewModel extends ViewModel {
                             }
                         }
                         queryLocalNewContactsList();
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                        uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
+                    }
+                }).start();
+            }
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, Arrays.toString(t.getStackTrace())));
+            }
+        });
+    }
+
+    /**
+     * TODO 本处的的更新判断尚未写完，将在下一次迭代中完成
+     * @author ChrisJaunes
+     * @param account
+     */
+    public void addContacts(final String account) {
+        final String time = TimeHelper.getNowTime();
+        final Retrofit retrofit = HttpHelper.getRetrofitBuilder().baseUrl(Config.URL_BASE).build();
+        final Call<ResponseBody> call = retrofit.create(ContactsRetrofit.class).update(account, time, ContactsConfig.CONTACTS_FRIEND_REQUEST);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                if (!response.isSuccessful()) {
+                    uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, String.valueOf(response.code())));
+                    return;
+                }
+                new Thread(()-> {
+                    try {
+                        assert response.body() != null;
+                        final JSONObject apiJson = new JSONObject(response.body().string());
+                        final String apiStatus = apiJson.getString(Config.STR_STATUS);
+                        if(ContactsConfig.STATUS_UPDATE_SUCCESSFUL.equals(apiStatus)) {
+                            uniApiResult.postValue(new UniApiResult<>(apiStatus, "请求成功"));
+                        } else{
+                            uniApiResult.postValue(new UniApiResult<>(apiStatus, "已经进行过请求或无此用户"));
+                        }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                         uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));

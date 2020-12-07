@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/et_search_account"
+            android:layout_width="0dp"
+            android:hint="请输入好友userId"
+            android:layout_weight="2.0"
+            android:layout_height="50sp"/>
+
+        <Button
+            android:id="@+id/btn_search_account"
+            android:layout_width="0dp"
+            android:text="添加"
+            android:layout_height="50sp"
+            android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>
