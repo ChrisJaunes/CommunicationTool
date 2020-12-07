@@ -1,0 +1,222 @@
+@startuml
+
+title __GROUP's Class Diagram__\n
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GAddAdapter {
+          ~ contactsList : List<String>
+          ~ contactsSet : Set<String>
+          + GAddAdapter()
+          + getGroupMemberList()
+          + getItemCount()
+          + onBindViewHolder()
+          + onCreateViewHolder()
+          + setContactsStringList()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GAddAdapter.ViewHolder {
+          ~ avatar : ImageView
+          ~ cb_check : CheckBox
+          ~ nickName : TextView
+          + ViewHolder()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GAddFragment {
+          + onActivityCreated()
+          + onCreateView()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GAddViewModel {
+          {static} + CREATE_FAIL : String
+          {static} + CREATE_SUCCESSFUL : String
+          - uniApiResult : MutableLiveData<UniApiResult<String>>
+          + addGroup()
+          + getUniApiResult()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GListAdapter {
+          ~ gInfoViewList : List<GInfoView>
+          + GListAdapter()
+          + addGInfoList()
+          + getItemCount()
+          + onBindViewHolder()
+          + onCreateViewHolder()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      interface com.chrisjaunes.communication.client.group.GListAdapter.ItemOnClickListener {
+          {abstract} + goToGroup()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GListAdapter.ViewHolder {
+          ~ avatar : ImageView
+          ~ nickName : TextView
+          + ViewHolder()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GListFragment {
+          + onCreateView()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GListViewModel {
+          - GInfoList : MutableLiveData<List<GInfo>>
+          - compositeDisposable : CompositeDisposable
+          - uniApiResult : MutableLiveData<UniApiResult<String>>
+          + GListViewModel()
+          + getGInfoList()
+          + getUniApiResult()
+          + queryLocalGroups()
+          + queryServer()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageActivity {
+          {static} - PHOTO_REQUEST_GALLERY : int
+          + onActivityResult()
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageAdapter {
+          - messageList : List<GMessage>
+          + GMessageAdapter()
+          + addMessageList()
+          + getItemCount()
+          + onBindViewHolder()
+          + onCreateViewHolder()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder {
+          - layout_left : LinearLayout
+          - layout_right : LinearLayout
+          - left_avatar : ImageView
+          - left_nickname : TextView
+          - right_avatar : ImageView
+          - right_nickname : TextView
+          - time : TextView
+          + ViewHolder()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageViewModel {
+          - GMessageList : MutableLiveData<List<GMessage>>
+          - compositeDisposable : CompositeDisposable
+          - group_id : String
+          - uniApiResult : MutableLiveData<UniApiResult<String>>
+          + GMessageViewModel()
+          + addMessage()
+          + getGMessageList()
+          + getUniApiResult()
+          + queryLocalMessageList()
+          + queryServerMessageList()
+          - updateGMessageViewManage()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageViewModel.Factory {
+          ~ group_id : String
+          + create()
+          ~ Factory()
+      }
+    }
+  }
+  
+
+  com.chrisjaunes.communication.client.group.GAddAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.group.GAddAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.group.GAddAdapter +-down- com.chrisjaunes.communication.client.group.GAddAdapter.ViewHolder
+  com.chrisjaunes.communication.client.group.GAddAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.chrisjaunes.communication.client.group.GAddFragment -up-|> androidx.fragment.app.Fragment
+  com.chrisjaunes.communication.client.group.GAddViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.group.GListAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.group.GListAdapter o-- com.chrisjaunes.communication.client.group.GListAdapter.ItemOnClickListener : itemOnClickListener
+  com.chrisjaunes.communication.client.group.GListAdapter +-down- com.chrisjaunes.communication.client.group.GListAdapter.ItemOnClickListener
+  com.chrisjaunes.communication.client.group.GListAdapter +-down- com.chrisjaunes.communication.client.group.GListAdapter.ViewHolder
+  com.chrisjaunes.communication.client.group.GListAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.chrisjaunes.communication.client.group.GListFragment -up-|> androidx.fragment.app.Fragment
+  com.chrisjaunes.communication.client.group.GListViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.group.GListViewModel o-- com.chrisjaunes.communication.client.group.model.GroupDao : gListDao
+  com.chrisjaunes.communication.client.group.GMessageActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.group.GMessageActivity o-- com.chrisjaunes.communication.client.group.GMessageViewModel : groupViewModel
+  com.chrisjaunes.communication.client.group.GMessageAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.account.model.AccountViewManage : accountViewManage
+  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.group.GMessageAdapter +-down- com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder
+  com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder o-- com.chrisjaunes.communication.client.myView.ChatTextView : left_content
+  com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder o-- com.chrisjaunes.communication.client.myView.ChatTextView : right_content
+  com.chrisjaunes.communication.client.group.GMessageViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.group.GMessageViewModel o-- com.chrisjaunes.communication.client.group.model.GroupDao : gMessageDao
+  com.chrisjaunes.communication.client.group.GMessageViewModel +-down- com.chrisjaunes.communication.client.group.GMessageViewModel.Factory
+  com.chrisjaunes.communication.client.group.GMessageViewModel.Factory .up.|> androidx.lifecycle.ViewModelProvider.Factory
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

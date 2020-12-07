@@ -77,7 +77,7 @@ public class ContactsViewModel extends ViewModel {
     }
     public void queryServer() {
         //final String lastTime = TimeHelper.getLastTime();
-        final String lastTime = "2020-11-17 13:14:20";
+        final String lastTime = "2020-11-17 00:00:00";
         final Retrofit retrofit = HttpHelper.getRetrofitBuilder().baseUrl(Config.URL_BASE).build();
         final Call<ResponseBody> call = retrofit.create(ContactsRetrofit.class).query(lastTime);
         call.enqueue(new Callback<ResponseBody>() {

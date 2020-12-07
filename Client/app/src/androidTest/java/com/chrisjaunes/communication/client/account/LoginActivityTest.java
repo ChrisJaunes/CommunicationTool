@@ -20,7 +20,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
-@LargeTest
 public class LoginActivityTest {
     @Test
     public void onCreateTest1() {
@@ -44,7 +43,7 @@ public class LoginActivityTest {
     public void onCreateTest3() {
         ActivityScenario<LoginActivity> scenario = ActivityScenario.launch(LoginActivity.class);
         onView(withId(R.id.btn_register)).perform(click());
-        onView(withId(R.id.btn_register)).check(doesNotExist());
+        onView(withId(R.id.btn_login)).check(doesNotExist());
         scenario.close();
     }
     @Test

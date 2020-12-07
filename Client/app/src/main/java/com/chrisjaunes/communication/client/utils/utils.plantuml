@@ -1,0 +1,167 @@
+@startuml
+
+title __UTILS's Class Diagram__\n
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.AudioTrackerHelper {
+          + createAudioTrack()
+          - initAudioTracker()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.BitmapHelper {
+          {static} + AVATAR_DEFAULT : Bitmap
+          {static} + BitmapToString()
+          {static} + StringToBitmap()
+          {static} + imageScale()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.ColorTrHelper {
+          {static} + colorToString()
+          {static} + nameToColor()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.ColorTrHelper.ColorSelectedAdapter {
+          {static} - ColorList : ArrayList<String>
+          {static} + getColorAdapter()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.ColorTrHelper.ColorSelectedListener {
+          ~ color_view : View
+          + ColorSelectedListener()
+          + onItemSelected()
+          + onNothingSelected()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.DialogHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.DialogHelper.SelectTextStyleColorDialog {
+          + SelectTextStyleColorDialog()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      interface com.chrisjaunes.communication.client.utils.DialogHelper.SelectTextStyleColorDialog.UpdateListener {
+          {abstract} + update()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.DialogHelper.logoutDialog {
+          + logoutDialog()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      interface com.chrisjaunes.communication.client.utils.DialogHelper.logoutDialog.LogoutListener {
+          {abstract} + logout()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.HttpHelper {
+          {static} + client : OkHttpClient
+          {static} + cookieJar : CookieJar
+          {static} - cookies : List<Cookie>
+          {static} + getOkHttpClient()
+          {static} + getRetrofitBuilder()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.TimeHelper {
+          {static} + getNowTime()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.UniApiResult {
+          + status : String
+          + UniApiResult()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.UniApiResult.Fail {
+          + error : String
+          + Fail()
+          + Fail()
+      }
+    }
+  }
+  
+
+  com.chrisjaunes.communication.client.utils.ColorTrHelper +-down- com.chrisjaunes.communication.client.utils.ColorTrHelper.ColorSelectedAdapter
+  com.chrisjaunes.communication.client.utils.ColorTrHelper +-down- com.chrisjaunes.communication.client.utils.ColorTrHelper.ColorSelectedListener
+  com.chrisjaunes.communication.client.utils.ColorTrHelper.ColorSelectedListener .up.|> android.widget.AdapterView.OnItemSelectedListener
+  com.chrisjaunes.communication.client.utils.DialogHelper +-down- com.chrisjaunes.communication.client.utils.DialogHelper.SelectTextStyleColorDialog
+  com.chrisjaunes.communication.client.utils.DialogHelper +-down- com.chrisjaunes.communication.client.utils.DialogHelper.logoutDialog
+  com.chrisjaunes.communication.client.utils.DialogHelper.SelectTextStyleColorDialog -up-|> android.app.Dialog
+  com.chrisjaunes.communication.client.utils.DialogHelper.SelectTextStyleColorDialog +-down- com.chrisjaunes.communication.client.utils.DialogHelper.SelectTextStyleColorDialog.UpdateListener
+  com.chrisjaunes.communication.client.utils.DialogHelper.logoutDialog -up-|> android.app.Dialog
+  com.chrisjaunes.communication.client.utils.DialogHelper.logoutDialog +-down- com.chrisjaunes.communication.client.utils.DialogHelper.logoutDialog.LogoutListener
+  com.chrisjaunes.communication.client.utils.UniApiResult o-- T : data
+  com.chrisjaunes.communication.client.utils.UniApiResult +-down- com.chrisjaunes.communication.client.utils.UniApiResult.Fail
+  com.chrisjaunes.communication.client.utils.UniApiResult.Fail -up-|> com.chrisjaunes.communication.client.utils.UniApiResult
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

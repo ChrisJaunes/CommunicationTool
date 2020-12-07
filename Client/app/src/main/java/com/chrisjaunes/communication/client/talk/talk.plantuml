@@ -1,0 +1,150 @@
+@startuml
+
+title __TALK's Class Diagram__\n
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TMessage {
+          - account1 : String
+          - account2 : String
+          - content : String
+          - content_type : int
+          - sendTime : String
+          + TMessage()
+          + TMessage()
+          + getAccount1()
+          + getAccount2()
+          + getContent()
+          + getContent_type()
+          + getSendTime()
+          {static} + jsonToTMessage()
+          + setAccount1()
+          + setAccount2()
+          + setContent()
+          + setContent_type()
+          + setSendTime()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      interface com.chrisjaunes.communication.client.talk.TMessageDao {
+          {abstract} + InsertMessage()
+          {abstract} + InsertMessageList()
+          {abstract} + isMessageExist()
+          {abstract} + queryMessageAboutTalk()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TMessageFactory {
+          {static} + STR_CONTENT_TYPE_EMOJI : int
+          {static} + STR_CONTENT_TYPE_GIF : int
+          {static} + STR_CONTENT_TYPE_IMG : int
+          {static} + STR_CONTENT_TYPE_NULL : int
+          {static} + STR_CONTENT_TYPE_PNG : int
+          {static} + STR_CONTENT_TYPE_TEXT : int
+          ~ create()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkActivity {
+          {static} + STR_CONTACTS_ACCOUNT : String
+          {static} - PHOTO_REQUEST_GALLERY : int
+          - toolbarOnMenuItemClickListener : OnMenuItemClickListener
+          + onActivityResult()
+          # onCreate()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkAdapter {
+          - messageList : List<TMessage>
+          + addMessageList()
+          + getItemCount()
+          + onBindViewHolder()
+          + onCreateViewHolder()
+          ~ TalkAdapter()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkAdapter.ViewHolder {
+          - layout_left : LinearLayout
+          - layout_right : LinearLayout
+          - left_avatar : ImageView
+          - left_nickname : TextView
+          - right_avatar : ImageView
+          - right_nickname : TextView
+          - time : TextView
+          + ViewHolder()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkViewModel {
+          - TMessageList : MutableLiveData<List<TMessage>>
+          - contacts_account : String
+          - uniApiResult : MutableLiveData<UniApiResult<String>>
+          + getTMessageList()
+          + getUniApiResult()
+          + queryLocalMessageList()
+          + queryServer()
+          + updateMessage()
+          ~ TalkViewModel()
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkViewModel.Factory {
+          ~ contacts_account : String
+          + create()
+          ~ Factory()
+      }
+    }
+  }
+  
+
+  com.chrisjaunes.communication.client.talk.TalkActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.talk.TalkActivity o-- com.chrisjaunes.communication.client.talk.TalkViewModel : talkViewModel
+  com.chrisjaunes.communication.client.talk.TalkAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.talk.TalkAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsView : contactsView
+  com.chrisjaunes.communication.client.talk.TalkAdapter +-down- com.chrisjaunes.communication.client.talk.TalkAdapter.ViewHolder
+  com.chrisjaunes.communication.client.talk.TalkAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.chrisjaunes.communication.client.talk.TalkAdapter.ViewHolder o-- com.chrisjaunes.communication.client.myView.ChatTextView : left_content
+  com.chrisjaunes.communication.client.talk.TalkAdapter.ViewHolder o-- com.chrisjaunes.communication.client.myView.ChatTextView : right_content
+  com.chrisjaunes.communication.client.talk.TalkViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.talk.TalkViewModel o-- com.chrisjaunes.communication.client.talk.TMessageDao : tMessageDao
+  com.chrisjaunes.communication.client.talk.TalkViewModel +-down- com.chrisjaunes.communication.client.talk.TalkViewModel.Factory
+  com.chrisjaunes.communication.client.talk.TalkViewModel.Factory .up.|> androidx.lifecycle.ViewModelProvider.Factory
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -26,6 +26,7 @@ public class AddContactsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         final View view = getView();
         final ContactsViewModel contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        assert view != null;
         final Button btn_search_account = view.findViewById(R.id.btn_search_account);
         btn_search_account.setOnClickListener(v -> {
             final EditText et_search_account = view.findViewById(R.id.et_search_account);
