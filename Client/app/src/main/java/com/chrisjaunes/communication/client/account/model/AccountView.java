@@ -2,25 +2,29 @@ package com.chrisjaunes.communication.client.account.model;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.myView.ChatTextStyleView;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 
 /**
- * @author chrisjuanes
- * @version 1
- * @status XXX
  * 设计模式：适配器模式（对象适配器）
+ * version 1.1 : 使用了适配器模式
  * 功能：对AccountRaw进行了封装，以便于外部使用
  * 持有 AccountRaw，处于编码简便的考虑，没有单独出一个接口
- *
+ * version 1.2 : 增加了ACCOUNT_VIEW_DEFAULT
+ * @author chrisjuanes
+ * @version 1.2
  */
 public class AccountView {
-    final AccountRaw accountRaw;
-    Bitmap avatarView;
-    ChatTextStyleView chatTextStyleView;
-    public AccountView(final AccountRaw accountRaw) {
-        assert null != accountRaw && null != accountRaw.nickname;
+    static public final AccountView ACCOUNT_VIEW_DEFAULT = new AccountView(new AccountRaw.Builder().build());
+
+    private final AccountRaw accountRaw;
+    private Bitmap avatarView;
+    private ChatTextStyleView chatTextStyleView;
+    public AccountView(@NonNull final AccountRaw accountRaw) {
+        assert null != accountRaw.nickname;
         this.accountRaw = accountRaw;
         if (null == accountRaw.avatar) {
             avatarView = BitmapHelper.AVATAR_DEFAULT;
@@ -39,13 +43,14 @@ public class AccountView {
     public String getNickName() {
         return accountRaw.nickname;
     }
-    public void setAvatarView(final Bitmap bitmap) {
+    public void setAvatarView(@NonNull final Bitmap bitmap) {
         this.avatarView = bitmap;
     }
     public Bitmap getAvatarView() {
         return avatarView;
     }
-    public ChatTextStyleView getChatTextStyleView() {
-        return chatTextStyleView;
+    public void setChatTextStyleView(@NonNull final ChatTextStyleView chatTextStyleView) {
+        this.chatTextStyleView = chatTextStyleView;
     }
+    public ChatTextStyleView getChatTextStyleView() { return chatTextStyleView; }
 }

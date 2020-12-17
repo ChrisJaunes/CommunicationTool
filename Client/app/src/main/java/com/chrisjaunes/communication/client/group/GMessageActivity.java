@@ -25,7 +25,6 @@ import com.chrisjaunes.communication.client.group.model.GroupConfig;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import java.io.FileNotFoundException;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +88,7 @@ public class GMessageActivity extends AppCompatActivity {
             layoutSwipeRefresh.setRefreshing(false);
             tvSendText.setEnabled(true);
             btnSendText.setEnabled(true);
+            tvSendText.setText("");
         });
         groupViewModel.getGMessageList().observe(this, GMessageList -> {
             Log.d("Group", "gMessageList : " + GMessageList + " size : " + GMessageList.size());
@@ -107,7 +107,6 @@ public class GMessageActivity extends AppCompatActivity {
                 Bitmap avatar = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
                 if (null == avatar) {
                     Log.d("Talk", " return chose bitmap is null");
-                    return;
                 }
 //                groupViewModel.addMessage(GroupViewModel.STR_CONTENT_TYPE_IMG, BitmapHelper.BitmapToString(avatar));
             } catch (FileNotFoundException e) {

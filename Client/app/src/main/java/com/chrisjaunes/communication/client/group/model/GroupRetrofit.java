@@ -25,7 +25,7 @@ public interface GroupRetrofit {
                                               @Field(GroupConfig.STR_CONTENT) String content);
 
     @POST(GroupConfig.URL_GROUP_QUERY)
-    Flowable<UniApiResult<List<GInfo>>> query();
+    Flowable<UniApiResult<List<GInfoRaw>>> query();
 
     @FormUrlEncoded
     @POST(GroupConfig.URL_GROUP_ADD)

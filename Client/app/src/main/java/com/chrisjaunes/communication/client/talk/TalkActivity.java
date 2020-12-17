@@ -86,6 +86,7 @@ public class TalkActivity extends AppCompatActivity {
             layoutSwipeRefresh.setRefreshing(false);
             tvSendText.setEnabled(true);
             btnSendText.setEnabled(true);
+            tvSendText.setText("");
         });
         talkViewModel.getTMessageList().observe(this, TMessageList -> {
             Log.d("Talk", "tMessageList : " + TMessageList + " size : " + TMessageList.size());

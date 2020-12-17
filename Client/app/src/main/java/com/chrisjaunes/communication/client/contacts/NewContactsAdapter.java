@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.contacts.model.ContactsConfig;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
-import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * a Adapter of RecycleView
+ * @author chrisjuanes
+ * @version 1.1
+ */
 public class NewContactsAdapter extends RecyclerView.Adapter<NewContactsAdapter.NowContactsViewHolder> {
     final List<String> contactsList;
     final ContactsViewManage contactsViewManage;

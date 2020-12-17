@@ -127,16 +127,16 @@ title __CONTACTS's Class Diagram__\n
   com.chrisjaunes.communication.client.contacts.AddContactsFragment -up-|> androidx.fragment.app.Fragment
   com.chrisjaunes.communication.client.contacts.ContactsViewModel -up-|> androidx.lifecycle.ViewModel
   com.chrisjaunes.communication.client.contacts.ContactsViewModel o-- com.chrisjaunes.communication.client.contacts.model.ContactsDao : contactsDao
-  com.chrisjaunes.communication.client.contacts.ContactsViewModel o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.contacts.ContactsViewModel o-- com.chrisjaunes.communication.client.contacts.ContactsViewManage : contactsViewManage
   com.chrisjaunes.communication.client.contacts.NewContactsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
-  com.chrisjaunes.communication.client.contacts.NewContactsAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.contacts.NewContactsAdapter o-- com.chrisjaunes.communication.client.contacts.ContactsViewManage : contactsViewManage
   com.chrisjaunes.communication.client.contacts.NewContactsAdapter o-- com.chrisjaunes.communication.client.contacts.NewContactsAdapter.ItemOnClickListener : itemOnClickListener
   com.chrisjaunes.communication.client.contacts.NewContactsAdapter +-down- com.chrisjaunes.communication.client.contacts.NewContactsAdapter.ItemOnClickListener
   com.chrisjaunes.communication.client.contacts.NewContactsAdapter +-down- com.chrisjaunes.communication.client.contacts.NewContactsAdapter.NowContactsViewHolder
   com.chrisjaunes.communication.client.contacts.NewContactsAdapter.NowContactsViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
   com.chrisjaunes.communication.client.contacts.NewContactsFragment -up-|> androidx.fragment.app.Fragment
   com.chrisjaunes.communication.client.contacts.NowContactsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
-  com.chrisjaunes.communication.client.contacts.NowContactsAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.contacts.NowContactsAdapter o-- com.chrisjaunes.communication.client.contacts.ContactsViewManage : contactsViewManage
   com.chrisjaunes.communication.client.contacts.NowContactsAdapter o-- com.chrisjaunes.communication.client.contacts.NowContactsAdapter.ItemOnClickListener : itemOnClickListener
   com.chrisjaunes.communication.client.contacts.NowContactsAdapter +-down- com.chrisjaunes.communication.client.contacts.NowContactsAdapter.ItemOnClickListener
   com.chrisjaunes.communication.client.contacts.NowContactsAdapter +-down- com.chrisjaunes.communication.client.contacts.NowContactsAdapter.NowContactsViewHolder

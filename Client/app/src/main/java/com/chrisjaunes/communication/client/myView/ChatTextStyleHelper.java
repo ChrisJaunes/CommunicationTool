@@ -28,8 +28,8 @@ public class ChatTextStyleHelper {
         sp_border_color.setAdapter(ColorTrHelper.ColorSelectedAdapter.getColorAdapter(view.getContext()));
         sp_border_color.setOnItemSelectedListener(new ColorTrHelper.ColorSelectedListener(vi_border_color));
     }
-    public ChatTextStyle getChatTextStyle() {
-        return new ChatTextStyle.Builder().addChatFontColor(
+    public ChatTextStyleRaw getChatTextStyle() {
+        return new ChatTextStyleRaw.Builder().addChatFontColor(
                 ColorTrHelper.colorToString(((ColorDrawable) vi_font_color.getBackground()).getColor())
         ).addChatBubbleColor(
                 ColorTrHelper.colorToString(((ColorDrawable) vi_bubble_color.getBackground()).getColor())

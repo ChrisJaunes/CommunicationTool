@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase;
 
 import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.contacts.model.ContactsDao;
+import com.chrisjaunes.communication.client.group.model.GInfoRaw;
 import com.chrisjaunes.communication.client.group.model.GMessage;
 import com.chrisjaunes.communication.client.group.model.GroupDao;
 import com.chrisjaunes.communication.client.talk.TMessageDao;
@@ -16,9 +17,10 @@ import com.chrisjaunes.communication.client.talk.TMessage;
  * version 2 : entities = {Contacts.class, TalkMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao}
  * version 3 : entities = {Contacts.class, TalkMessage.class, GMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao, GMessageDao}
  * version 4 : entities = {Contacts.class, TalkMessage.class, GMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao, GMessageDao}
+ * version 5 : entities = {ContactsRaw.class, TMessage.class, GInfoRaw.class, GMessage.class} exportSchema = false, Dao = {ContactsDao, TalkMessageDao, GMessageDao}
  */
-@Database(entities = {ContactsRaw.class, TMessage.class, GMessage.class},
-        version = 4,
+@Database(entities = {ContactsRaw.class, TMessage.class, GInfoRaw.class, GMessage.class},
+        version = 5,
         exportSchema = false)
 public abstract  class LocalDatabase extends RoomDatabase{
     public abstract ContactsDao getContactsDao();

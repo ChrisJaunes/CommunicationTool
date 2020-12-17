@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountView;
-import com.chrisjaunes.communication.client.account.model.AccountViewManage;
+import com.chrisjaunes.communication.client.account.AccountViewManage;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
-import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 import com.chrisjaunes.communication.client.myView.ChatTextView;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class TalkAdapter extends  RecyclerView.Adapter<TalkAdapter.ViewHolder>{
     TalkAdapter(final List<TMessage> messageList) {
         this.messageList = messageList;
         accountView = AccountViewManage.getInstance().getAccountView();
-        contactsView = ContactsView.CONTACTS_DEFAULT;
+        contactsView = ContactsView.CONTACTS_VIEW_DEFAULT;
     }
     @NonNull
     @Override

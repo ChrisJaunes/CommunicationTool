@@ -184,7 +184,7 @@ title __GROUP's Class Diagram__\n
   
 
   com.chrisjaunes.communication.client.group.GAddAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
-  com.chrisjaunes.communication.client.group.GAddAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.group.GAddAdapter o-- com.chrisjaunes.communication.client.contacts.ContactsViewManage : contactsViewManage
   com.chrisjaunes.communication.client.group.GAddAdapter +-down- com.chrisjaunes.communication.client.group.GAddAdapter.ViewHolder
   com.chrisjaunes.communication.client.group.GAddAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
   com.chrisjaunes.communication.client.group.GAddFragment -up-|> androidx.fragment.app.Fragment
@@ -200,8 +200,8 @@ title __GROUP's Class Diagram__\n
   com.chrisjaunes.communication.client.group.GMessageActivity -up-|> androidx.appcompat.app.AppCompatActivity
   com.chrisjaunes.communication.client.group.GMessageActivity o-- com.chrisjaunes.communication.client.group.GMessageViewModel : groupViewModel
   com.chrisjaunes.communication.client.group.GMessageAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
-  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.account.model.AccountViewManage : accountViewManage
-  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.account.AccountViewManage : accountViewManage
+  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.contacts.ContactsViewManage : contactsViewManage
   com.chrisjaunes.communication.client.group.GMessageAdapter +-down- com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder
   com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
   com.chrisjaunes.communication.client.group.GMessageAdapter.ViewHolder o-- com.chrisjaunes.communication.client.myView.ChatTextView : left_content

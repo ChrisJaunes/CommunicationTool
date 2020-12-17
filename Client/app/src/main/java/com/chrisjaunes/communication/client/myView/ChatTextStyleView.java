@@ -8,7 +8,7 @@ public class ChatTextStyleView {
     public int border_color;
     public int bubble_color;
 
-    public static ChatTextStyleView valueOf(ChatTextStyle rawData) {
+    public static ChatTextStyleView valueOf(ChatTextStyleRaw rawData) {
         ChatTextStyleView viewData = new ChatTextStyleView();
         viewData.text_color = Color.parseColor(rawData.font_color);
         viewData.border_color = Color.parseColor(rawData.border_color);
@@ -16,6 +16,6 @@ public class ChatTextStyleView {
         return viewData;
     }
     public static ChatTextStyleView valueOf(String json) {
-        return valueOf(ChatTextStyle.valueOf(json));
+        return valueOf(ChatTextStyleRaw.valueOf(json));
     }
 }

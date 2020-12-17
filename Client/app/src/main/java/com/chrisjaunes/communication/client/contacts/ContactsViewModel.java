@@ -11,7 +11,6 @@ import com.chrisjaunes.communication.client.contacts.model.ContactsConfig;
 import com.chrisjaunes.communication.client.contacts.model.ContactsDao;
 import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.contacts.model.ContactsRetrofit;
-import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
@@ -25,16 +24,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+/**
+ * 采用了MVVM,作为ViewModel层
+ * version 1.1: use Retrofit
+ * @author ChrisJaunes
+ * @version 1.1
+ */
 public class ContactsViewModel extends ViewModel {
     private final MutableLiveData<UniApiResult<String>> uniApiResult = new MutableLiveData<>();
     public LiveData<UniApiResult<String>> getUniApiResult() { return uniApiResult; }
@@ -89,9 +90,10 @@ public class ContactsViewModel extends ViewModel {
                 }
                 new Thread(()-> {
                     try {
+                        assert response.body() != null;
                         final JSONObject apiJson = new JSONObject(response.body().string());
                         final String apiStatus = apiJson.getString(Config.STR_STATUS);
-                        uniApiResult.postValue(new UniApiResult<>(apiStatus, apiStatus));
+                        uniApiResult.postValue(new UniApiResult<>(apiStatus, apiStatus) );
                         if (ContactsConfig.STATUS_QUERY_SUCCESSFUL.equals(apiStatus)) {
                             updateLocalDataBase((JSONArray) apiJson.get(Config.STR_STATUS_DATA));
                             queryLocalNowContactsList();

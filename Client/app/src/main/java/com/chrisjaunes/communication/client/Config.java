@@ -1,8 +1,8 @@
 package com.chrisjaunes.communication.client;
 
 public class Config {
-    static public final String URL_BASE = "http://125.216.246.202:8080/communicationServer/";
-    //static public final String URL_BASE = "http://172.21.143.47:8080/communicationServer/";
+    static public final String URL_BASE = "http://192.168.1.169:8080/communicationServer/";
+//    static public final String URL_BASE = "http://172.21.143.47:8080/communicationServer/";
     static public final String URL_LOGIN = URL_BASE + "account/login";
     static public final String URL_REGISTER = URL_BASE + "account/register";
     static public final String URL_UPDATE_MESSAGE = URL_BASE + "account/updateMessage";

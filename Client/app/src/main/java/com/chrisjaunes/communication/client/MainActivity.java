@@ -25,7 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.chrisjaunes.communication.client.account.AccountViewModel;
 import com.chrisjaunes.communication.client.account.LoginActivity;
-import com.chrisjaunes.communication.client.account.model.AccountViewManage;
+import com.chrisjaunes.communication.client.account.AccountViewManage;
 import com.chrisjaunes.communication.client.contacts.AddContactsFragment;
 import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
 import com.chrisjaunes.communication.client.contacts.NewContactsFragment;
@@ -79,9 +79,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
         navigationView.getMenu().getItem(MENU_LOGOUT).setOnMenuItemClickListener(item -> {
-            new DialogHelper.logoutDialog(MainActivity.this, R.style.LogoutDialog, () -> {
+            new DialogHelper.logoutDialog(MainActivity.this, R.style.LogoutDialog, ()-> {
+                MyApplication.getInstance().logout();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }).show();
             return true;

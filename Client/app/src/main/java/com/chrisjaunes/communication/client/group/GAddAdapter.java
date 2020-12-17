@@ -11,13 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
-import com.chrisjaunes.communication.client.contacts.model.ContactsViewManage;
+import com.chrisjaunes.communication.client.contacts.ContactsViewManage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/**
+ * a adapter about RecycleView
+ * @author ChrisJaunes
+ * @version 1.1
+ */
 public class GAddAdapter extends RecyclerView.Adapter<GAddAdapter.ViewHolder> {
     final ContactsViewManage contactsViewManage;
     final List<String> contactsList;
@@ -32,6 +36,10 @@ public class GAddAdapter extends RecyclerView.Adapter<GAddAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_group,parent,false);
+        view.setOnClickListener(v -> {
+            CheckBox checkBox = v.findViewById(R.id.create_group_checkbox);
+            checkBox.setChecked(!checkBox.isChecked());
+        });
         return new ViewHolder(view);
     }
 

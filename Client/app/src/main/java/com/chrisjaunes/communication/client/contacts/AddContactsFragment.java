@@ -16,6 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
+/**
+ * a fragment about function(add contacts)
+ * @author chrisjuanes
+ * @version 1.1
+ */
 public class AddContactsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

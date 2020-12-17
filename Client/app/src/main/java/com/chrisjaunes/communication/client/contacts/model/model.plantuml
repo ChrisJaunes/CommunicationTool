@@ -107,7 +107,7 @@ title __MODEL's Class Diagram__\n
   namespace com.chrisjaunes.communication.client {
     namespace contacts {
       namespace model {
-        class com.chrisjaunes.communication.client.contacts.model.ContactsViewManage {
+        class com.chrisjaunes.communication.client.contacts.ContactsViewManage {
             - contactsViewHashMap : HashMap<String, ContactsView>
             {static} - instance : ContactsViewManage
             + getContactsRaw()
@@ -123,7 +123,7 @@ title __MODEL's Class Diagram__\n
 
   com.chrisjaunes.communication.client.contacts.model.ContactsView o-- com.chrisjaunes.communication.client.myView.ChatTextStyleView : chatTextStyleView
   com.chrisjaunes.communication.client.contacts.model.ContactsView o-- com.chrisjaunes.communication.client.contacts.model.ContactsRaw : contactsRaw
-  com.chrisjaunes.communication.client.contacts.model.ContactsViewManage o-- com.chrisjaunes.communication.client.contacts.model.ContactsDao : contactsDao
+  com.chrisjaunes.communication.client.contacts.ContactsViewManage o-- com.chrisjaunes.communication.client.contacts.model.ContactsDao : contactsDao
 
 
 right footer

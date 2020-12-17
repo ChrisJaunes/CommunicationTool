@@ -14,6 +14,11 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+/**
+ * 采用了JavaBean
+ * @author ChrisJaunes
+ * @version 1.1(2020-12-18)
+ */
 @Entity
 public class ContactsRaw {
     @NonNull

@@ -22,7 +22,14 @@ import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import java.util.List;
-
+/**
+ * a fragment about function(add contacts)
+ * version 1.1 : 添加群聊
+ * version 1.2 : 将ViewModel和其他控制逻辑移到onActivityCreated里面
+ * version 1.3 : 添加里requireActivity().onBackPressed()以便于销毁自身;
+ * @author chrisjuanes
+ * @version 1.3
+ */
 public class GAddFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -33,8 +40,9 @@ public class GAddFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final View view = getView();
+        assert view != null;
         final GAddViewModel gAddViewModel = new ViewModelProvider(this).get(GAddViewModel.class);
-        final ContactsViewModel contactsViewModel = new ViewModelProvider(getActivity()).get(ContactsViewModel.class);
+        final ContactsViewModel contactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
         // TODO
         final TextView createGroupName = view.findViewById(R.id.create_group_name);
         final Button confirmButton = view.findViewById(R.id.create_group_confirm_button);
@@ -57,6 +65,7 @@ public class GAddFragment extends Fragment {
             Toast.makeText(getActivity(),stringUniApiResult.data,Toast.LENGTH_SHORT).show();
             if (stringUniApiResult instanceof UniApiResult.Fail)
                 Log.e("NowContacts[uniApiResult]", ((UniApiResult.Fail) stringUniApiResult).error);
+            requireActivity().onBackPressed();
         });
         contactsViewModel.getNowContactsListResult().observe(getViewLifecycleOwner(), stringContactsList -> {
             Log.d("NowContacts[nowContactsListResult]", "contactsList" + stringContactsList + " size : " + stringContactsList.size());

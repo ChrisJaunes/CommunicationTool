@@ -91,5 +91,6 @@ public class UpdateMessage extends HttpServlet {
 		}
 		response.setContentType("application/json");
 		response.getWriter().append(resJson.toString()).flush();
+		Log.info(String.format("resJson : %s", resJson.toString()));
 	}
 }

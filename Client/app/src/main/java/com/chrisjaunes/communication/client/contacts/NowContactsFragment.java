@@ -21,6 +21,8 @@ import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.talk.TalkActivity;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
+import java.util.Objects;
+
 /**
  * @author ChrisJaunes
  */
@@ -34,8 +36,9 @@ public class NowContactsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         final View view = getView();
         // DONE ContactsViewModel 生命周期为 Activity
-        final ContactsViewModel contactsViewModel = new ViewModelProvider(getActivity()).get(ContactsViewModel.class);
+        final ContactsViewModel contactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
         // DONE 下拉刷新控件，用于下拉时请求服务器端
+        assert view != null;
         final TextView tvSwipeRefresh = view.findViewById(R.id.tv_swipe_refresh);
         final SwipeRefreshLayout layoutSwipeRefresh = view.findViewById(R.id.layout_swipe_refresh);
         layoutSwipeRefresh.setEnabled(true);
@@ -51,7 +54,7 @@ public class NowContactsFragment extends Fragment {
             Log.d("NowContacts[interface]", account);
             Intent intent = new Intent(getActivity(), TalkActivity.class);
             intent.putExtra(TalkActivity.STR_CONTACTS_ACCOUNT, account);
-            getActivity().startActivity(intent);
+            requireActivity().startActivity(intent);
         });
         rvContacts.setAdapter(contactsAdapter);
         rvContacts.setItemAnimator(new DefaultItemAnimator());

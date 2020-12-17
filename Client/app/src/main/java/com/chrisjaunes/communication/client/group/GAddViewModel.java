@@ -20,7 +20,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
+/**
+ * @author ChrisJaunes
+ * @version 1
+ */
 public class GAddViewModel extends ViewModel {
     static public final String CREATE_SUCCESSFUL = "1";
     static public final String CREATE_FAIL = "2";

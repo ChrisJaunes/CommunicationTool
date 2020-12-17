@@ -66,6 +66,7 @@ public class LoginViewModel extends ViewModel {
                     uniApiResultLiveDate.postValue(new UniApiResult.Fail(Config.STATUS_NET_ERROR, Config.ERROR_UNKNOWN, String.format("错误返回代码 %d", response.code())));
                     return;
                 }
+                assert response.body() != null;
                 String jsonS = response.body().string();
                 Gson gson = new Gson();
                 UniApiResult<AccountRaw> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<AccountRaw>>() {}.getType());

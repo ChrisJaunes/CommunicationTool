@@ -2,9 +2,13 @@ package com.chrisjaunes.communication.client.group.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+/**
+ * 采用了JavaBean
+ * @author ChrisJaunes
+ * @version 1.1
+ */
 @Entity
-public class GInfo {
+public class GInfoRaw {
     @PrimaryKey
     private int group;
     private String group_name;

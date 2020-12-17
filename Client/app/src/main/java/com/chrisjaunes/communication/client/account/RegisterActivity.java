@@ -84,11 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 Uri uri = data.getData();
                 Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                String bitmapStr = BitmapHelper.BitmapToString(bitmap);
-                if (bitmapStr.length() > AccountRaw.LIMIT_AVATAR_LEN) {
-                    Toast.makeText(this, "选择头像过大", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 final ImageView iv_avatar = findViewById(R.id.iv_avatar);
                 iv_avatar.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {

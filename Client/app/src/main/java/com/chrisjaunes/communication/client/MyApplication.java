@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.room.Room;
 
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
-import com.chrisjaunes.communication.client.account.model.AccountViewManage;
+import com.chrisjaunes.communication.client.account.AccountViewManage;
 
 public class MyApplication extends Application {
     private static MyApplication instance = null;
@@ -14,7 +14,6 @@ public class MyApplication extends Application {
     }
     public MyApplication() {
         instance = this;
-
     }
 
     public void setAccount(AccountRaw account) {
@@ -32,6 +31,11 @@ public class MyApplication extends Application {
                     .build();
         }
         return localDatabase;
+    }
+
+    public void logout() {
+        //setAccount(AccountRaw.ACCOUNT_RAW_DEFAULT);
+        localDatabase = null;
     }
 }
 

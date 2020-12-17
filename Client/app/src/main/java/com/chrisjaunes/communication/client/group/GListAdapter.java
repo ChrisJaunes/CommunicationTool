@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.group.model.GInfo;
+import com.chrisjaunes.communication.client.group.model.GInfoRaw;
 import com.chrisjaunes.communication.client.group.model.GInfoView;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class GListAdapter extends RecyclerView.Adapter<GListAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final GInfoView gInfoView = gInfoViewList.get(position);
         holder.nickName.setText(gInfoView.getGroupName());
-        holder.avatar.setImageBitmap(gInfoView.getAvatar());
+        holder.avatar.setImageBitmap(gInfoView.getAvatarView());
         holder.itemView.setOnClickListener(v -> itemOnClickListener.goToGroup(gInfoView.getGroup(), gInfoView.getGroupName()));
     }
 
@@ -54,9 +54,9 @@ public class GListAdapter extends RecyclerView.Adapter<GListAdapter.ViewHolder> 
         }
     }
 
-    public void addGInfoList(final List<GInfo> gInfoList) {
+    public void addGInfoList(final List<GInfoRaw> gInfoList) {
         gInfoViewList.clear();
-        for(GInfo g : gInfoList) {
+        for(GInfoRaw g : gInfoList) {
             gInfoViewList.add(new GInfoView(g));
             notifyItemChanged(gInfoViewList.size());
         }

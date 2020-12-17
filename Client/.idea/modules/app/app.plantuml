@@ -1,0 +1,625 @@
+@startuml
+
+title __CLIENT.APP's Class Diagram__\n
+
+  namespace com.chrisjaunes.communication.client {
+    class com.chrisjaunes.communication.client.BuildConfig {
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    class com.chrisjaunes.communication.client.Config {
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    abstract class com.chrisjaunes.communication.client.LocalDatabase {
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    class com.chrisjaunes.communication.client.LocalDatabase_Impl {
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    class com.chrisjaunes.communication.client.MainActivity {
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    class com.chrisjaunes.communication.client.MyApplication {
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    class com.chrisjaunes.communication.client.PreActivity {
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      class com.chrisjaunes.communication.client.account.AccountViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      class com.chrisjaunes.communication.client.account.LoginActivity {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      class com.chrisjaunes.communication.client.account.LoginViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      class com.chrisjaunes.communication.client.account.RegisterActivity {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      class com.chrisjaunes.communication.client.account.RegisterViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      namespace model {
+        class com.chrisjaunes.communication.client.account.model.AccountRaw {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      namespace model {
+        class com.chrisjaunes.communication.client.account.model.AccountView {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace account {
+      namespace model {
+        class com.chrisjaunes.communication.client.account.model.AccountViewManage {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      class com.chrisjaunes.communication.client.contacts.AddContactsFragment {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      class com.chrisjaunes.communication.client.contacts.ContactsViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      class com.chrisjaunes.communication.client.contacts.NewContactsAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      class com.chrisjaunes.communication.client.contacts.NewContactsFragment {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      class com.chrisjaunes.communication.client.contacts.NowContactsAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      class com.chrisjaunes.communication.client.contacts.NowContactsFragment {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      namespace model {
+        class com.chrisjaunes.communication.client.contacts.model.ContactsConfig {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      namespace model {
+        interface com.chrisjaunes.communication.client.contacts.model.ContactsDao {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      namespace model {
+        class com.chrisjaunes.communication.client.contacts.model.ContactsDao_Impl {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      namespace model {
+        class com.chrisjaunes.communication.client.contacts.model.ContactsRaw {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      namespace model {
+        interface com.chrisjaunes.communication.client.contacts.model.ContactsRetrofit {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      namespace model {
+        class com.chrisjaunes.communication.client.contacts.model.ContactsView {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace contacts {
+      namespace model {
+        class com.chrisjaunes.communication.client.contacts.model.ContactsViewManage {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GAddAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GAddFragment {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GAddViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GListAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GListFragment {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GListViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageActivity {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      class com.chrisjaunes.communication.client.group.GMessageViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        class com.chrisjaunes.communication.client.group.model.GInfo {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        class com.chrisjaunes.communication.client.group.model.GInfoView {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        class com.chrisjaunes.communication.client.group.model.GMember {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        class com.chrisjaunes.communication.client.group.model.GMessage {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        class com.chrisjaunes.communication.client.group.model.GroupConfig {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        interface com.chrisjaunes.communication.client.group.model.GroupDao {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        class com.chrisjaunes.communication.client.group.model.GroupDao_Impl {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace group {
+      namespace model {
+        interface com.chrisjaunes.communication.client.group.model.GroupRetrofit {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace myView {
+      class com.chrisjaunes.communication.client.myView.AvatarCircleView {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace myView {
+      class com.chrisjaunes.communication.client.myView.ChatBoxView {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace myView {
+      class com.chrisjaunes.communication.client.myView.ChatTextStyle {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace myView {
+      class com.chrisjaunes.communication.client.myView.ChatTextStyleHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace myView {
+      class com.chrisjaunes.communication.client.myView.ChatTextStyleView {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace myView {
+      class com.chrisjaunes.communication.client.myView.ChatTextView {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TMessage {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      interface com.chrisjaunes.communication.client.talk.TMessageDao {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TMessageDao_Impl {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TMessageFactory {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkActivity {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace talk {
+      class com.chrisjaunes.communication.client.talk.TalkViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.AudioTrackerHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.BitmapHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.ColorTrHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.DialogHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.HttpHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.TimeHelper {
+      }
+    }
+  }
+  
+
+  namespace com.chrisjaunes.communication.client {
+    namespace utils {
+      class com.chrisjaunes.communication.client.utils.UniApiResult {
+      }
+    }
+  }
+  
+
+  com.chrisjaunes.communication.client.LocalDatabase -up-|> androidx.room.RoomDatabase
+  com.chrisjaunes.communication.client.LocalDatabase_Impl -up-|> com.chrisjaunes.communication.client.LocalDatabase
+  com.chrisjaunes.communication.client.LocalDatabase_Impl o-- com.chrisjaunes.communication.client.contacts.model.ContactsDao : _contactsDao
+  com.chrisjaunes.communication.client.LocalDatabase_Impl o-- com.chrisjaunes.communication.client.group.model.GroupDao : _groupDao
+  com.chrisjaunes.communication.client.LocalDatabase_Impl o-- com.chrisjaunes.communication.client.talk.TMessageDao : _tMessageDao
+  com.chrisjaunes.communication.client.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.MainActivity o-- com.chrisjaunes.communication.client.account.AccountViewModel : accountViewModel
+  com.chrisjaunes.communication.client.MainActivity o-- com.chrisjaunes.communication.client.contacts.AddContactsFragment : addContactsFragment
+  com.chrisjaunes.communication.client.MainActivity o-- com.chrisjaunes.communication.client.group.GAddFragment : gAddFragment
+  com.chrisjaunes.communication.client.MainActivity o-- com.chrisjaunes.communication.client.group.GListFragment : gListFragment
+  com.chrisjaunes.communication.client.MainActivity o-- com.chrisjaunes.communication.client.contacts.NewContactsFragment : newContactsFragment
+  com.chrisjaunes.communication.client.MainActivity o-- com.chrisjaunes.communication.client.contacts.NowContactsFragment : nowContactsFragment
+  com.chrisjaunes.communication.client.MyApplication -up-|> android.app.Application
+  com.chrisjaunes.communication.client.MyApplication o-- com.chrisjaunes.communication.client.LocalDatabase : localDatabase
+  com.chrisjaunes.communication.client.PreActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.account.AccountViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.account.LoginActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.account.LoginViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.account.RegisterActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.account.RegisterViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.account.model.AccountRaw o-- com.chrisjaunes.communication.client.myView.ChatTextStyle : text_style
+  com.chrisjaunes.communication.client.account.model.AccountView o-- com.chrisjaunes.communication.client.account.model.AccountRaw : accountRaw
+  com.chrisjaunes.communication.client.account.model.AccountView o-- com.chrisjaunes.communication.client.myView.ChatTextStyleView : chatTextStyleView
+  com.chrisjaunes.communication.client.account.model.AccountViewManage o-- com.chrisjaunes.communication.client.account.model.AccountView : accountView
+  com.chrisjaunes.communication.client.contacts.AddContactsFragment -up-|> androidx.fragment.app.Fragment
+  com.chrisjaunes.communication.client.contacts.ContactsViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.contacts.ContactsViewModel o-- com.chrisjaunes.communication.client.contacts.model.ContactsDao : contactsDao
+  com.chrisjaunes.communication.client.contacts.ContactsViewModel o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.contacts.NewContactsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.contacts.NewContactsAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.contacts.NewContactsAdapter o-- com.chrisjaunes.communication.client.contacts.NewContactsAdapter.ItemOnClickListener : itemOnClickListener
+  com.chrisjaunes.communication.client.contacts.NewContactsFragment -up-|> androidx.fragment.app.Fragment
+  com.chrisjaunes.communication.client.contacts.NowContactsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.contacts.NowContactsAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.contacts.NowContactsAdapter o-- com.chrisjaunes.communication.client.contacts.NowContactsAdapter.ItemOnClickListener : itemOnClickListener
+  com.chrisjaunes.communication.client.contacts.NowContactsFragment -up-|> androidx.fragment.app.Fragment
+  com.chrisjaunes.communication.client.contacts.model.ContactsDao_Impl .up.|> com.chrisjaunes.communication.client.contacts.model.ContactsDao
+  com.chrisjaunes.communication.client.contacts.model.ContactsView o-- com.chrisjaunes.communication.client.myView.ChatTextStyleView : chatTextStyleView
+  com.chrisjaunes.communication.client.contacts.model.ContactsView o-- com.chrisjaunes.communication.client.contacts.model.ContactsRaw : contactsRaw
+  com.chrisjaunes.communication.client.contacts.model.ContactsViewManage o-- com.chrisjaunes.communication.client.contacts.model.ContactsDao : contactsDao
+  com.chrisjaunes.communication.client.group.GAddAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.group.GAddAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.group.GAddFragment -up-|> androidx.fragment.app.Fragment
+  com.chrisjaunes.communication.client.group.GAddViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.group.GListAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.group.GListAdapter o-- com.chrisjaunes.communication.client.group.GListAdapter.ItemOnClickListener : itemOnClickListener
+  com.chrisjaunes.communication.client.group.GListFragment -up-|> androidx.fragment.app.Fragment
+  com.chrisjaunes.communication.client.group.GListViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.group.GListViewModel o-- com.chrisjaunes.communication.client.group.model.GroupDao : gListDao
+  com.chrisjaunes.communication.client.group.GMessageActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.group.GMessageActivity o-- com.chrisjaunes.communication.client.group.GMessageViewModel : groupViewModel
+  com.chrisjaunes.communication.client.group.GMessageAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.account.model.AccountViewManage : accountViewManage
+  com.chrisjaunes.communication.client.group.GMessageAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsViewManage : contactsViewManage
+  com.chrisjaunes.communication.client.group.GMessageViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.group.GMessageViewModel o-- com.chrisjaunes.communication.client.group.model.GroupDao : gMessageDao
+  com.chrisjaunes.communication.client.group.model.GInfoView o-- com.chrisjaunes.communication.client.group.model.GInfo : gInfo
+  com.chrisjaunes.communication.client.group.model.GroupDao_Impl .up.|> com.chrisjaunes.communication.client.group.model.GroupDao
+  com.chrisjaunes.communication.client.myView.AvatarCircleView -up-|> androidx.appcompat.widget.AppCompatImageView
+  com.chrisjaunes.communication.client.myView.ChatBoxView -up-|> android.view.View
+  com.chrisjaunes.communication.client.myView.ChatTextView -up-|> android.view.View
+  com.chrisjaunes.communication.client.talk.TMessageDao_Impl .up.|> com.chrisjaunes.communication.client.talk.TMessageDao
+  com.chrisjaunes.communication.client.talk.TalkActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.chrisjaunes.communication.client.talk.TalkActivity o-- com.chrisjaunes.communication.client.talk.TalkViewModel : talkViewModel
+  com.chrisjaunes.communication.client.talk.TalkAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.chrisjaunes.communication.client.talk.TalkAdapter o-- com.chrisjaunes.communication.client.contacts.model.ContactsView : contactsView
+  com.chrisjaunes.communication.client.talk.TalkViewModel -up-|> androidx.lifecycle.ViewModel
+  com.chrisjaunes.communication.client.talk.TalkViewModel o-- com.chrisjaunes.communication.client.talk.TMessageDao : tMessageDao
+  com.chrisjaunes.communication.client.utils.UniApiResult o-- T : data
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

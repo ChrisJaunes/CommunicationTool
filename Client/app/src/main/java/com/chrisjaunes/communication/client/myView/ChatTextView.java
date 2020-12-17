@@ -229,7 +229,7 @@ public class ChatTextView extends View {
         invalidate();
     }
     // 更改颜色
-    public void setMyColor(ChatTextStyle chatTextStyle){
+    public void setMyColor(ChatTextStyleRaw chatTextStyle){
         this.text_color = Color.parseColor(chatTextStyle.font_color);
         this.border_color = Color.parseColor(chatTextStyle.border_color);
         this.bubble_color = Color.parseColor(chatTextStyle.bubble_color);

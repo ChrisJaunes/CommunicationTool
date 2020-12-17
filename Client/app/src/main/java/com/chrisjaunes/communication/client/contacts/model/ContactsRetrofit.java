@@ -1,8 +1,6 @@
 package com.chrisjaunes.communication.client.contacts.model;
 
-import com.chrisjaunes.communication.client.group.model.GInfo;
 import com.chrisjaunes.communication.client.group.model.GMessage;
-import com.chrisjaunes.communication.client.group.model.GroupConfig;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
 import java.util.List;
@@ -10,7 +8,6 @@ import java.util.List;
 import io.reactivex.Flowable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -34,4 +31,7 @@ public interface ContactsRetrofit {
                               @Field(ContactsConfig.STR_TIME) String time,
                               @Field(ContactsConfig.STR_OPERATION) String operation);
 
+    @FormUrlEncoded
+    @POST(ContactsConfig.URL_CONTACTS_QUERY_ACCOUNT)
+    Call<ResponseBody> queryAccount(@Field(ContactsConfig.STR_CONTACTS_ACCOUNT) String account);
 }

@@ -3,6 +3,7 @@ package com.chrisjaunes.communication.client.contacts.model;
 public class ContactsConfig {
     public static final String URL_CONTACTS_QUERY = "contacts/query";
     public static final String URL_CONTACTS_UPDATE = "contacts/update";
+    public static final String URL_CONTACTS_QUERY_ACCOUNT = "contacts/query/account";
     public static final String STATUS_QUERY_SUCCESSFUL = "query successful";
     public static final String STATUS_UPDATE_SUCCESSFUL = "update successful";
     public static final int CONTACTS_FRIENDS_NULL_CODE = 0;

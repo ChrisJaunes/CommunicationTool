@@ -53,7 +53,7 @@ title __MODEL's Class Diagram__\n
   namespace com.chrisjaunes.communication.client {
     namespace account {
       namespace model {
-        class com.chrisjaunes.communication.client.account.model.AccountViewManage {
+        class com.chrisjaunes.communication.client.account.AccountViewManage {
             {static} - instance : AccountViewManage
             + getAccountView()
             {static} + getInstance()
@@ -65,12 +65,12 @@ title __MODEL's Class Diagram__\n
   }
   
 
-  com.chrisjaunes.communication.client.account.model.AccountRaw o-- com.chrisjaunes.communication.client.myView.ChatTextStyle : text_style
+  com.chrisjaunes.communication.client.account.model.AccountRaw o-- com.chrisjaunes.communication.client.myView.ChatTextStyleRaw : text_style
   com.chrisjaunes.communication.client.account.model.AccountRaw +-down- com.chrisjaunes.communication.client.account.model.AccountRaw.Builder
   com.chrisjaunes.communication.client.account.model.AccountRaw.Builder o-- com.chrisjaunes.communication.client.account.model.AccountRaw : account
   com.chrisjaunes.communication.client.account.model.AccountView o-- com.chrisjaunes.communication.client.account.model.AccountRaw : accountRaw
   com.chrisjaunes.communication.client.account.model.AccountView o-- com.chrisjaunes.communication.client.myView.ChatTextStyleView : chatTextStyleView
-  com.chrisjaunes.communication.client.account.model.AccountViewManage o-- com.chrisjaunes.communication.client.account.model.AccountView : accountView
+  com.chrisjaunes.communication.client.account.AccountViewManage o-- com.chrisjaunes.communication.client.account.model.AccountView : accountView
 
 
 right footer

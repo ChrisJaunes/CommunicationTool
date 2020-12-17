@@ -2,19 +2,23 @@ package com.chrisjaunes.communication.client.account.model;
 
 import androidx.annotation.NonNull;
 
-import com.chrisjaunes.communication.client.myView.ChatTextStyle;
+import com.chrisjaunes.communication.client.myView.ChatTextStyleRaw;
 
 /**
- * @author ChrisJaunes
  * 采用了建造者模式
+ * version 1.1: 使用了建造者模式
+ * version 1.2: 将ChatTextStyleRaw和AccountRaw分开
+ * version 1.3：将AccountRaw的构造函数设为私有，确保只能使用Builder创建
+ * @author ChrisJaunes
+ * @version 1.3(2020-12-18)
  */
 public class AccountRaw {
-    static public final long  LIMIT_AVATAR_LEN = 4294967295L;
     public String account;
     public String nickname;
     public String avatar;
-    public ChatTextStyle text_style;
+    public ChatTextStyleRaw text_style;
 
+    private AccountRaw(){}
     public static class Builder{
         private final AccountRaw account;
         public Builder() {
@@ -22,7 +26,7 @@ public class AccountRaw {
             account.account = "";
             account.nickname = "";
             account.avatar = "";
-            account.text_style = new ChatTextStyle();
+            account.text_style = ChatTextStyleRaw.CHAT_TEXT_STYLE_RAW_DEFAULT;
         }
         public Builder setAccount(String account) {
             this.account.account = account;
@@ -36,7 +40,7 @@ public class AccountRaw {
             account.avatar = avatar;
             return this;
         }
-        public Builder setChatTextStyle(ChatTextStyle textStyle) {
+        public Builder setChatTextStyle(ChatTextStyleRaw textStyle) {
             account.text_style = textStyle;
             return this;
         }
@@ -54,9 +58,5 @@ public class AccountRaw {
                 ", avatar='" + avatar + '\'' +
                 ", text_style=" + text_style +
                 '}';
-    }
-
-    public boolean check() {
-        return account != null;
     }
 }

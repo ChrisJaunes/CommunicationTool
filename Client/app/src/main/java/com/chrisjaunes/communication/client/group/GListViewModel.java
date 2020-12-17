@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
-import com.chrisjaunes.communication.client.group.model.GInfo;
+import com.chrisjaunes.communication.client.group.model.GInfoRaw;
 import com.chrisjaunes.communication.client.group.model.GroupConfig;
 import com.chrisjaunes.communication.client.group.model.GroupDao;
 import com.chrisjaunes.communication.client.group.model.GroupRetrofit;
@@ -22,24 +22,27 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+/**
+ * TODO 基本上本地数据库部分都没有写
+ * 基于RxJava 和 Retrofit
+ * @author ChrisJaunes
+ * @version 1
+ */
 public class GListViewModel extends ViewModel {
     final private MutableLiveData<UniApiResult<String>> uniApiResult = new MutableLiveData<>();
     public LiveData<UniApiResult<String>> getUniApiResult() { return uniApiResult; }
-    final private  MutableLiveData<List<GInfo>> GInfoList = new MutableLiveData<>();
-    public LiveData<List<GInfo>> getGInfoList() { return GInfoList; }
+    final private  MutableLiveData<List<GInfoRaw>> GInfoList = new MutableLiveData<>();
+    public LiveData<List<GInfoRaw>> getGInfoList() { return GInfoList; }
 
     private final GroupDao gListDao;
     private final CompositeDisposable compositeDisposable;
 
     public GListViewModel() {
-        this.gListDao = MyApplication.getInstance().getLocalDataBase().getGroupDao();
+        gListDao = MyApplication.getInstance().getLocalDataBase().getGroupDao();
         this.compositeDisposable = new CompositeDisposable();
     }
 
-    //查询本地 群聊
-    public void queryLocalGroups(){
-//        Log.d("ChatGroupViewModel","queryLocalGroups");
+    public void queryLocalGroups() {
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -49,11 +52,10 @@ public class GListViewModel extends ViewModel {
 //        }).start();
     }
 
-    // 查询服务器 群聊
     public void queryServer() {
-        String sendTime = TimeHelper.getNowTime();
+        //String sendTime = TimeHelper.getNowTime();
         if (compositeDisposable != null && ! compositeDisposable.isDisposed()) {
-            ResourceSubscriber<UniApiResult<List<GInfo>>> addMessage = HttpHelper.getRetrofitBuilder()
+            ResourceSubscriber<UniApiResult<List<GInfoRaw>>> addMessage = HttpHelper.getRetrofitBuilder()
                     .baseUrl(Config.URL_BASE)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -62,9 +64,9 @@ public class GListViewModel extends ViewModel {
                     .query()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new ResourceSubscriber<UniApiResult<List<GInfo>>>() {
+                    .subscribeWith(new ResourceSubscriber<UniApiResult<List<GInfoRaw>>>() {
                         @Override
-                        public void onNext(UniApiResult<List<GInfo>> listUniApiResult) {
+                        public void onNext(UniApiResult<List<GInfoRaw>> listUniApiResult) {
                             uniApiResult.postValue(new UniApiResult<>(listUniApiResult.status, ""));
                             if(GroupConfig.STATUS_QUERY_GROUP_SUCCESSFUL.equals(listUniApiResult.status)) {
                                 GInfoList.postValue(listUniApiResult.data);

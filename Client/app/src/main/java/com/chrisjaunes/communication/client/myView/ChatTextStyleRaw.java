@@ -2,22 +2,23 @@ package com.chrisjaunes.communication.client.myView;
 
 import androidx.annotation.NonNull;
 
-import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ChatTextStyle {
+public class ChatTextStyleRaw {
     private static final String STR_FONT_COLOR = "font_color";
     private static final String STR_BUBBLE_COLOR = "bubble_color";
     private static final String STR_BORDER_COLOR = "border_color";
     private static final String DEFAULT_FONT_COLOR = "#ff000000";
     private static final String DEFAULT_BUBBLE_COLOR = "#ffffffff";
     private static final String DEFAULT_BORDER_COLOR = "#ffffffff";
-    public String font_color = ChatTextStyle.DEFAULT_FONT_COLOR;
-    public String bubble_color = ChatTextStyle.DEFAULT_BUBBLE_COLOR;
-    public String border_color = ChatTextStyle.DEFAULT_BORDER_COLOR;
+    public static ChatTextStyleRaw CHAT_TEXT_STYLE_RAW_DEFAULT = new ChatTextStyleRaw();
+
+    public String font_color = ChatTextStyleRaw.DEFAULT_FONT_COLOR;
+    public String bubble_color = ChatTextStyleRaw.DEFAULT_BUBBLE_COLOR;
+    public String border_color = ChatTextStyleRaw.DEFAULT_BORDER_COLOR;
 
     @NonNull
     @Override
@@ -34,8 +35,8 @@ public class ChatTextStyle {
         return gson.toJson(this);
     }
 
-    public static ChatTextStyle valueOf(String json) {
-        ChatTextStyle chatTextStyle = new ChatTextStyle();
+    public static ChatTextStyleRaw valueOf(String json) {
+        ChatTextStyleRaw chatTextStyle = new ChatTextStyleRaw();
         try {
             if (null == json) json = "{}";
             JSONObject jsonO = new JSONObject(json);
@@ -52,10 +53,10 @@ public class ChatTextStyle {
     }
 
     public static class Builder {
-        ChatTextStyle chatTextStyle;
+        ChatTextStyleRaw chatTextStyle;
 
         public Builder() {
-            chatTextStyle = new ChatTextStyle();
+            chatTextStyle = new ChatTextStyleRaw();
         }
 
         public Builder addChatFontColor(String color) {
@@ -73,7 +74,7 @@ public class ChatTextStyle {
             return this;
         }
 
-        ChatTextStyle build() {
+        ChatTextStyleRaw build() {
             return chatTextStyle;
         }
     }

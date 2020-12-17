@@ -9,7 +9,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 
 import com.chrisjaunes.communication.client.R;
-import com.chrisjaunes.communication.client.myView.ChatTextStyle;
+import com.chrisjaunes.communication.client.myView.ChatTextStyleRaw;
 
 /**
  * @author Chris
@@ -23,14 +23,14 @@ public class DialogHelper {
         public logoutDialog(@NonNull Context context, int themeResId, LogoutListener listener) {
             super(context, themeResId);
             setContentView(R.layout.dialog_logout);
-            findViewById(R.id.btn_yes).setOnClickListener(v -> listener.logout());
+            findViewById(R.id.btn_yes).setOnClickListener(v -> {listener.logout(); dismiss();});
             findViewById(R.id.btn_no).setOnClickListener(v -> dismiss());
         }
     }
 
     public static class SelectTextStyleColorDialog extends Dialog {
         public interface UpdateListener {
-            void update(ChatTextStyle textStyle);
+            void update(ChatTextStyleRaw textStyle);
         }
         public SelectTextStyleColorDialog(@NonNull Context context, UpdateListener listener) {
             super(context);
@@ -51,7 +51,7 @@ public class DialogHelper {
             sp_border_color.setOnItemSelectedListener(new ColorTrHelper.ColorSelectedListener(vi_border_color));
 
             findViewById(R.id.btn_confirm).setOnClickListener(v -> {
-                ChatTextStyle textStyle = new ChatTextStyle();
+                ChatTextStyleRaw textStyle = new ChatTextStyleRaw();
                 textStyle.font_color = ColorTrHelper.colorToString(((ColorDrawable) vi_font_color.getBackground()).getColor());
                 textStyle.bubble_color = ColorTrHelper.colorToString(((ColorDrawable) vi_bubble_color.getBackground()).getColor());
                 textStyle.border_color = ColorTrHelper.colorToString(((ColorDrawable) vi_border_color.getBackground()).getColor());

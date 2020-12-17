@@ -5,7 +5,7 @@ title __MODEL's Class Diagram__\n
   namespace com.chrisjaunes.communication.client {
     namespace group {
       namespace model {
-        class com.chrisjaunes.communication.client.group.model.GInfo {
+        class com.chrisjaunes.communication.client.group.model.GInfoRaw {
             - group : int
             - group_avatar : String
             - group_name : String
@@ -127,7 +127,7 @@ title __MODEL's Class Diagram__\n
   }
   
 
-  com.chrisjaunes.communication.client.group.model.GInfoView o-- com.chrisjaunes.communication.client.group.model.GInfo : gInfo
+  com.chrisjaunes.communication.client.group.model.GInfoView o-- com.chrisjaunes.communication.client.group.model.GInfoRaw : gInfo
 
 
 right footer

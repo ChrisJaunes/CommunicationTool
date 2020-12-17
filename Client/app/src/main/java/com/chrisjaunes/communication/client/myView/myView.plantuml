@@ -58,7 +58,7 @@ title __MYVIEW's Class Diagram__\n
 
   namespace com.chrisjaunes.communication.client {
     namespace myView {
-      class com.chrisjaunes.communication.client.myView.ChatTextStyle {
+      class com.chrisjaunes.communication.client.myView.ChatTextStyleRaw {
           + border_color : String
           + bubble_color : String
           + font_color : String
@@ -78,7 +78,7 @@ title __MYVIEW's Class Diagram__\n
 
   namespace com.chrisjaunes.communication.client {
     namespace myView {
-      class com.chrisjaunes.communication.client.myView.ChatTextStyle.Builder {
+      class com.chrisjaunes.communication.client.myView.ChatTextStyleRaw.Builder {
           + Builder()
           + addChatBorderColor()
           + addChatBubbleColor()
@@ -154,8 +154,8 @@ title __MYVIEW's Class Diagram__\n
 
   com.chrisjaunes.communication.client.myView.AvatarCircleView -up-|> androidx.appcompat.widget.AppCompatImageView
   com.chrisjaunes.communication.client.myView.ChatBoxView -up-|> android.view.View
-  com.chrisjaunes.communication.client.myView.ChatTextStyle +-down- com.chrisjaunes.communication.client.myView.ChatTextStyle.Builder
-  com.chrisjaunes.communication.client.myView.ChatTextStyle.Builder o-- com.chrisjaunes.communication.client.myView.ChatTextStyle : chatTextStyle
+  com.chrisjaunes.communication.client.myView.ChatTextStyleRaw +-down- com.chrisjaunes.communication.client.myView.ChatTextStyleRaw.Builder
+  com.chrisjaunes.communication.client.myView.ChatTextStyleRaw.Builder o-- com.chrisjaunes.communication.client.myView.ChatTextStyleRaw : chatTextStyle
   com.chrisjaunes.communication.client.myView.ChatTextView -up-|> android.view.View
 
 
