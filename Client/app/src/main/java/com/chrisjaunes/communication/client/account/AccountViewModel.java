@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.myView.ChatTextStyleRaw;
+import com.chrisjaunes.communication.client.myView.ChatTextStyleView;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
@@ -72,7 +73,7 @@ public class AccountViewModel extends ViewModel {
                 Log.v("Login", res.status);
                 result.postValue(res);
                 if(Config.STATUS_UPDATE_SUCCESSFUL.equals(res.status))
-                    AccountViewManage.getInstance().getAccountView().setAvatarView(avatar);
+                    AccountViewManage.getInstance().setAvatarView(avatar);
             }
         });
     }
@@ -105,9 +106,13 @@ public class AccountViewModel extends ViewModel {
                 assert response.body() != null;
                 String jsonS = response.body().string();
                 Gson gson = new Gson();
-                UniApiResult<String> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<String>>() {
-                }.getType());
+                UniApiResult<String> res = gson.fromJson(
+                        jsonS, new TypeToken<UniApiResult<String>>() {}.getType()
+                );
                 result.postValue(res);
+                if(Config.STATUS_UPDATE_SUCCESSFUL.equals(res.status))
+                    AccountViewManage.getInstance().getAccountView()
+                            .setChatTextStyleView(ChatTextStyleView.valueOf(textStyle));
             }
         });
     }

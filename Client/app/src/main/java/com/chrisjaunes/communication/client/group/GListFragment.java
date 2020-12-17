@@ -32,7 +32,7 @@ public class GListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_add_group, container, false);
+        return inflater.inflate(R.layout.fragment_now_group, container, false);
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

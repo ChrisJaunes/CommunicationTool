@@ -56,6 +56,7 @@ public class DialogHelper {
                 textStyle.bubble_color = ColorTrHelper.colorToString(((ColorDrawable) vi_bubble_color.getBackground()).getColor());
                 textStyle.border_color = ColorTrHelper.colorToString(((ColorDrawable) vi_border_color.getBackground()).getColor());
                 listener.update(textStyle);
+                dismiss();
             });
         }
     }

@@ -43,6 +43,7 @@ public class AccountView {
     public String getNickName() {
         return accountRaw.nickname;
     }
+    // HINT only be used by AccountViewManage
     public void setAvatarView(@NonNull final Bitmap bitmap) {
         this.avatarView = bitmap;
     }

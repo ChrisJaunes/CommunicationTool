@@ -1,6 +1,10 @@
 package com.chrisjaunes.communication.client.account;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.account.model.AccountView;
@@ -19,12 +23,22 @@ public class AccountViewManage {
         return instance;
     }
 
+    private final MutableLiveData<AccountView> accountViewMutableLiveData = new MutableLiveData<>();
+    public LiveData<AccountView> getAccountViewLiveData() {
+        return accountViewMutableLiveData;
+    }
+
     private AccountView accountView;
     public void setAccount(@NonNull final AccountRaw accountRaw) {
         this.accountView = new AccountView(accountRaw);
+        accountViewMutableLiveData.postValue(accountView);
     }
     public AccountView getAccountView() {
         assert null != accountView;
         return accountView;
+    }
+    public void setAvatarView(@NonNull final Bitmap bitmap) {
+        accountView.setAvatarView(bitmap);
+        accountViewMutableLiveData.postValue(accountView);
     }
 }

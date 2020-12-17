@@ -65,6 +65,7 @@ public class GAddFragment extends Fragment {
             Toast.makeText(getActivity(),stringUniApiResult.data,Toast.LENGTH_SHORT).show();
             if (stringUniApiResult instanceof UniApiResult.Fail)
                 Log.e("NowContacts[uniApiResult]", ((UniApiResult.Fail) stringUniApiResult).error);
+            createGroupName.setText("");
             requireActivity().onBackPressed();
         });
         contactsViewModel.getNowContactsListResult().observe(getViewLifecycleOwner(), stringContactsList -> {

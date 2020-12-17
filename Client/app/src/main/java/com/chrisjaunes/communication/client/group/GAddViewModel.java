@@ -6,12 +6,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.group.model.GroupConfig;
 import com.chrisjaunes.communication.client.group.model.GroupRetrofit;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
+import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class GAddViewModel extends ViewModel {
     // TODO 添加群聊
     public void addGroup(final String groupName, List<String> groupMember) {
         Retrofit retrofit = HttpHelper.getRetrofitBuilder().baseUrl(Config.URL_BASE).build();
-        Call<ResponseBody> call = retrofit.create(GroupRetrofit.class).addGroup(groupName, groupMember.toString());
+        Call<ResponseBody> call = retrofit.create(GroupRetrofit.class).addGroup(groupName, new Gson().toJson(groupMember));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
