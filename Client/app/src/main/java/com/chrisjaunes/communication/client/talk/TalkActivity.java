@@ -93,8 +93,7 @@ public class TalkActivity extends AppCompatActivity {
             talkAdapter.addMessageList(TMessageList);
             if(messageList.size() != 0) {rvTalkMessage.scrollToPosition(messageList.size() - 1);}
         });
-        talkViewModel.queryLocalMessageList();
-        // DONE getContactsViewLiveData
+        // TODO getContactsViewLiveData use ContactsViewManage and no use LiveData
         final MutableLiveData<ContactsView> contactsViewLiveData = new MutableLiveData<>();
         new Thread(()-> contactsViewLiveData.postValue(
                 new ContactsView(MyApplication.getInstance().getLocalDataBase().getContactsDao().queryContactsByAccountID(contacts_account))
@@ -105,6 +104,7 @@ public class TalkActivity extends AppCompatActivity {
             talkAdapter.contactsView = contactsView;
             talkAdapter.notifyDataSetChanged();
         });
+        new Thread(talkViewModel::queryLocalMessageList).start();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,12 +126,9 @@ public class TalkActivity extends AppCompatActivity {
     }
     @SuppressLint("NonConstantResourceId")
     private final Toolbar.OnMenuItemClickListener toolbarOnMenuItemClickListener = item -> {
-        switch (item.getItemId()){
-            case  R.id.action_dial:
-                Log.i("TalkActivity", "dial");
-                Toast.makeText(getApplicationContext(),"add",Toast.LENGTH_SHORT).show();
-                break;
-            default:break;
+        if (item.getItemId() == R.id.action_dial) {
+            Log.i("TalkActivity", "dial");
+            Toast.makeText(getApplicationContext(), "add", Toast.LENGTH_SHORT).show();
         }
         return true;
     };

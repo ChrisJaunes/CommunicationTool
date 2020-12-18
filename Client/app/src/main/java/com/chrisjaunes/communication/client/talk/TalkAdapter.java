@@ -15,6 +15,7 @@ import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountView;
 import com.chrisjaunes.communication.client.account.AccountViewManage;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
+import com.chrisjaunes.communication.client.group.model.GMessage;
 import com.chrisjaunes.communication.client.myView.ChatTextView;
 
 import java.util.List;
@@ -65,10 +66,9 @@ public class TalkAdapter extends  RecyclerView.Adapter<TalkAdapter.ViewHolder>{
         Log.v("TalkAdapter", "" + contactsView.getAvatarView());
     }
     public void addMessageList(@NonNull List<TMessage> newMessageList) {
-        for (TMessage tMessage : newMessageList) {
-            messageList.add(messageList.size(), tMessage);
-            notifyItemChanged(messageList.size());
-        }
+        messageList.clear();
+        messageList.addAll(newMessageList);
+        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {

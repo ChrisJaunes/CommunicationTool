@@ -47,7 +47,7 @@ public class TalkViewModel extends ViewModel {
     }
 
     public void queryLocalMessageList() {
-        new Thread(() -> TMessageList.postValue(tMessageDao.queryMessageAboutTalk(contacts_account))).start();
+        TMessageList.postValue(tMessageDao.queryMessageAboutTalk(contacts_account));
     }
     public void updateMessage(final int type, final String content) {
         final String lastTime = TimeHelper.getNowTime();
@@ -84,9 +84,10 @@ public class TalkViewModel extends ViewModel {
                         TMessage tMessage = new TMessage(AccountViewManage.getInstance().getAccountView().getAccount(),
                                 contacts_account, lastTime, type, content);
                         tMessageDao.InsertMessage(tMessage);
-                        List<TMessage> newTMessages = new ArrayList<>();
-                        newTMessages.add(tMessage);
-                        TMessageList.postValue(newTMessages);
+                        //List<TMessage> newTMessages = new ArrayList<>();
+                        //newTMessages.add(tMessage);
+                        //TMessageList.postValue(newTMessages);
+                        new Thread(TalkViewModel.this::queryLocalMessageList).start();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -96,7 +97,7 @@ public class TalkViewModel extends ViewModel {
     }
     public void queryServer() {
         //String lastTime = getLastUpdateMessageTime();
-        final String lastTime = "0000-00-00 00:00:00";
+        final String lastTime = "2020-11-17 00:00:00";
         final OkHttpClient client = HttpHelper.getOkHttpClient();
         final RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_TIME, lastTime)
@@ -117,21 +118,23 @@ public class TalkViewModel extends ViewModel {
                     uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_NET, String.valueOf(response.code())));
                     return;
                 }
+                assert response.body() != null;
                 String resJson = response.body().string();
                 try {
                     JSONObject jsonO = new JSONObject(resJson);
                     uniApiResult.postValue(new UniApiResult<>(jsonO.getString(Config.STR_STATUS), ""));
 
                     JSONArray jsonA = (JSONArray) jsonO.get(Config.STR_STATUS_DATA);
-                    List<TMessage> newTMessages = new ArrayList<>();
+//                    List<TMessage> newTMessages = new ArrayList<>();
                     for (int i = 0; i < jsonA.length(); ++i) {
                         TMessage message = TMessage.jsonToTMessage((JSONObject) jsonA.get(i));
                         if (!tMessageDao.isMessageExist(message.getAccount1(), message.getAccount2(),message.getSendTime())) {
                             tMessageDao.InsertMessage(message);
-                            newTMessages.add(message);
+//                            newTMessages.add(message);
                         }
                     }
-                    TMessageList.postValue(newTMessages);
+//                    TMessageList.postValue(newTMessages);
+                    new Thread(TalkViewModel.this::queryLocalMessageList).start();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
