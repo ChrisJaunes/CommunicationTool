@@ -34,7 +34,6 @@ public class MyApplication extends Application {
     }
 
     public void logout() {
-        //setAccount(AccountRaw.ACCOUNT_RAW_DEFAULT);
         localDatabase = null;
     }
 }

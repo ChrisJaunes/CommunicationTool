@@ -48,6 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
+            android:background="@drawable/login_edit_bg"
             android:textSize="22sp"
             android:hint="@string/talk_send_message_hint"
             android:inputType="text"
@@ -57,12 +58,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
+            android:background="@drawable/login_btn_bg"
             android:text="@string/btn_send"/>
         <Button
             android:id="@+id/btn_send_img"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
+            android:background="@drawable/login_btn_bg"
             android:text="@string/btn_send_img"/>
     </LinearLayout>
 </LinearLayout>

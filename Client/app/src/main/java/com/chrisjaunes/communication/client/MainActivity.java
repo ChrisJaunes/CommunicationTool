@@ -19,15 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.chrisjaunes.communication.client.account.AccountViewManage;
 import com.chrisjaunes.communication.client.account.AccountViewModel;
 import com.chrisjaunes.communication.client.account.LoginActivity;
-import com.chrisjaunes.communication.client.account.AccountViewManage;
-import com.chrisjaunes.communication.client.account.model.AccountView;
 import com.chrisjaunes.communication.client.contacts.AddContactsFragment;
 import com.chrisjaunes.communication.client.contacts.ContactsViewModel;
 import com.chrisjaunes.communication.client.contacts.NewContactsFragment;
@@ -41,7 +38,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class MainActivity extends AppCompatActivity {
     private final static int MENU_AVATAR = 0;

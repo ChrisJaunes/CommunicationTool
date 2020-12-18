@@ -87,7 +87,7 @@ public class Add extends HttpServlet {
                     sqlOperation.append(sql_row);
                     params.add(o);
                 }
-                Log.info(sql + "|" + rs.getString(1) + "|" + sqlOperation.toString());
+                Log.info(sql + "|" + rs.getString(1) + "|" + sqlOperation.toString()+"|"+params.size());
                 // DONE insert all member;
                 preStmt = conn.prepareStatement(sqlOperation.toString());
                 DBHelper.setParams(preStmt, params);
