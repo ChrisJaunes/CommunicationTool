@@ -46,6 +46,8 @@ public class Login extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String account = request.getParameter(STR_ACCOUNT);
 		String password = request.getParameter(STR_PASSWORD);
 		assert null != account && null != password;
@@ -79,7 +81,7 @@ public class Login extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		Log.info(resJson.toString());
+		//Log.info(resJson.toString());
 		response.setContentType("application/json");
 		response.getWriter().append(resJson.toString()).flush();
 	}

@@ -1,5 +1,6 @@
 package com.chrisjaunes.communication.client.account;
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -7,8 +8,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
+import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
+import com.chrisjaunes.communication.client.utils.MD5Helper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,11 +45,12 @@ public class LoginViewModel extends ViewModel {
     public LiveData<AccountRaw> getAccountRawLiveData() {return accountRawLiveData;}
 
     public void login(final String account,final String password) {
+        final String password_e = MD5Helper.MD5(password);
         OkHttpClient client = HttpHelper.getOkHttpClient();
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(STR_ACCOUNT,  account)
-                .add(STR_PASSWORD, password)
+                .add(STR_PASSWORD, password_e)
                 .build();
 
         Request request = new okhttp3.Request.Builder()
@@ -68,11 +72,13 @@ public class LoginViewModel extends ViewModel {
                 }
                 assert response.body() != null;
                 String jsonS = response.body().string();
+                Log.d(">>", jsonS);
                 Gson gson = new Gson();
                 UniApiResult<AccountRaw> res = gson.fromJson(jsonS, new TypeToken<UniApiResult<AccountRaw>>() {}.getType());
                 uniApiResultLiveDate.postValue(new UniApiResult<>(res.status, res.status));
                 if (STATUS_LOGIN_SUCCESSFUL.equals(res.status)) {
                     accountRawLiveData.postValue(res.data);
+                    MyApplication.getInstance().setLoginAuto(account, password);
                 }
             }
         });

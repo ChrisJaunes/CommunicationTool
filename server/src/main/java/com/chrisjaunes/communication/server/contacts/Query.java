@@ -41,6 +41,8 @@ public class Query extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
         String requestTime = request.getParameter(ContactsConfig.STR_TIME);
         Log.info(String.format("account : %s, time : %s", account, requestTime));

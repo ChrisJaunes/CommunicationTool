@@ -43,6 +43,8 @@ public class Register extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String account = request.getParameter(Config.STR_ACCOUNT);
 		String password = request.getParameter(Config.STR_PASSWORD);
 		String nickname  = request.getParameter(Config.STR_NICKNAME);
@@ -78,7 +80,7 @@ public class Register extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		Log.info(resJson.toString());
+		//Log.info(resJson.toString());
 		response.setContentType("application/json");
 		response.getWriter().append(resJson.toString()).flush();
 	}

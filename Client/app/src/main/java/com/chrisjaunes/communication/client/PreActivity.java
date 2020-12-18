@@ -17,9 +17,6 @@ public class PreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre);
         SharedPreferences sharedPreferences = getSharedPreferences("login_account", Context.MODE_PRIVATE);
-//        if (sharedPreferences.contains()) {
-//
-//        }
         String login_account = sharedPreferences.getString(LoginActivity.STR_AUTO_LOGIN_ACCOUNT, "111");
         String login_password = sharedPreferences.getString(LoginActivity.STR_AUTO_LOGIN_PASSWORD, "111");
         boolean login_auto = sharedPreferences.getBoolean(LoginActivity.STR_AUTO_LOGIN, false);

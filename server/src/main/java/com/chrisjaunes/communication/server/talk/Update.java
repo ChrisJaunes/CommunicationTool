@@ -38,6 +38,8 @@ public class Update extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
 		String account2 = request.getParameter(Config.STR_ACCOUNT2);
 		String sendTime = request.getParameter(Config.STR_SEND_TIME);

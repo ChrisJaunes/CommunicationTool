@@ -1,9 +1,12 @@
 package com.chrisjaunes.communication.client;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.room.Room;
 
+import com.chrisjaunes.communication.client.account.LoginActivity;
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.account.AccountViewManage;
 
@@ -35,6 +38,19 @@ public class MyApplication extends Application {
 
     public void logout() {
         localDatabase = null;
+        SharedPreferences.Editor editor = getSharedPreferences("login_account", Context.MODE_PRIVATE).edit();
+        editor.putString(LoginActivity.STR_AUTO_LOGIN_ACCOUNT, "");
+        editor.putString(LoginActivity.STR_AUTO_LOGIN_PASSWORD, "");
+        editor.putBoolean(LoginActivity.STR_AUTO_LOGIN, false);
+        editor.apply();
+    }
+
+    public void setLoginAuto(final String account, final String password) {
+        SharedPreferences.Editor editor = getSharedPreferences("login_account", Context.MODE_PRIVATE).edit();
+        editor.putString(LoginActivity.STR_AUTO_LOGIN_ACCOUNT, account);
+        editor.putString(LoginActivity.STR_AUTO_LOGIN_PASSWORD, password);
+        editor.putBoolean(LoginActivity.STR_AUTO_LOGIN, true);
+        editor.apply();
     }
 }
 

@@ -51,6 +51,8 @@ public class AddMessage extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
         String groupId = request.getParameter(Config.STR_GROUP);
         String sendTime = request.getParameter(Config.STR_SEND_TIME);

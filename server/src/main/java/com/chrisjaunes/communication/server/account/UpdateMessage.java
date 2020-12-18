@@ -40,6 +40,8 @@ public class UpdateMessage extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
 		Log.info(String.format("account : %s", account));
 
@@ -79,7 +81,7 @@ public class UpdateMessage extends HttpServlet {
 						params.add(account);
 						DBHelper.executeOperate(sqlOperate, params);
 					}
-					Log.info(String.format("nickname : %s , avatar : %s, textStyle : %s", nickname, avatar, textStyle));
+					//Log.info(String.format("nickname : %s , avatar : %s, textStyle : %s", nickname, avatar, textStyle));
 					resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_SUCCESSFUL);
 				} else{
 					resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_FAIL);

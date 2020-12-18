@@ -75,6 +75,7 @@ public class TalkViewModel extends ViewModel {
                     return;
                 }
                 try {
+                    assert response.body() != null;
                     String resJson = response.body().string();
                     JSONObject jsonO = new JSONObject(resJson);
                     uniApiResult.postValue(new UniApiResult<>(jsonO.getString(Config.STR_STATUS), ""));

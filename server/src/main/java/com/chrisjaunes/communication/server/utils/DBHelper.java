@@ -37,7 +37,8 @@ public class DBHelper {
         try{
             DB_URL = "jdbc:mysql://localhost:3306/Communication?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8&useSSL=false";
 	        DB_USER = "root";
-	        DB_PASSWORD = "123456";
+	        DB_PASSWORD = "Passwd123!";
+//	        DB_PASSWORD = "123456";
 
             Class.forName(DRIVER_CLASS);
             Log.log(Level.INFO, "驱动加载成功");

@@ -50,6 +50,8 @@ public class Add extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String account = (String)request.getSession().getAttribute(Config.STR_ACCOUNT);
         String groupName = request.getParameter(Config.STR_GROUP_NAME);
         String groupMemberList = request.getParameter(Config.STR_GROUP_MEMBER_LIST);

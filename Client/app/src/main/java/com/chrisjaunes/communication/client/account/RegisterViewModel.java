@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
+import com.chrisjaunes.communication.client.utils.MD5Helper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,10 +39,11 @@ public class RegisterViewModel extends ViewModel {
 
     public void register(final AccountRaw account, final String password) {
         OkHttpClient client = HttpHelper.getOkHttpClient();
+        final String password_e = MD5Helper.MD5(password);
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(Config.STR_ACCOUNT, account.account)
-                .add(Config.STR_PASSWORD, password)
+                .add(Config.STR_PASSWORD, password_e)
                 .add(Config.STR_NICKNAME, account.nickname)
                 .add(Config.STR_AVATAR, account.avatar)
                 .add(Config.STR_TEXT_STYLE, account.text_style.toJson())

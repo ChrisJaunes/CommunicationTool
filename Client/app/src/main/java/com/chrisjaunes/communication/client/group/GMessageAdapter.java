@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountView;
 import com.chrisjaunes.communication.client.account.AccountViewManage;
@@ -43,22 +44,29 @@ public class GMessageAdapter extends RecyclerView.Adapter<GMessageAdapter.ViewHo
         GMessage message = messageList.get(position);
         final AccountView accountView = accountViewManage.getAccountView();
         final ContactsView contactsView = contactsViewManage.getContactsView(message.getAccount());
-
         holder.time.setText(message.getSendTime());
         if (accountView.getAccount().equals(message.getAccount())) {
             holder.layout_left.setVisibility(View.GONE);
             holder.layout_right.setVisibility(View.VISIBLE);
             holder.right_avatar.setImageBitmap(accountView.getAvatarView());
             holder.right_nickname.setText(accountView.getNickName());
-            holder.right_content.setMyText(message.getContent());
             holder.right_content.setMyColor(accountView.getChatTextStyleView());
+            if (message.getContentType() == 1) {
+                holder.right_content.setMyText(message.getContent());
+            } else {
+                holder.right_content.setMyText("非文本请等待之后的迭代");
+            }
         } else{
             holder.layout_left.setVisibility(View.VISIBLE);
             holder.layout_right.setVisibility(View.GONE);
             holder.left_avatar.setImageBitmap(contactsView.getAvatarView());
             holder.left_nickname.setText(contactsView.getNickName());
-            holder.left_content.setMyText(message.getContent());
             holder.left_content.setMyColor(contactsView.getChatTextStyleView());
+            if (message.getContentType() == 1) {
+                holder.left_content.setMyText(message.getContent());
+            } else {
+                holder.left_content.setMyText("非文本请等待之后的迭代");
+            }
         }
         Log.v("GroupAdapter", "!" + contactsView.getAvatarView());
     }

@@ -43,15 +43,23 @@ public class TalkAdapter extends  RecyclerView.Adapter<TalkAdapter.ViewHolder>{
             holder.layout_right.setVisibility(View.VISIBLE);
             holder.right_avatar.setImageBitmap(accountView.getAvatarView());
             holder.right_nickname.setText(accountView.getNickName());
-            holder.right_content.setMyText(message.getContent());
             holder.right_content.setMyColor(accountView.getChatTextStyleView());
+            if (message.getContent_type() == 1) {
+                holder.right_content.setMyText(message.getContent());
+            } else {
+                holder.right_content.setMyText("非文本请等待之后的迭代");
+            }
         } else {
             holder.layout_left.setVisibility(View.VISIBLE);
             holder.layout_right.setVisibility(View.GONE);
             holder.left_avatar.setImageBitmap(contactsView.getAvatarView());
             holder.left_nickname.setText(contactsView.getNickName());
-            holder.left_content.setMyText(message.getContent());
             holder.left_content.setMyColor(contactsView.getChatTextStyleView());
+            if (message.getContent_type() == 1) {
+                holder.left_content.setMyText(message.getContent());
+            } else {
+                holder.left_content.setMyText("非文本请等待之后的迭代");
+            }
         }
         Log.v("TalkAdapter", message.getAccount1() + message.getContent());
         Log.v("TalkAdapter", "" + contactsView.getAvatarView());
