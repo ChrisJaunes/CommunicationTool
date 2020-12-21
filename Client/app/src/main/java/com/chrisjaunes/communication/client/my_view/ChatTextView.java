@@ -1,4 +1,4 @@
-package com.chrisjaunes.communication.client.myView;
+package com.chrisjaunes.communication.client.my_view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,10 +10,14 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.chrisjaunes.communication.client.R;
+
+import java.util.HashMap;
 
 public class ChatTextView extends View {
     // textwidth
@@ -32,7 +36,7 @@ public class ChatTextView extends View {
     //左边
     private Boolean is_left;
     // 内容
-    private String text;
+    private String text = "";
     //字体大小
     private int text_size;
     // 外面边框画笔
@@ -47,9 +51,15 @@ public class ChatTextView extends View {
     int text_color;
 
     int signleLineHeight;
+    // test
+    HashMap<String,Integer> testWidth;
 
     public ChatTextView(Context context, @Nullable AttributeSet attrs) {
+
         super(context, attrs);
+        // test
+        testWidth = new HashMap<>();
+
         Log.d("ChatTextView","create view");
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChatTextView);
         radius = typedArray.getFloat(R.styleable.ChatTextView_border_radius,0);
@@ -88,25 +98,17 @@ public class ChatTextView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if( text == null ){
-            setMeasuredDimension(0,0);
-            return;
-        }
-        Log.d("ChatTextView","now text: " + text);
-        //获得当前view的宽高限制的类型
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         width = calcWidth();
         height = calcHeight();
-        Log.d("ChatTextView","measure: width" + width + " height: " + height);
+        requestLayout();
         setMeasuredDimension(width,height);
     }
 
     @Override
     protected  void onDraw(Canvas canvas){
+        Log.d("ChatTextView",String.format("onDraw : time: %d width : %d height: %d text: %s, C_width %d, C_Hight %d",
+                System.currentTimeMillis(),width,height,text, getWidth(), getHeight()));
+
         paintIn.setColor(bubble_color);
         paintText.setColor(text_color);
         paintOut.setColor(border_color);
@@ -114,9 +116,6 @@ public class ChatTextView extends View {
             super.onDraw(canvas);
             return;
         }
-        Log.d("ChatTextView","onDraw");
-        Log.d("ChatTextView","text: " + text);
-        Log.d("ChatTextView","draw: width" + width + " height: " + height);
         RectF rectF = new RectF(0,0,width,height);
         if( is_left){
             // 画外矩形
@@ -148,6 +147,7 @@ public class ChatTextView extends View {
             //画内矩形
             rectF = new RectF(borderWidth,borderWidth,width-triangleWidth-borderWidth,height-borderWidth);
         }
+
         canvas.drawRect(rectF,paintIn);
 //        canvas.drawRoundRect(rectF,radius,radius,paintIn);
         drawText(canvas);
@@ -216,26 +216,11 @@ public class ChatTextView extends View {
     }
 
     // 给外面接口，更改text
-    public void setMyText(String text){
+    public void setMyText(@NonNull final String text){
         this.text = text;
         invalidate();
     }
 
-    // 更改颜色
-    public void setMyColor(int text_color,int border_color,int background_color){
-        this.text_color = text_color;
-        this.border_color = border_color;
-        this.bubble_color = background_color;
-        invalidate();
-    }
-    // 更改颜色
-    public void setMyColor(ChatTextStyleRaw chatTextStyle){
-        this.text_color = Color.parseColor(chatTextStyle.font_color);
-        this.border_color = Color.parseColor(chatTextStyle.border_color);
-        this.bubble_color = Color.parseColor(chatTextStyle.bubble_color);
-        Log.d("TalkAdapterX", "" + this.text_color);
-        invalidate();
-    }
     // 更改颜色
     public void setMyColor(ChatTextStyleView chatTextStyleView){
         this.text_color = chatTextStyleView.text_color;

@@ -11,14 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountView;
 import com.chrisjaunes.communication.client.account.AccountViewManage;
 import com.chrisjaunes.communication.client.contacts.model.ContactsView;
 import com.chrisjaunes.communication.client.contacts.ContactsViewManage;
 import com.chrisjaunes.communication.client.group.model.GMessage;
-import com.chrisjaunes.communication.client.myView.ChatTextView;
+import com.chrisjaunes.communication.client.my_view.ChatTextView;
 
 import java.util.List;
 

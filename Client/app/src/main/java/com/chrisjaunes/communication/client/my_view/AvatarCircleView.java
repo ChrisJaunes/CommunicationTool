@@ -1,4 +1,4 @@
-package com.chrisjaunes.communication.client.myView;
+package com.chrisjaunes.communication.client.my_view;
 
 import android.content.Context;
 import android.graphics.Bitmap;

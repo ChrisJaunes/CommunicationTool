@@ -2,7 +2,7 @@ package com.chrisjaunes.communication.client.account.model;
 
 import androidx.annotation.NonNull;
 
-import com.chrisjaunes.communication.client.myView.ChatTextStyleRaw;
+import com.chrisjaunes.communication.client.my_view.ChatTextStyleRaw;
 
 /**
  * 采用了建造者模式

@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.R;
 import com.chrisjaunes.communication.client.account.model.AccountRaw;
-import com.chrisjaunes.communication.client.myView.ChatTextStyleHelper;
+import com.chrisjaunes.communication.client.my_view.ChatTextStyleHelper;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 

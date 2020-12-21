@@ -36,6 +36,7 @@ public class MyApplication extends Application {
         return localDatabase;
     }
 
+
     public void logout() {
         localDatabase = null;
         SharedPreferences.Editor editor = getSharedPreferences("login_account", Context.MODE_PRIVATE).edit();

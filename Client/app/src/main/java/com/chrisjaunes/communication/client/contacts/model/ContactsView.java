@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
-import com.chrisjaunes.communication.client.myView.ChatTextStyleView;
+import com.chrisjaunes.communication.client.my_view.ChatTextStyleView;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 /**
  * 设计模式：适配器模式（对象适配器）

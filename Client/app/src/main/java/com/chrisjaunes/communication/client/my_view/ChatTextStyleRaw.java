@@ -1,4 +1,4 @@
-package com.chrisjaunes.communication.client.myView;
+package com.chrisjaunes.communication.client.my_view;
 
 import androidx.annotation.NonNull;
 

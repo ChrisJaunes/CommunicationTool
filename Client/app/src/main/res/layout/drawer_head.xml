@@ -7,7 +7,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <com.chrisjaunes.communication.client.myView.AvatarCircleView
+    <com.chrisjaunes.communication.client.my_view.AvatarCircleView
         android:id="@+id/iv_avatar"
         android:layout_width="150dp"
         android:layout_height="150dp"

@@ -1,4 +1,4 @@
-package com.chrisjaunes.communication.client.myView;
+package com.chrisjaunes.communication.client.my_view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;

@@ -10,8 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chrisjaunes.communication.client.Config;
-import com.chrisjaunes.communication.client.myView.ChatTextStyleRaw;
-import com.chrisjaunes.communication.client.myView.ChatTextStyleView;
+import com.chrisjaunes.communication.client.my_view.ChatTextStyleRaw;
+import com.chrisjaunes.communication.client.my_view.ChatTextStyleView;
 import com.chrisjaunes.communication.client.utils.BitmapHelper;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
