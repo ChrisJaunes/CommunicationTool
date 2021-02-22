@@ -15,6 +15,7 @@ import com.chrisjaunes.communication.client.group.model.GMessage;
 import com.chrisjaunes.communication.client.group.model.GroupDao;
 import com.chrisjaunes.communication.client.group.model.GroupRetrofit;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
+import com.chrisjaunes.communication.client.utils.ThreadPoolHelper;
 import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
@@ -63,7 +64,7 @@ public class GMessageViewModel extends ViewModel {
         }
     }
     public void queryLocalMessageList() {
-        new Thread(() -> GMessageList.postValue(gMessageDao.queryMessageAboutGroup(group_id))).start();
+        ThreadPoolHelper.getInstance().execute(() -> GMessageList.postValue(gMessageDao.queryMessageAboutGroup(group_id)));
     }
     // TODO
     public void queryServerMessageList() {
@@ -81,10 +82,16 @@ public class GMessageViewModel extends ViewModel {
                         @Override
                         public void onNext(UniApiResult<List<GMessage>> listUniApiResult) {
                             uniApiResult.postValue(new UniApiResult<>(listUniApiResult.status, listUniApiResult.status));
-                            new Thread(() -> {
+
+                            /*new Thread(() -> {
                                 updateGMessageViewManage(listUniApiResult.data);
                                 queryLocalMessageList();
-                            }).start();
+                            }).start();*/
+
+                            ThreadPoolHelper.getInstance().execute(()->{
+                                updateGMessageViewManage(listUniApiResult.data);
+                                queryLocalMessageList();
+                            });
                         }
                         @Override
                         public void onError(Throwable t) {

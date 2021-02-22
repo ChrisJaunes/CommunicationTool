@@ -36,8 +36,11 @@ import com.chrisjaunes.communication.client.utils.DialogHelper;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.FileNotFoundException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MainActivity extends AppCompatActivity {
     private final static int MENU_AVATAR = 0;
@@ -168,6 +171,17 @@ public class MainActivity extends AppCompatActivity {
                 toolBarTitle.setText("创建群聊");
                 updateFragment(gAddFragment);
                 break;
+            case R.id.action_update_ip:
+                toolBarTitle.setText("更新ip地址");
+                new Thread(() -> {
+                    try {
+                        InetAddress ip = InetAddress.getLocalHost();
+                        Log.d("MainActivity","get ip : successful " + ip.getHostAddress());
+                    } catch (UnknownHostException e) {
+                        Log.d("MainActivity","get ip failed ");
+                        e.printStackTrace();
+                    }
+                }).start();
             default:break;
         }
         return true;

@@ -12,6 +12,7 @@ import com.chrisjaunes.communication.client.contacts.model.ContactsDao;
 import com.chrisjaunes.communication.client.contacts.model.ContactsRaw;
 import com.chrisjaunes.communication.client.contacts.model.ContactsRetrofit;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
+import com.chrisjaunes.communication.client.utils.ThreadPoolHelper;
 import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
@@ -88,7 +89,7 @@ public class ContactsViewModel extends ViewModel {
                     uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, String.valueOf(response.code())));
                     return;
                 }
-                new Thread(()-> {
+                ThreadPoolHelper.getInstance().execute(() -> {
                     try {
                         assert response.body() != null;
                         final JSONObject apiJson = new JSONObject(response.body().string());
@@ -102,8 +103,8 @@ public class ContactsViewModel extends ViewModel {
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                         uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
-                    }
-                }).start();
+                    };
+                });
             }
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
@@ -122,7 +123,7 @@ public class ContactsViewModel extends ViewModel {
                     uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, String.valueOf(response.code())));
                     return;
                 }
-                new Thread(()-> {
+                ThreadPoolHelper.getInstance().execute(() -> {
                     try {
                         assert response.body() != null;
                         final JSONObject apiJson = new JSONObject(response.body().string());
@@ -141,7 +142,7 @@ public class ContactsViewModel extends ViewModel {
                         e.printStackTrace();
                         uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
                     }
-                }).start();
+                });
             }
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
@@ -166,7 +167,7 @@ public class ContactsViewModel extends ViewModel {
                     uniApiResult.setValue(new UniApiResult.Fail(Config.ERROR_NET, Config.ERROR_NET, String.valueOf(response.code())));
                     return;
                 }
-                new Thread(()-> {
+                ThreadPoolHelper.getInstance().execute(() -> {
                     try {
                         assert response.body() != null;
                         final JSONObject apiJson = new JSONObject(response.body().string());
@@ -180,7 +181,7 @@ public class ContactsViewModel extends ViewModel {
                         e.printStackTrace();
                         uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
                     }
-                }).start();
+                });
             }
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {

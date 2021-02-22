@@ -13,6 +13,7 @@ import com.chrisjaunes.communication.client.Config;
 import com.chrisjaunes.communication.client.MyApplication;
 import com.chrisjaunes.communication.client.account.AccountViewManage;
 import com.chrisjaunes.communication.client.utils.HttpHelper;
+import com.chrisjaunes.communication.client.utils.ThreadPoolHelper;
 import com.chrisjaunes.communication.client.utils.TimeHelper;
 import com.chrisjaunes.communication.client.utils.UniApiResult;
 
@@ -87,7 +88,9 @@ public class TalkViewModel extends ViewModel {
                         //List<TMessage> newTMessages = new ArrayList<>();
                         //newTMessages.add(tMessage);
                         //TMessageList.postValue(newTMessages);
-                        new Thread(TalkViewModel.this::queryLocalMessageList).start();
+
+                        ThreadPoolHelper.getInstance().execute(TalkViewModel.this::queryLocalMessageList);
+                        //new Thread(TalkViewModel.this::queryLocalMessageList).start();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -134,7 +137,8 @@ public class TalkViewModel extends ViewModel {
                         }
                     }
 //                    TMessageList.postValue(newTMessages);
-                    new Thread(TalkViewModel.this::queryLocalMessageList).start();
+                    ThreadPoolHelper.getInstance().execute(TalkViewModel.this::queryLocalMessageList);
+                    //new Thread(TalkViewModel.this::queryLocalMessageList).start();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     uniApiResult.postValue(new UniApiResult.Fail(Config.ERROR_UNKNOWN, Arrays.toString(e.getStackTrace())));
