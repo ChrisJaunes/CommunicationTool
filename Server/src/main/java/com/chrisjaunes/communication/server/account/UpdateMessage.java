@@ -1,5 +1,6 @@
 package com.chrisjaunes.communication.server.account;
 
+import com.chrisjaunes.communication.server.AccountFilter;
 import com.chrisjaunes.communication.server.Config;
 import com.chrisjaunes.communication.server.utils.DBHelper;
 import net.sf.json.JSONObject;
@@ -12,6 +13,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +41,7 @@ public class UpdateMessage extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see AccountFilter#doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -46,51 +51,49 @@ public class UpdateMessage extends HttpServlet {
 		Log.info(String.format("account : %s", account));
 
 		JSONObject resJson = new JSONObject();
-		if (null == account) {
-			resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-		} else {
-			try {
-				String sqlQuery = String.format("select * from %s where account = ?", Config.TABLE_ACCOUNT);
-				List<Object> params = new ArrayList<>();
-				params.add(account);
-				ResultSet result = DBHelper.executeQuery(sqlQuery, params);
-				if (result.next()) {
-					String nickname = request.getParameter(Config.STR_NICKNAME);
-					if (null != nickname) {
-						String sqlOperate = String.format("update %s set %s = ? where %s = ?", Config.TABLE_ACCOUNT, Config.STR_NICKNAME, Config.STR_ACCOUNT);
-						params.clear();
-						params.add(nickname);
-						params.add(account);
-						DBHelper.executeOperate(sqlOperate, params);
-					}
-
-					String avatar = request.getParameter(Config.STR_AVATAR);
-					if(null != avatar) {
-						String sqlOperate = String.format("update %s set %s = ? where %s = ?", Config.TABLE_ACCOUNT, Config.STR_AVATAR,  Config.STR_ACCOUNT);
-						params.clear();
-						params.add(avatar);
-						params.add(account);
-						DBHelper.executeOperate(sqlOperate, params);
-					}
-
-					String textStyle = request.getParameter(Config.STR_TEXT_STYLE);
-					if (null != textStyle) {
-						String sqlOperate = String.format("update %s set %s = ? where %s = ?", Config.TABLE_ACCOUNT, Config.STR_TEXT_STYLE, Config.STR_ACCOUNT);
-						params.clear();
-						params.add(textStyle);
-						params.add(account);
-						DBHelper.executeOperate(sqlOperate, params);
-					}
-					//Log.info(String.format("nickname : %s , avatar : %s, textStyle : %s", nickname, avatar, textStyle));
-					resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_SUCCESSFUL);
-				} else{
-					resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_FAIL);
+		assert null == account;
+		try {
+			String sqlQuery = String.format("select * from %s where account = ?", Config.TABLE_ACCOUNT);
+			List<Object> params = new ArrayList<>();
+			params.add(account);
+			ResultSet result = DBHelper.executeQuery(sqlQuery, params);
+			if (result.next()) {
+				String nickname = request.getParameter(Config.STR_NICKNAME);
+				if (null != nickname) {
+					String sqlOperate = String.format("update %s set %s = ? where %s = ?", Config.TABLE_ACCOUNT, Config.STR_NICKNAME, Config.STR_ACCOUNT);
+					params.clear();
+					params.add(nickname);
+					params.add(account);
+					DBHelper.executeOperate(sqlOperate, params);
 				}
-				DBHelper.closeResource(result);
-			} catch (SQLException throwables) {
-				throwables.printStackTrace();
+
+				String avatar = request.getParameter(Config.STR_AVATAR);
+				if(null != avatar) {
+					String sqlOperate = String.format("update %s set %s = ? where %s = ?", Config.TABLE_ACCOUNT, Config.STR_AVATAR,  Config.STR_ACCOUNT);
+					params.clear();
+					params.add(avatar);
+					params.add(account);
+					DBHelper.executeOperate(sqlOperate, params);
+				}
+
+				String textStyle = request.getParameter(Config.STR_TEXT_STYLE);
+				if (null != textStyle) {
+					String sqlOperate = String.format("update %s set %s = ? where %s = ?", Config.TABLE_ACCOUNT, Config.STR_TEXT_STYLE, Config.STR_ACCOUNT);
+					params.clear();
+					params.add(textStyle);
+					params.add(account);
+					DBHelper.executeOperate(sqlOperate, params);
+				}
+				//Log.info(String.format("nickname : %s , avatar : %s, textStyle : %s", nickname, avatar, textStyle));
+				resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_SUCCESSFUL);
+			} else{
+				resJson.put(Config.STR_STATUS, Config.STATUS_UPDATE_FAIL);
 			}
+			DBHelper.closeResource(result);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
 		}
+
 		response.setContentType("application/json");
 		response.getWriter().append(resJson.toString()).flush();
 		Log.info(String.format("resJson : %s", resJson.toString()));

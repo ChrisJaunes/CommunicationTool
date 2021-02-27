@@ -47,9 +47,8 @@ public class Query extends HttpServlet {
 		Log.info(String.format("account : %s, time : %s", account, requestTime));
 
 		JSONObject resJson = new JSONObject();
-		if (null == account) {
-			resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-		} else if (null == requestTime) {
+		assert null == account;
+		if (null == requestTime) {
 			resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
 		} else {
 			requestTime = TimeHelper.timeToStdTime(requestTime);

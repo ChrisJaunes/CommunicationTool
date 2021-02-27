@@ -57,9 +57,9 @@ public class Add extends HttpServlet {
         String groupMemberList = request.getParameter(Config.STR_GROUP_MEMBER_LIST);
         Log.info(String.format("account : %s, groupName : %s, groupMemberList : %s", account, groupName, groupMemberList));
         JSONObject resJson = new JSONObject();
-        if (null == account) {
-            resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-        } else if (null == groupName || null == groupMemberList) {
+
+        assert null == account;
+        if (null == groupName || null == groupMemberList) {
             resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
         }else {
             Connection conn = null;

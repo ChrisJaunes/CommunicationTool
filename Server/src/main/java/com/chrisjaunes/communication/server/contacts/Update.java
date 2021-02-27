@@ -55,9 +55,8 @@ public class Update extends HttpServlet {
         Log.info(String.format("account : %s, account2 : %s, time : %s, operation : %s", account, account2, sendTime, sendOperation));
 
         JSONObject resJson = new JSONObject();
-        if (null == account) {
-            resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-        } else if (null == account2 || null == sendTime || null == sendOperation) {
+        assert null == account;
+        if (null == account2 || null == sendTime || null == sendOperation) {
             resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
         } else {
             sendTime = TimeHelper.timeToStdTime(sendTime);

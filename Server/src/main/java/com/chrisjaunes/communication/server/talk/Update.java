@@ -48,9 +48,8 @@ public class Update extends HttpServlet {
 		Log.info(String.format("account : %s, account2 : %s, time : %s, content_type : %s, content : %s", account, account2, sendTime, sendContentType, sendContent));
 
 		JSONObject resJson = new JSONObject();
-		if (null == account) {
-			resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-		} else if (null == account2 || null == sendTime || null == sendContentType || null == sendContent) {
+		assert null == account;
+		if (null == account2 || null == sendTime || null == sendContentType || null == sendContent) {
 			resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
 		}else {
 			try {
@@ -84,5 +83,4 @@ public class Update extends HttpServlet {
 		response.setContentType("application/json");
 		response.getWriter().append(resJson.toString()).flush();
 	}
-
 }

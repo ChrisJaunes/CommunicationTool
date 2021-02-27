@@ -60,9 +60,8 @@ public class AddMessage extends HttpServlet {
         String sendContent = request.getParameter(Config.STR_CONTENT);
         Log.info(String.format("group : %s, account : %s, time : %s, content_type : %s, content : %s", groupId, account, sendTime, sendContentType, sendContent));
         JSONObject resJson = new JSONObject();
-        if (null == account) {
-            resJson.put(Config.STR_STATUS, Config.STATUS_ACCOUNT_NOT_LOGIN);
-        } else if (null == groupId || null == sendTime || null == sendContentType || null == sendContent) {
+        assert null == account;
+        if (null == groupId || null == sendTime || null == sendContentType || null == sendContent) {
             resJson.put(Config.STR_STATUS, Config.STATUS_ILLEGAL_PARAMETER);
         } else {
             try {
